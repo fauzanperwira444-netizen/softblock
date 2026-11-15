@@ -1,0 +1,6 @@
+packages:
+  - apps/web
+
+# S-7: hanya paket ini yang boleh menjalankan skrip install.
+onlyBuiltDependencies:
+  - esbuild

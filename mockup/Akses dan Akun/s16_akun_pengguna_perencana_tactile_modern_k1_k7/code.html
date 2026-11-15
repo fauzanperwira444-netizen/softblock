@@ -1,0 +1,453 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Perencana - S16 Akun &amp; Keamanan</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#073523",
+            "surface-tint": "#406653",
+            "surface-container-low": "#f2f4f4",
+            "primary-fixed-dim": "#a6d0b8",
+            "surface-container-highest": "#e1e3e3",
+            "surface-bright": "#f8fafa",
+            "outline-variant": "#c1c8c2",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#beedd2",
+            "on-secondary-fixed": "#181d1c",
+            "tertiary": "#3d6752",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#191c1d",
+            "background": "#f8fafa",
+            "primary-fixed": "#c2ecd3",
+            "inverse-primary": "#a6d0b8",
+            "surface-variant": "#e1e3e3",
+            "on-background": "#191c1d",
+            "on-primary-container": "#0c3424",
+            "on-secondary-fixed-variant": "#434847",
+            "on-tertiary-fixed": "#002114",
+            "on-primary-fixed-variant": "#284e3c",
+            "primary-container": "#769e88",
+            "secondary": "#5a5f5e",
+            "surface-dim": "#d8dada",
+            "surface": "#f8fafa",
+            "outline": "#717973",
+            "secondary-fixed-dim": "#c3c7c6",
+            "surface-container": "#eceeee",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "surface-container-high": "#e6e8e8",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#414844",
+            "on-primary-fixed": "#002114",
+            "inverse-on-surface": "#eff1f1",
+            "secondary-fixed": "#dfe3e1",
+            "on-surface": "#191c1d",
+            "on-primary": "#ffffff",
+            "primary": "#406653",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#739f87",
+            "secondary-container": "#dce1df",
+            "on-secondary-container": "#5f6462",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-ui": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "label-numeric-md": ["Space Mono"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .tactile-card {
+      box-shadow: -3px -3px 10px rgba(255, 255, 255, 0.95), 4px 4px 14px rgba(30, 35, 34, 0.04), 1px 1px 3px rgba(30, 35, 34, 0.02);
+    }
+    .tactile-inset {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.06), inset -2px -2px 5px rgba(255, 255, 255, 0.85);
+    }
+    .tactile-btn {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.8), 2px 3px 6px rgba(30, 35, 34, 0.06);
+      transition: all 0.15s ease-in-out;
+    }
+    .tactile-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: -2px -2px 8px rgba(255, 255, 255, 0.9), 3px 5px 10px rgba(30, 35, 34, 0.08);
+    }
+    .tactile-btn:active {
+      transform: scale(0.98);
+      box-shadow: inset 1px 1px 3px rgba(30, 35, 34, 0.12);
+    }
+    .tactile-active-nav {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.8), 2px 2px 6px rgba(30, 35, 34, 0.04);
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafa] text-on-surface antialiased font-body-md text-body-md min-h-screen flex selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+<!-- ==================== DESKTOP SHELL (K1) ==================== -->
+<div class="flex-1 flex flex-row min-h-screen w-full relative">
+<!-- SideNavBar K1 Shell (Komponen 01) -->
+<aside class="fixed left-0 top-0 h-screen w-20 flex flex-col items-center justify-between py-6 z-40 bg-surface-container-low border-r border-[#e5e8e8] shadow-[4px_0_16px_rgba(30,35,34,0.04)] hidden md:flex">
+  <!-- Bagian Atas: Logo brand emblem melingkar -->
+  <div class="flex flex-col items-center gap-6 w-full">
+    <a href="#" title="Perencana Workspace" class="w-12 h-12 rounded-full bg-white flex items-center justify-center tactile-card text-primary font-bold shadow-sm border border-[#e5e8e8] shrink-0 active:scale-[0.98] transition-all hover:bg-white">
+      <span class="material-symbols-outlined text-[24px] text-primary">local_cafe</span>
+    </a>
+    <!-- Bagian Tengah: Menu navigasi vertikal ramping dengan tombol bulat w-12 h-12 (state default/inactive) -->
+    <nav class="flex flex-col items-center gap-3 w-full">
+      <a href="#" title="Dashboard" class="w-12 h-12 rounded-full bg-white/70 hover:bg-white text-on-surface-variant flex items-center justify-center border border-[#e5e8e8]/60 tactile-card transition-all active:scale-[0.98] group">
+        <span class="material-symbols-outlined text-[22px] text-secondary group-hover:text-primary transition-colors">dashboard</span>
+      </a>
+      <a href="#" title="Projek" class="w-12 h-12 rounded-full bg-white/70 hover:bg-white text-on-surface-variant flex items-center justify-center border border-[#e5e8e8]/60 tactile-card transition-all active:scale-[0.98] group">
+        <span class="material-symbols-outlined text-[22px] text-secondary group-hover:text-primary transition-colors">folder_open</span>
+      </a>
+      <a href="#" title="Task" class="w-12 h-12 rounded-full bg-white/70 hover:bg-white text-on-surface-variant flex items-center justify-center border border-[#e5e8e8]/60 tactile-card transition-all active:scale-[0.98] group">
+        <span class="material-symbols-outlined text-[22px] text-secondary group-hover:text-primary transition-colors">check_box</span>
+      </a>
+      <a href="#" title="To-do" class="w-12 h-12 rounded-full bg-white/70 hover:bg-white text-on-surface-variant flex items-center justify-center border border-[#e5e8e8]/60 tactile-card transition-all active:scale-[0.98] group">
+        <span class="material-symbols-outlined text-[22px] text-secondary group-hover:text-primary transition-colors">checklist</span>
+      </a>
+      <a href="#" title="Kalender" class="w-12 h-12 rounded-full bg-white/70 hover:bg-white text-on-surface-variant flex items-center justify-center border border-[#e5e8e8]/60 tactile-card transition-all active:scale-[0.98] group">
+        <span class="material-symbols-outlined text-[22px] text-secondary group-hover:text-primary transition-colors">calendar_today</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bagian Bawah: Bantuan & Tombol Avatar profil Cah melingkar tersorot/aktif sebagai indikator Akun -->
+  <div class="flex flex-col items-center gap-3 pt-3 border-t border-[#e5e8e8]/80 w-full px-2">
+    <a href="#" title="Bantuan" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all">
+      <span class="material-symbols-outlined text-[20px]">help_outline</span>
+    </a>
+    <!-- Avatar Profil Aktif (S16 Akun Saat Ini) dengan ring sage dan identitas tooltip -->
+    <a href="#" title="Cah - Akun Pengguna" aria-current="page" class="relative group flex items-center justify-center active:scale-[0.98] transition-all">
+      <div class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs ring-2 ring-primary ring-offset-2 ring-offset-[#f8fafa] shadow-sm">
+        C
+      </div>
+      <span class="material-symbols-outlined absolute -bottom-1 -right-1 text-primary text-[14px] bg-white rounded-full p-0.5 border border-[#769e88]/30">
+        verified_user
+      </span>
+    </a>
+  </div>
+</aside>
+<!-- Main Content Canvas Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-[#f8fafa] pb-16 md:ml-20">
+<!-- TopNavBar K1 Shell (Komponen 04) -->
+<header class="sticky top-0 z-20 w-full bg-[#f8fafa]/80 backdrop-blur-md px-6 lg:px-8 py-3.5 flex items-center justify-between border-b border-[#e5e8e8]/80 shadow-[0_2px_12px_rgba(30,35,34,0.04)]">
+<!-- Sisi Kiri: Search bar taktil debossed -->
+<div class="flex items-center gap-3 flex-1 max-w-lg">
+<div class="md:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-white border border-[#e5e8e8] tactile-btn shrink-0">
+<span class="material-symbols-outlined text-[20px] text-primary">menu</span>
+</div>
+<div class="relative w-full flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-[18px] text-secondary pointer-events-none">search</span>
+<input class="w-full pl-10 pr-14 py-2 text-[13px] rounded-full bg-[#f2f4f4] tactile-inset border border-[#e5e8e8]/80 placeholder:text-secondary/70 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Cari task, projek, atau pengaturan..." type="text">
+<span class="absolute right-3 px-1.5 py-0.5 rounded-md bg-white border border-[#e5e8e8] text-[10px] font-mono font-semibold text-secondary pointer-events-none shadow-xs">⌘K</span>
+</div>
+</div>
+<!-- Sisi Kanan: Action controls, notifikasi, filter, avatar pengguna -->
+<div class="flex items-center gap-2.5">
+<button class="tactile-btn hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#191c1d] text-white text-[13px] font-semibold hover:bg-black active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Tambah task</span>
+</button>
+<button aria-label="Filter" class="w-9 h-9 rounded-full bg-white border border-[#e5e8e8] tactile-btn flex items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button aria-label="Notifikasi" class="relative w-9 h-9 rounded-full bg-white border border-[#e5e8e8] tactile-btn flex items-center justify-center text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Avatar profil aktif pengguna dengan sage ring -->
+<div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shadow-sm ring-2 ring-[#769e88] ring-offset-2 ring-offset-[#f8fafa] ml-1">
+          C
+        </div>
+</div>
+</header>
+<!-- Subheader: Breadcrumb & Wireframe Pager K1 (Komponen 03) -->
+<div class="px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 border-b border-[#e5e8e8]/60 bg-white/40">
+<div class="flex items-center gap-2 text-[12px] font-medium text-on-surface-variant">
+<span>Pengaturan</span>
+<span class="material-symbols-outlined text-[13px] text-secondary">chevron_right</span>
+<span class="text-primary font-bold">S16 Akun &amp; Keamanan</span>
+<span class="text-secondary/40 mx-1">|</span>
+<!-- Penanda data K3 status sinkronisasi -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#769e88]/10 text-primary border border-[#769e88]/20 text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Tersinkronisasi · Data per 18 Nov 2026, 13.20</span>
+</div>
+</div>
+<!-- Kontrol pager wireframe (Komponen 03) -->
+<div class="flex items-center gap-2">
+<a class="tactile-btn px-3 py-1 rounded-full bg-white border border-[#e5e8e8] text-[12px] font-semibold text-secondary hover:text-primary flex items-center gap-1 transition-all" href="#">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>S04 Reset password</span>
+</a>
+<a class="tactile-btn px-3 py-1 rounded-full bg-white border border-[#e5e8e8] text-[12px] font-semibold text-secondary hover:text-primary flex items-center gap-1 transition-all" href="#">
+<span>S10 Dashboard</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Main Container Content (Bento Grid Tactile Layout) -->
+<div class="p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+<!-- Banner Header Title -->
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-[26px] font-bold text-on-surface tracking-tight">Akun Pengguna</h2>
+<p class="text-[13px] text-on-surface-variant mt-0.5">Kelola identitas, kata sandi, dan preferensi zona waktu kerja Anda</p>
+</div>
+</div>
+<!-- Google SSO Account Banner (Katalog K2–K7) -->
+<div class="rounded-2xl p-5 sm:p-6 bg-white tactile-card border border-[#e5e8e8] relative overflow-hidden">
+<div class="absolute right-0 top-0 w-64 h-64 bg-[#769e88]/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 relative z-10">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-2xl bg-[#f2f4f4] flex items-center justify-center shrink-0 tactile-inset text-primary border border-[#e5e8e8]">
+<!-- Google Icon -->
+<svg class="w-6 h-6" viewBox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+</div>
+<div class="space-y-1.5">
+<div class="flex items-center gap-2.5 flex-wrap">
+<h3 class="text-[17px] font-bold text-on-surface">Masuk Lewat Akun Google</h3>
+<!-- Token Chip K3 Otentikasi Utama bersarang pada pill sage soft -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#769e88]/15 text-[#073523] border border-[#769e88]/30 text-[11px] font-bold">
+<span class="material-symbols-outlined text-[13px] text-primary">verified</span>
+<span>Otentikasi Utama</span>
+</span>
+</div>
+<p class="text-[13px] text-on-surface-variant max-w-3xl leading-relaxed">
+                Akun ini terotentikasi melalui Google Single Sign-On (SSO) dan belum memiliki password lokal. Anda dapat membuat password mandiri melalui alur reset password untuk fleksibilitas masuk di semua ekosistem Perencana.
+              </p>
+</div>
+</div>
+<!-- Tombol taktil "Buat password" -->
+<button class="tactile-btn px-5 py-2.5 rounded-full bg-[#f2f4f4] hover:bg-white text-primary text-[13px] font-bold shrink-0 flex items-center gap-2 border border-[#e5e8e8] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[17px]">key</span>
+<span>Buat password</span>
+</button>
+</div>
+</div>
+<!-- 2-Column Bento Grid Layout (Modul K6 & K4/K5) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Kolom Kiri (7 Kolom): Informasi Profil & Preferensi Regional -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Kartu Informasi Profil (Modul K6 Form Pattern) -->
+<section class="rounded-2xl p-6 bg-white tactile-card border border-[#e5e8e8] flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3 border-b border-[#eceeee]">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">badge</span>
+<h3 class="text-[17px] font-bold text-on-surface">Informasi Profil</h3>
+</div>
+<!-- ID Akun badge taktil diskret -->
+<span class="text-[11px] font-mono font-bold text-on-surface-variant bg-[#f2f4f4] px-2.5 py-1 rounded-md border border-[#e5e8e8]">ID: P-9082</span>
+</div>
+<!-- Field: Alamat Email (Read-only SSO terikat) -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block text-[11px] font-bold tracking-wider text-on-surface-variant uppercase">ALAMAT EMAIL</label>
+<!-- Badge K3: Terkunci (SSO) -->
+<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#eceeee] text-secondary border border-[#e5e8e8]">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+<span>Terkunci (SSO)</span>
+</span>
+</div>
+<div class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-[#f2f4f4] tactile-inset text-secondary border border-[#e5e8e8]/80 cursor-not-allowed">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[19px]">mail</span>
+<span class="text-[14px] font-medium select-all text-on-surface">cah@email.com</span>
+</div>
+<span class="material-symbols-outlined text-[17px] text-outline">lock</span>
+</div>
+<p class="text-[12px] text-secondary flex items-center gap-1.5 pt-0.5">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>Email terdaftar terikat dengan akun SSO Google dan tidak bisa diubah.</span>
+</p>
+</div>
+<!-- Field: Nama Tampil (U-11) dengan Karakter Counter -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block text-[11px] font-bold tracking-wider text-on-surface-variant uppercase" for="display-name">NAMA TAMPIL</label>
+<span class="text-[11px] font-mono font-bold text-on-surface-variant">3 / 45</span>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#c1c8c2]/60 focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface text-[14px] font-semibold outline-none transition-all" id="display-name" maxlength="45" type="text" value="Cah">
+</div>
+<p class="text-[12px] text-on-surface-variant">
+                Opsional. Nama yang akan muncul pada notifikasi tugas, catatan proyek, dan laporan kolaborasi tim.
+              </p>
+</div>
+<!-- Action: Simpan nama -->
+<div class="pt-2 flex justify-end">
+<button class="tactile-btn px-6 py-2.5 rounded-full bg-[#191c1d] text-white text-[13px] font-bold hover:bg-black transition-all flex items-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[17px]">check</span>
+<span>Simpan nama</span>
+</button>
+</div>
+</section>
+<!-- Kartu Preferensi Waktu & Regional (Modul K6) -->
+<section class="rounded-2xl p-6 bg-white tactile-card border border-[#e5e8e8] flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3 border-b border-[#eceeee]">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">schedule</span>
+<h3 class="text-[17px] font-bold text-on-surface">Preferensi Waktu &amp; Regional</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px]">public</span>
+</div>
+<!-- Zona Waktu Selector -->
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold tracking-wider text-on-surface-variant uppercase" for="timezone-select">ZONA WAKTU AKTIF</label>
+<div class="relative">
+<select class="w-full appearance-none px-4 py-2.5 pr-10 rounded-xl bg-white border border-[#c1c8c2]/60 focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface text-[14px] font-semibold outline-none transition-all cursor-pointer" id="timezone-select">
+<option selected="">Asia/Jakarta (WIB, UTC+7)</option>
+<option>Asia/Makassar (WITA, UTC+8)</option>
+<option>Asia/Jayapura (WIT, UTC+9)</option>
+<option>UTC (Universal Time Coordinated)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<p class="text-[12px] text-on-surface-variant leading-relaxed">
+                Penyesuaian zona waktu berlaku ke depan untuk jadwal task dan kalender. Riwayat hari yang sudah lewat tidak dihitung ulang.
+              </p>
+</div>
+<!-- Action: Simpan zona waktu -->
+<div class="pt-2 flex justify-end">
+<button class="tactile-btn px-6 py-2.5 rounded-full bg-[#769e88] text-white text-[13px] font-bold hover:bg-primary transition-all flex items-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[17px]">update</span>
+<span>Simpan zona waktu</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Kolom Kanan (5 Kolom): Ganti Password & Sesi Keluar -->
+<div class="lg:col-span-5 space-y-6">
+<!-- Kartu Ganti Password (Keamanan) -->
+<section class="rounded-2xl p-6 bg-white tactile-card border border-[#e5e8e8] flex flex-col gap-5">
+<div class="flex items-center justify-between pb-3 border-b border-[#eceeee]">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">lock_reset</span>
+<h3 class="text-[17px] font-bold text-on-surface">Ganti Password</h3>
+</div>
+<span class="text-[11px] font-bold text-secondary bg-[#f2f4f4] px-2.5 py-0.5 rounded-full border border-[#e5e8e8]">Keamanan</span>
+</div>
+<!-- Password Lama dengan Galat Inline K6 -->
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold tracking-wider text-on-surface-variant uppercase" for="old-password">PASSWORD LAMA</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 pr-11 rounded-xl bg-[#ffdad6]/20 border-2 border-error text-on-surface text-[14px] outline-none font-mono tracking-widest" id="old-password" type="password" value="rahasia123">
+<button class="absolute right-3.5 top-1/2 -translate-y-1/2 text-error hover:text-on-error-container" onclick="const input = document.getElementById('old-password'); input.type = input.type === 'password' ? 'text' : 'password';" title="Tampilkan password" type="button">
+<span class="material-symbols-outlined text-[19px]">visibility</span>
+</button>
+</div>
+<p class="text-[12px] text-error font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">error</span>
+<span>Password lama salah</span>
+</p>
+</div>
+<!-- Password Baru dengan Validasi & Indikator Bar Segmen K3 -->
+<div class="space-y-2">
+<label class="block text-[11px] font-bold tracking-wider text-on-surface-variant uppercase" for="new-password">PASSWORD BARU</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 pr-11 rounded-xl bg-white border border-[#c1c8c2]/60 focus:border-primary focus:ring-2 focus:ring-primary/20 text-on-surface text-[14px] outline-none transition-all placeholder:tracking-normal placeholder:font-sans placeholder:text-secondary/60" id="new-password" placeholder="Minimal 8 karakter" type="password">
+<button class="absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" onclick="const input = document.getElementById('new-password'); input.type = input.type === 'password' ? 'text' : 'password';" title="Sembunyikan password" type="button">
+<span class="material-symbols-outlined text-[19px]">visibility_off</span>
+</button>
+</div>
+<!-- Bar Segmen Kekuatan Password K3 -->
+<div class="space-y-1.5 pt-1">
+<div class="grid grid-cols-4 gap-1.5">
+<div class="h-1.5 rounded-full bg-primary"></div>
+<div class="h-1.5 rounded-full bg-primary"></div>
+<div class="h-1.5 rounded-full bg-[#769e88]"></div>
+<div class="h-1.5 rounded-full bg-[#eceeee]"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant">
+<span>Rentang: 8–128 karakter</span>
+<span class="font-bold text-primary">Kekuatan: Menengah</span>
+</div>
+</div>
+</div>
+<!-- Peringatan Sesi -->
+<div class="p-3 rounded-xl bg-[#f2f4f4] text-on-surface-variant text-[12px] flex items-start gap-2.5 border border-[#e5e8e8]">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
+<span>Perangkat lain akan keluar otomatis. Perangkat ini tetap masuk.</span>
+</div>
+<!-- Action: Ganti password -->
+<div class="pt-2 flex justify-end">
+<button class="tactile-btn px-6 py-2.5 rounded-full bg-primary text-white text-[13px] font-bold hover:bg-surface-tint transition-all flex items-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[17px]">enhanced_encryption</span>
+<span>Ganti password</span>
+</button>
+</div>
+</section>
+<!-- Kartu Sesi & Keluar (Pola Dialog K4/K5) -->
+<section class="rounded-2xl p-6 bg-white tactile-card border border-error/25 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-[#eceeee]">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-error text-[22px]">logout</span>
+<h3 class="text-[17px] font-bold text-error">Keluar Sesi</h3>
+</div>
+<!-- Badge Outline Kontras K3 Zona Bahaya -->
+<span class="text-[11px] font-bold text-error border border-error/30 bg-[#ffdad6]/40 px-2.5 py-0.5 rounded-full">Zona Bahaya</span>
+</div>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">
+              Hanya keluar dari perangkat ini tanpa memerlukan konfirmasi ulang. Cache dan data offline lokal di browser ini akan dibersihkan secara aman.
+            </p>
+<div class="pt-1 flex justify-start">
+<button class="tactile-btn px-5 py-2.5 rounded-full bg-[#ffdad6]/50 text-on-error-container hover:bg-error hover:text-white text-[13px] font-bold border border-error/30 transition-all flex items-center gap-2 group active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:-translate-x-0.5">power_settings_new</span>
+<span>Keluar dari perangkat ini</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+</body></html>

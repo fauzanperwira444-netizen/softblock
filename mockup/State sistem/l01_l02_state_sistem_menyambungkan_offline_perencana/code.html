@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Perencana - System State L01 &amp; L02 (Tactile Barista Modern)</title>
+<!-- Google Fonts: Plus Jakarta Sans & Space Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error-container": "#93000a",
+            "on-surface": "#191c1d",
+            "on-tertiary-container": "#073523",
+            "surface-bright": "#f8fafa",
+            "secondary": "#5a5f5e",
+            "inverse-primary": "#a6d0b8",
+            "background": "#f8fafa",
+            "primary-fixed-dim": "#a6d0b8",
+            "on-primary-fixed": "#002114",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#5f6462",
+            "inverse-surface": "#2e3131",
+            "surface-container-low": "#f2f4f4",
+            "secondary-fixed-dim": "#c3c7c6",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "surface-container-highest": "#e1e3e3",
+            "on-secondary-fixed": "#181d1c",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#beedd2",
+            "primary": "#406653",
+            "on-background": "#191c1d",
+            "surface-container-high": "#e6e8e8",
+            "surface-container": "#eceeee",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#414844",
+            "primary-fixed": "#c2ecd3",
+            "tertiary": "#3d6752",
+            "on-primary-fixed-variant": "#284e3c",
+            "surface-tint": "#406653",
+            "outline": "#717973",
+            "secondary-fixed": "#dfe3e1",
+            "secondary-container": "#dce1df",
+            "inverse-on-surface": "#eff1f1",
+            "surface-dim": "#d8dada",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#739f87",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#002114",
+            "on-secondary-fixed-variant": "#434847",
+            "on-primary-container": "#0c3424",
+            "surface-variant": "#e1e3e3",
+            "outline-variant": "#c1c8c2",
+            "primary-container": "#769e88",
+            "surface": "#f8fafa",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "1.5rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "margin-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-lg": "1.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "label-numeric-md": ["Space Mono"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "label-ui": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-numeric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-numeric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "label-ui": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Neomorphic Tactile Barista Shadows */
+    .tactile-convex {
+      box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.95), 6px 6px 16px rgba(30, 35, 34, 0.05), 2px 2px 6px rgba(30, 35, 34, 0.03);
+    }
+    .tactile-convex-sm {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(30, 35, 34, 0.04);
+    }
+    .tactile-debossed {
+      box-shadow: inset 2px 2px 6px rgba(30, 35, 34, 0.07), inset -2px -2px 6px rgba(255, 255, 255, 0.85);
+    }
+    .tactile-debossed-accent {
+      box-shadow: inset 1px 1px 4px rgba(30, 35, 34, 0.12), inset -1px -1px 3px rgba(255, 255, 255, 0.7);
+    }
+    .barista-glow {
+      background: radial-gradient(circle, rgba(143, 188, 163, 0.35) 0%, rgba(227, 239, 233, 0.15) 70%, transparent 100%);
+    }
+
+    /* Tooltip Helper */
+    .has-tooltip:hover .tooltip-target {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @keyframes tactile-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-tactile-spin {
+      animation: tactile-spin 2.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex selection:bg-tertiary-fixed selection:text-on-tertiary-container font-body-md text-body-md overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (Strict implementation from JSON & Blueprint) -->
+<!-- ========================================================================= -->
+<aside class="fixed left-0 top-0 h-full p-space-md flex flex-col z-30 h-screen w-64 shrink-0 rounded-r-2xl bg-surface-container-low shadow-[6px_0_16px_rgba(30,35,34,0.04)] justify-between">
+<!-- Header Brand Section -->
+<div>
+<div class="flex items-center gap-space-sm px-space-sm py-space-sm mb-space-lg">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center tactile-convex shrink-0">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="coffee_maker">coffee_maker</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">Perencana</span>
+<span class="text-label-ui font-label-ui text-secondary">Workspace Pro</span>
+</div>
+</div>
+<!-- System State Switcher (Audit & Demo Control) -->
+<div class="mb-space-lg p-space-xs bg-surface-container rounded-lg tactile-debossed">
+<p class="text-label-ui font-label-ui text-secondary px-space-sm py-1 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary" data-icon="alt_route">alt_route</span>
+          SIMULATOR STATE:
+        </p>
+<div class="grid grid-cols-2 gap-1 p-0.5">
+<button class="py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 tactile-convex bg-surface-container-lowest text-on-surface font-semibold shadow-sm" id="btn-state-l01" onclick="switchState('l01')">
+            L01 Loading
+          </button>
+<button class="py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 text-secondary hover:text-on-surface" id="btn-state-l02" onclick="switchState('l02')">
+            L02 Offline
+          </button>
+</div>
+</div>
+<!-- Navigation Tabs (JSON: Dashboard, Tugas, Kalender, Analisis, Pengaturan) -->
+<nav aria-label="Menu Utama" class="space-y-1.5">
+<!-- 1. Dashboard -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 active:scale-[0.97]" href="#dashboard">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<!-- 2. Tugas (ACTIVE TAB) -->
+<a class="flex items-center gap-3 bg-tertiary-fixed/40 text-on-tertiary-container font-semibold rounded-full px-space-md py-space-sm shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(30,35,34,0.05)] active:scale-[0.97] transition-all duration-200" href="#tugas">
+<span class="material-symbols-outlined text-xl text-primary" data-icon="check_circle">check_circle</span>
+<span class="text-body-md font-body-md">Tugas</span>
+<span class="ml-auto font-label-numeric-md text-label-ui text-primary bg-primary-fixed/60 px-2 py-0.5 rounded-full">3</span>
+</a>
+<!-- 3. Kalender -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 active:scale-[0.97]" href="#kalender">
+<span class="material-symbols-outlined text-xl" data-icon="calendar_today">calendar_today</span>
+<span class="text-body-md font-body-md">Kalender</span>
+</a>
+<!-- 4. Analisis -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 active:scale-[0.97]" href="#analisis">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span class="text-body-md font-body-md">Analisis</span>
+</a>
+<!-- 5. Pengaturan -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 active:scale-[0.97]" href="#pengaturan">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="text-body-md font-body-md">Pengaturan</span>
+</a>
+</nav>
+<!-- CTA (SideNavBar JSON specification: Tambah Tugas disabled in current state) -->
+<div class="mt-space-lg relative has-tooltip">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-surface-container-high text-secondary cursor-not-allowed opacity-75 font-semibold text-body-sm tactile-debossed" disabled="">
+<span class="material-symbols-outlined text-lg opacity-60" data-icon="add">add</span>
+<span>Tambah Tugas</span>
+</button>
+<!-- Tooltip -->
+<div class="tooltip-target invisible opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-inverse-surface text-inverse-on-surface text-xs rounded-lg shadow-lg pointer-events-none transition-all duration-150 text-center z-50">
+<span id="side-cta-tooltip-text">Sedang menyambungkan… Tombol ubah terkunci sementara.</span>
+</div>
+</div>
+</div>
+<!-- Footer Profile & Bantuan -->
+<div class="pt-space-md border-t border-surface-container-highest/60">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 mb-2" href="#bantuan">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span class="text-body-md font-body-md">Bantuan</span>
+</a>
+<!-- Profile Capsule (Akun Profil Cah) -->
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest/80 tactile-convex-sm">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-xs shrink-0 tactile-debossed-accent">
+            CH
+          </div>
+<div class="min-w-0">
+<p class="text-body-sm font-body-sm font-semibold text-on-surface truncate">Cahya Santoso</p>
+<p class="text-[10px] font-label-ui text-secondary truncate">Akun Profil Cah</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER (1280px optimized laptop screen)                 -->
+<!-- ========================================================================= -->
+<div class="pl-64 flex-1 flex flex-col min-w-0 bg-background">
+<!-- SHARED COMPONENT: TopNavBar (from JSON & Blueprint specifications) -->
+<header class="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md shadow-[0_2px_12px_rgba(30,35,34,0.04)]">
+<div class="flex items-center justify-between px-space-xl py-space-md w-full gap-space-lg">
+<!-- Left: Search Bar on Left (JSON: search_bar: 'on_left') with debossed ⌘K -->
+<div class="flex items-center gap-space-md w-96 max-w-md">
+<div class="w-full flex items-center bg-surface-container-low rounded-full px-space-md py-2 tactile-debossed text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-lg mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-body-sm placeholder:text-secondary text-on-surface w-full focus:outline-none" placeholder="Cari task, jurnal, arsip..." type="text"/>
+<kbd class="ml-2 font-label-numeric-md text-[10px] bg-surface-container-highest/80 text-secondary px-2 py-0.5 rounded-full tactile-convex-sm border border-outline-variant/30">⌘K</kbd>
+</div>
+</div>
+<!-- Center: Hardware / System Telemetry Capsule -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low tactile-debossed">
+<!-- State LED Indicator -->
+<span class="relative flex h-2.5 w-2.5" id="top-status-indicator">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+</span>
+<span class="text-label-ui font-label-ui text-on-surface font-semibold" id="top-status-text">
+            Menyambungkan ke Server Pusat…
+          </span>
+<span class="text-label-ui font-label-numeric-md text-secondary border-l border-outline-variant/40 pl-2">
+            Pkl 14.52 WIB
+          </span>
+</div>
+<!-- Right: Actions & Disabled Primary Action (+ Tambah task) -->
+<div class="flex items-center gap-space-sm">
+<!-- Trailing Icon Actions: notifications, tune -->
+<button class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors duration-150 tactile-convex-sm active:scale-[0.98]" title="Notifikasi">
+<span class="material-symbols-outlined text-lg" data-icon="notifications">notifications</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors duration-150 tactile-convex-sm active:scale-[0.98]" title="Filter &amp; Penyesuaian">
+<span class="material-symbols-outlined text-lg" data-icon="tune">tune</span>
+</button>
+<!-- Disabled Primary Action (+ Tambah task) with Tooltip -->
+<div class="relative has-tooltip">
+<button class="flex items-center gap-1.5 bg-surface-container-high text-secondary border border-outline-variant/40 px-4 py-2 rounded-full font-label-ui text-body-sm cursor-not-allowed opacity-75 tactile-debossed select-none" disabled="">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="lock">lock</span>
+<span class="font-semibold">+ Tambah task</span>
+</button>
+<!-- Tooltip -->
+<div class="tooltip-target invisible opacity-0 absolute top-full right-0 mt-2 w-56 p-2.5 bg-inverse-surface text-inverse-on-surface text-xs rounded-xl shadow-xl pointer-events-none transition-all duration-200 z-50">
+<div class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-amber-300 text-sm shrink-0" data-icon="info">info</span>
+<p class="leading-relaxed" id="topbar-tooltip-body">
+                  Menyambungkan… Tombol ubah aktif setelah tersambung dengan server.
+                </p>
+</div>
+</div>
+</div>
+<!-- User Avatar Portrait (from JSON: profile_image_alt) -->
+<div class="ml-2 w-9 h-9 rounded-full bg-surface-container-lowest p-0.5 tactile-convex-sm flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="Portrait photo of a young Indonesian professional user in minimalist sage clothing sitting in a serene modern studio with soft daylight and high-key tactile decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhkKsAbMrC1Nre_zHomIBjZcksmFByEz2aMkHGpGyPzXXegXV4GNWrN6HpTiat92zDFOZlnx2XMnMIVv0nYr4huNTdtlu5-NeP30d1Pig8zrX-hpqVWyCZLbrH4LBdaBwZlER8u5AaU1xrUC1FGT0CAtaTwtoW86SLv60pAWil04pibjzlyQnX6DEETTZLPWyhGacCP-_wlMcSuqcCSqhd03_0ocsL_HpKQf17KzEr"/>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- DYNAMIC STATUS BANNER (Sbar) TAKTIL (L01 & L02 States)                    -->
+<!-- ========================================================================= -->
+<section class="px-space-xl pt-space-md">
+<!-- STATE BANNER L01: MENYAMBUNGKAN & MEMUAT -->
+<div class="transition-all duration-300 flex items-center justify-between p-space-md rounded-2xl bg-amber-50/70 border border-amber-200/60 tactile-convex" id="banner-l01">
+<div class="flex items-center gap-4">
+<!-- Barista Gauge / Tactile Loading Hourglass -->
+<div class="w-11 h-11 rounded-full bg-surface-container-lowest flex items-center justify-center text-amber-700 tactile-convex-sm shrink-0 relative">
+<span class="material-symbols-outlined text-2xl animate-tactile-spin" data-icon="progress_activity">progress_activity</span>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-amber-500 rounded-full border-2 border-white flex items-center justify-center">
+<span class="w-1 h-1 bg-white rounded-full"></span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-label-ui uppercase tracking-wider font-bold">
+                State L01: Sinkronisasi Server Lambat
+              </span>
+<span class="text-xs text-amber-800 font-label-numeric-md">Timeout: 8.4s</span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-on-surface mt-0.5">
+              Menyambungkan… Data per 14.52 tampil dulu. Tombol ubah aktif setelah tersambung.
+            </p>
+<p class="text-body-sm text-secondary">
+              Aplikasi mempertahankan stabilitas tampilan lokal saat handshake soket telemetry diulang.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-secondary text-xs tactile-debossed">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_sync">cloud_sync</span>
+<span>Retrying packet 2/5</span>
+</div>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-semibold text-body-sm tactile-convex-sm active:scale-[0.98] transition-all" onclick="simulateRetry()">
+<span class="material-symbols-outlined text-base text-primary" data-icon="refresh">refresh</span>
+<span>Coba lagi</span>
+</button>
+</div>
+</div>
+<!-- STATE BANNER L02: OFFLINE (READ-ONLY CACHE) -->
+<div class="hidden transition-all duration-300 flex items-center justify-between p-space-md rounded-2xl bg-secondary-fixed/50 border border-outline-variant/60 tactile-convex" id="banner-l02">
+<div class="flex items-center gap-4">
+<!-- Disconnect Symbol Pill -->
+<div class="w-11 h-11 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface-variant tactile-convex-sm shrink-0 relative">
+<span class="material-symbols-outlined text-2xl" data-icon="wifi_off">wifi_off</span>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-rose-500 rounded-full border-2 border-white flex items-center justify-center">
+<span class="w-1 h-1 bg-white rounded-full"></span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-[10px] font-label-ui uppercase tracking-wider font-bold">
+                State L02: Mode Mandiri (Offline)
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-label-ui font-semibold">
+<span class="material-symbols-outlined text-[12px]" data-icon="verified_user">verified_user</span>
+                Cache Lokal Terverifikasi
+              </span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-on-surface mt-0.5">
+              Offline. Data per 14.52, hanya bisa dibaca.
+            </p>
+<p class="text-body-sm text-secondary">
+              Anda tidak terhubung ke internet. Seluruh perubahan draft dinonaktifkan demi integritas data replikasi.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary text-xs tactile-debossed flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="database">database</span>
+<span>SQLite Cache 2.4 MB</span>
+</div>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-lowest text-on-surface hover:bg-surface-container font-semibold text-body-sm tactile-convex-sm active:scale-[0.98] transition-all" onclick="checkConnection()">
+<span class="material-symbols-outlined text-base" data-icon="network_check">network_check</span>
+<span>Periksa Jaringan</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTENT: Read-Only Dashboard & Task List                   -->
+<!-- ========================================================================= -->
+<main class="flex-1 px-space-xl py-space-lg space-y-space-lg">
+<!-- Bento Header & Telemetry Row -->
+<div class="grid grid-cols-12 gap-space-lg">
+<!-- Left Bento (8 Cols): Title & Filter Triggers -->
+<div class="col-span-8 p-space-lg bg-surface-container-lowest rounded-2xl tactile-convex flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 barista-glow pointer-events-none rounded-full blur-2xl"></div>
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">Daftar Tugas Aktif</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-secondary text-xs font-label-numeric-md tactile-debossed">
+                  Data per 14.52
+                </span>
+</div>
+<p class="text-body-md text-secondary mt-1">
+                Workspace Pro <span class="mx-1">•</span> Semester Akhir &amp; Relokasi Studio
+              </p>
+</div>
+<!-- Read Only Lock Indicator Badge -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40 tactile-debossed text-secondary text-xs font-label-ui">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="lock_clock">lock_clock</span>
+<span>MODE HANYA BACA</span>
+</div>
+</div>
+<!-- Secondary Filter Capsule Bar (All Actions Disabled Elegantly) -->
+<div class="flex flex-wrap items-center gap-2 mt-space-lg pt-space-md border-t border-surface-container-low">
+<span class="text-label-ui font-label-ui text-secondary mr-2">AKSI &amp; FILTER:</span>
+<!-- Button: Kelola Label (Disabled with tooltip) -->
+<div class="relative has-tooltip">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-low text-secondary/70 text-body-sm tactile-debossed cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-sm opacity-60" data-icon="label">label</span>
+<span>Kelola label</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 p-2 bg-inverse-surface text-inverse-on-surface text-[11px] rounded-lg shadow-lg pointer-events-none transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+<!-- Button: Tambah Progress (Disabled with tooltip) -->
+<div class="relative has-tooltip">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-low text-secondary/70 text-body-sm tactile-debossed cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-sm opacity-60" data-icon="speed">speed</span>
+<span>Tambah progress</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 p-2 bg-inverse-surface text-inverse-on-surface text-[11px] rounded-lg shadow-lg pointer-events-none transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+<!-- Button: + To-do (Disabled with tooltip) -->
+<div class="relative has-tooltip">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-low text-secondary/70 text-body-sm tactile-debossed cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-sm opacity-60" data-icon="add_task">add_task</span>
+<span>+ To-do</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 p-2 bg-inverse-surface text-inverse-on-surface text-[11px] rounded-lg shadow-lg pointer-events-none transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+<!-- Button: Selesai Massal (Disabled with tooltip) -->
+<div class="relative has-tooltip ml-auto">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container text-secondary/70 text-body-sm tactile-debossed cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-sm opacity-60" data-icon="done_all">done_all</span>
+<span>Tandai Selesai</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute bottom-full right-0 mb-2 w-44 p-2 bg-inverse-surface text-inverse-on-surface text-[11px] rounded-lg shadow-lg pointer-events-none transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Bento (4 Cols): Hardware Telemetry Card / Snapshot State -->
+<div class="col-span-4 p-space-lg bg-surface-container-lowest rounded-2xl tactile-convex flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-ui font-label-ui text-secondary uppercase tracking-wider">Telemetri Sync</span>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="tune">tune</span>
+</div>
+<!-- Circular Metric Representation (Tactile Barista Style) -->
+<div class="my-3 flex items-center justify-center">
+<div class="w-28 h-28 rounded-full bg-surface-container-low tactile-debossed flex flex-col items-center justify-center relative p-2">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest tactile-convex-sm flex flex-col items-center justify-center">
+<span class="text-label-ui font-label-ui text-secondary">CACHED</span>
+<span class="text-label-numeric-lg font-label-numeric-lg text-primary">100%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-2.5 tactile-debossed text-center">
+<p class="text-xs text-on-surface font-semibold">Integritas Snapshot Aman</p>
+<p class="text-[11px] text-secondary font-label-numeric-md">SHA-256: 7f8a...c912</p>
+</div>
+</div>
+</div>
+<!-- Bento Section 2: Task List Read-Only Table & Precision Rows -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg tactile-convex space-y-space-md">
+<div class="flex items-center justify-between pb-2 border-b border-surface-container-high/70">
+<div class="flex items-center gap-3">
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface">Daftar Antrean Tugas</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary text-xs font-medium">3 item terkunci</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary font-label-numeric-md">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span>Stamp snapshot: 14.52.19 WIB</span>
+</div>
+</div>
+<!-- Task Item 1: Cari 10 jurnal rujukan -->
+<div class="p-space-md rounded-xl bg-surface-bright border border-outline-variant/30 tactile-convex-sm hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Checkbox (Disabled) -->
+<div class="relative has-tooltip">
+<button class="w-6 h-6 rounded-md bg-surface-container-low tactile-debossed flex items-center justify-center cursor-not-allowed opacity-60" disabled="">
+<span class="w-2 h-2 rounded-sm bg-transparent"></span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute left-full ml-2 top-1/2 -translate-y-1/2 w-32 p-1.5 bg-inverse-surface text-inverse-on-surface text-[10px] rounded shadow-md transition-all z-50">
+                  Hanya baca
+                </div>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface text-body-md truncate">Cari 10 jurnal rujukan</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-container text-[10px] font-label-ui">Akademik</span>
+<span class="text-[11px] font-label-numeric-md text-secondary bg-surface-container px-2 py-0.2 rounded tactile-debossed-accent">Data per 14.52</span>
+</div>
+<p class="text-body-sm text-secondary truncate mt-0.5">Topik: Sistem Sensor IoT untuk Ekstraksi Espresso Presisi Tinggi</p>
+</div>
+</div>
+<!-- Task Meta & Actions (Disabled) -->
+<div class="flex items-center gap-space-md shrink-0">
+<!-- Progress Bar -->
+<div class="w-32 hidden md:block">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-secondary text-[10px] font-label-ui">Progress</span>
+<span class="font-label-numeric-md text-[11px] text-primary">7/10</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full tactile-debossed overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<!-- Action Menu Disabled -->
+<div class="relative has-tooltip">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-secondary cursor-not-allowed opacity-60 tactile-debossed" disabled="">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute right-full mr-2 top-1/2 -translate-y-1/2 w-40 p-2 bg-inverse-surface text-inverse-on-surface text-xs rounded-lg shadow-lg transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Item 2: Susun kerangka bab 3 -->
+<div class="p-space-md rounded-xl bg-surface-bright border border-outline-variant/30 tactile-convex-sm hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Checkbox (Disabled) -->
+<div class="relative has-tooltip">
+<button class="w-6 h-6 rounded-md bg-surface-container-low tactile-debossed flex items-center justify-center cursor-not-allowed opacity-60" disabled="">
+<span class="w-2 h-2 rounded-sm bg-transparent"></span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute left-full ml-2 top-1/2 -translate-y-1/2 w-32 p-1.5 bg-inverse-surface text-inverse-on-surface text-[10px] rounded shadow-md transition-all z-50">
+                  Hanya baca
+                </div>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface text-body-md truncate">Susun kerangka bab 3</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-label-ui">Metodologi</span>
+<span class="text-[11px] font-label-numeric-md text-secondary bg-surface-container px-2 py-0.2 rounded tactile-debossed-accent">Data per 14.52</span>
+</div>
+<p class="text-body-sm text-secondary truncate mt-0.5">Uji verifikasi sensor termal flow rate dan resistensi hidrolik</p>
+</div>
+</div>
+<!-- Task Meta & Actions (Disabled) -->
+<div class="flex items-center gap-space-md shrink-0">
+<!-- Progress Bar -->
+<div class="w-32 hidden md:block">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-secondary text-[10px] font-label-ui">Progress</span>
+<span class="font-label-numeric-md text-[11px] text-primary">30%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full tactile-debossed overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<!-- Action Menu Disabled -->
+<div class="relative has-tooltip">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-secondary cursor-not-allowed opacity-60 tactile-debossed" disabled="">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute right-full mr-2 top-1/2 -translate-y-1/2 w-40 p-2 bg-inverse-surface text-inverse-on-surface text-xs rounded-lg shadow-lg transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Item 3: Pesan truk pindahan -->
+<div class="p-space-md rounded-xl bg-surface-bright border border-outline-variant/30 tactile-convex-sm hover:border-outline-variant/60 transition-all">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Checkbox (Disabled) -->
+<div class="relative has-tooltip">
+<button class="w-6 h-6 rounded-md bg-surface-container-low tactile-debossed flex items-center justify-center cursor-not-allowed opacity-60" disabled="">
+<span class="w-2 h-2 rounded-sm bg-transparent"></span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute left-full ml-2 top-1/2 -translate-y-1/2 w-32 p-1.5 bg-inverse-surface text-inverse-on-surface text-[10px] rounded shadow-md transition-all z-50">
+                  Hanya baca
+                </div>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface text-body-md truncate">Pesan truk pindahan</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-ui">Logistik</span>
+<span class="text-[11px] font-label-numeric-md text-secondary bg-surface-container px-2 py-0.2 rounded tactile-debossed-accent">Data per 14.52</span>
+</div>
+<p class="text-body-sm text-secondary truncate mt-0.5">Konfirmasi box packing mesin espresso komersial &amp; meja barista</p>
+</div>
+</div>
+<!-- Task Meta & Actions (Disabled) -->
+<div class="flex items-center gap-space-md shrink-0">
+<!-- Progress Bar -->
+<div class="w-32 hidden md:block">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-secondary text-[10px] font-label-ui">Progress</span>
+<span class="font-label-numeric-md text-[11px] text-primary">Pending</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full tactile-debossed overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 10%"></div>
+</div>
+</div>
+<!-- Action Menu Disabled -->
+<div class="relative has-tooltip">
+<button class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-secondary cursor-not-allowed opacity-60 tactile-debossed" disabled="">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<div class="tooltip-target invisible opacity-0 absolute right-full mr-2 top-1/2 -translate-y-1/2 w-40 p-2 bg-inverse-surface text-inverse-on-surface text-xs rounded-lg shadow-lg transition-all text-center z-50">
+<span class="state-tooltip-text">Sedang menyambungkan…</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Section 3: Dokumentasi Penanganan Galat & Recovery -->
+<div class="p-space-lg bg-surface-container-low rounded-2xl tactile-debossed">
+<div class="flex items-center gap-2 mb-space-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="shield">shield</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Protokol Penanganan Galat &amp; Pemulihan Sistem (Recovery)</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-lowest tactile-convex-sm">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<p class="font-semibold text-body-sm text-on-surface">1. Cache Immutability</p>
+</div>
+<p class="text-body-sm text-secondary">
+              State offline mengunci pointer database lokal. Tidak ada mutasi optimistic tanpa tanda tangan server (ACK) untuk mencegah konflik merge saat koneksi pulih.
+            </p>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest tactile-convex-sm">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<p class="font-semibold text-body-sm text-on-surface">2. Exponential Backoff</p>
+</div>
+<p class="text-body-sm text-secondary">
+              L01 mencoba reconnect secara bergradasi (2s, 4s, 8s, 16s). Pengguna tetap disajikan data terakhir (14.52) tanpa interupsi layar putih / blocking spinner.
+            </p>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-lowest tactile-convex-sm">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<p class="font-semibold text-body-sm text-on-surface">3. Visual Feedback Tactility</p>
+</div>
+<p class="text-body-sm text-secondary">
+              Tombol aksi diubah ke kondisi debossed recessed dengan opacity 60% dan cursor prohibited, dilengkapi tooltip konteks instan untuk mencegah friksi pengguna.
+            </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Inline Logic for Interactive Preview Switcher -->
+<script>
+    function switchState(state) {
+      const bannerL01 = document.getElementById('banner-l01');
+      const bannerL02 = document.getElementById('banner-l02');
+      const btnL01 = document.getElementById('btn-state-l01');
+      const btnL02 = document.getElementById('btn-state-l02');
+      const topIndicator = document.getElementById('top-status-indicator');
+      const topText = document.getElementById('top-status-text');
+      const topTooltip = document.getElementById('topbar-tooltip-body');
+      const sideTooltip = document.getElementById('side-cta-tooltip-text');
+      const tooltips = document.querySelectorAll('.state-tooltip-text');
+
+      if (state === 'l01') {
+        // Show L01
+        bannerL01.classList.remove('hidden');
+        bannerL02.classList.add('hidden');
+
+        // Nav Pill styling
+        btnL01.className = 'py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 tactile-convex bg-surface-container-lowest text-on-surface font-semibold shadow-sm';
+        btnL02.className = 'py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 text-secondary hover:text-on-surface';
+
+        // Top Status LED Amber
+        topIndicator.innerHTML = `
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+        `;
+        topText.textContent = 'Menyambungkan ke Server Pusat…';
+        topTooltip.textContent = 'Menyambungkan… Tombol ubah aktif setelah tersambung dengan server.';
+        sideTooltip.textContent = 'Sedang menyambungkan… Tombol ubah terkunci sementara.';
+
+        tooltips.forEach(t => t.textContent = 'Sedang menyambungkan…');
+
+      } else {
+        // Show L02
+        bannerL01.classList.add('hidden');
+        bannerL02.classList.remove('hidden');
+
+        // Nav Pill styling
+        btnL02.className = 'py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 tactile-convex bg-surface-container-lowest text-on-surface font-semibold shadow-sm';
+        btnL01.className = 'py-1.5 px-2 rounded-full text-center text-[10px] font-label-ui transition-all duration-150 text-secondary hover:text-on-surface';
+
+        // Top Status LED Offline Grey/Red
+        topIndicator.innerHTML = `
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-slate-400"></span>
+        `;
+        topText.textContent = 'Sistem Offline (Read-Only)';
+        topTooltip.textContent = 'Sedang offline. Data per 14.52 terkunci untuk menjaga replikasi.';
+        sideTooltip.textContent = 'Sedang offline. Buat task baru membutuhkan sinkronisasi.';
+
+        tooltips.forEach(t => t.textContent = 'Sedang offline');
+      }
+    }
+
+    function simulateRetry() {
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-base animate-spin" data-icon="sync">sync</span><span>Mencoba...</span>`;
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 1400);
+    }
+
+    function checkConnection() {
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="material-symbols-outlined text-base animate-spin" data-icon="radar">radar</span><span>Memindai...</span>`;
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        alert('Jaringan belum tersedia. Snapshot cache 14.52 tetap dimuat.');
+      }, 1200);
+    }
+  </script>
+</body></html>

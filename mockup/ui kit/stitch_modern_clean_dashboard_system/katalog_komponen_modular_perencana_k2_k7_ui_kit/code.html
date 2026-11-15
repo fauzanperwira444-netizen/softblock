@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Katalog Komponen Modular Perencana — Batch 0: K2 hingga K7</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS via CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Verbatim Tailwind Config as specified in design system -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#191c1d",
+            "surface-variant": "#e1e3e3",
+            "inverse-on-surface": "#eff1f1",
+            "surface-dim": "#d8dada",
+            "surface-container": "#eceeee",
+            "on-secondary-fixed-variant": "#434847",
+            "on-tertiary-container": "#073523",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "surface": "#f8fafa",
+            "on-tertiary-fixed": "#002114",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#beedd2",
+            "inverse-primary": "#a6d0b8",
+            "surface-container-highest": "#e1e3e3",
+            "secondary-container": "#dce1df",
+            "surface-tint": "#406653",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#414844",
+            "on-error-container": "#93000a",
+            "primary": "#406653",
+            "surface-container-high": "#e6e8e8",
+            "on-primary-container": "#0c3424",
+            "secondary": "#5a5f5e",
+            "on-secondary-container": "#5f6462",
+            "on-background": "#191c1d",
+            "on-primary-fixed": "#002114",
+            "secondary-fixed-dim": "#c3c7c6",
+            "primary-fixed-dim": "#a6d0b8",
+            "tertiary": "#3d6752",
+            "surface-container-low": "#f2f4f4",
+            "primary-container": "#769e88",
+            "outline": "#717973",
+            "outline-variant": "#c1c8c2",
+            "tertiary-container": "#739f87",
+            "primary-fixed": "#c2ecd3",
+            "inverse-surface": "#2e3131",
+            "on-error": "#ffffff",
+            "surface-bright": "#f8fafa",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#284e3c",
+            "background": "#f8fafa",
+            "on-secondary-fixed": "#181d1c",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#dfe3e1"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "gutter-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "margin": "1.5rem",
+            "space-2xl": "3rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-numeric-md": ["Space Mono"],
+            "label-ui": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-numeric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-numeric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "label-ui": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Neomorphic Tactile Shadows & Insets based on espresso hardware tactile rules */
+    .tactile-convex {
+      box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.95), 6px 6px 16px rgba(30, 35, 34, 0.05), 2px 2px 6px rgba(30, 35, 34, 0.03);
+    }
+    .tactile-convex-sm {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(30, 35, 34, 0.05);
+    }
+    .tactile-inset {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.07), inset -2px -2px 5px rgba(255, 255, 255, 0.85);
+    }
+    .tactile-inset-deep {
+      box-shadow: inset 3px 3px 8px rgba(30, 35, 34, 0.1), inset -3px -3px 8px rgba(255, 255, 255, 0.9);
+    }
+    .tactile-button {
+      box-shadow: -3px -3px 8px rgba(255, 255, 255, 0.9), 4px 4px 10px rgba(30, 35, 34, 0.06);
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tactile-button:active {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.12), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+      transform: scale(0.98);
+    }
+    .radial-sage-glow {
+      background: radial-gradient(circle, rgba(143, 188, 163, 0.35) 0%, rgba(227, 239, 233, 0.1) 70%, transparent 100%);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-container">
+<!-- Top Global Header (Perencana UI Anchor Shell) -->
+<header class="sticky top-0 z-40 w-full bg-surface/85 backdrop-blur-md shadow-[0_2px_12px_rgba(30,35,34,0.04)] px-space-xl py-space-md flex items-center justify-between border-b border-transparent">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest tactile-convex flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="coffee_maker">coffee_maker</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-semibold tracking-tight text-on-surface">Perencana</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed/60 text-on-tertiary-container font-label-ui text-label-ui">Batch 0 : K2–K7</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Design System &amp; Precision Modular UI Kit</p>
+</div>
+</div>
+<!-- Quick Palette Chips Pill & Actions -->
+<div class="flex items-center gap-space-sm">
+<div class="hidden lg:flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container-low tactile-inset text-on-surface-variant text-[12px]">
+<span class="w-2.5 h-2.5 rounded-full bg-[#f8fafa] border border-outline-variant/60" title="Surface Ceramic #F8FAFA"></span>
+<span class="font-label-ui text-label-ui">Porcelain</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container" title="Muted Sage #769E88"></span>
+<span class="font-label-ui text-label-ui">Muted Sage</span>
+<span class="w-2.5 h-2.5 rounded-full bg-on-surface" title="Jet Charcoal #191C1D"></span>
+<span class="font-label-ui text-label-ui">Jet Black</span>
+</div>
+<button class="tactile-button bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-full font-label-ui text-label-ui flex items-center gap-space-xs hover:bg-surface-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="tune">tune</span>
+<span>Spesifikasi</span>
+</button>
+<button class="bg-on-surface text-surface-container-lowest hover:bg-black transition-all px-space-md py-2 rounded-full font-label-ui text-label-ui flex items-center gap-space-xs shadow-md active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span>+ Tambah task</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas Container: Outer Tablet Containment Bezel -->
+<main class="max-w-[1520px] mx-auto p-space-md md:p-space-xl space-y-space-2xl">
+<!-- HERO / DOKUMENTASI INTRO -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg md:p-space-xl tactile-convex relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full radial-sage-glow pointer-events-none"></div>
+<div class="max-w-4xl relative z-10 space-y-space-sm">
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-low tactile-inset text-primary font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[14px]" data-icon="developer_board">developer_board</span>
+<span>Dokumentasi Komponen Resmi</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Katalog Komponen Modular Perencana — Batch 0: K2 hingga K7</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          Koleksi komponen sistem bersama (Shared Component Kit) untuk Daftar Task, Dashboard, Detail Projek, Form Sheets, Dialogs, dan Panel Detail. Mengadaptasi presisi instrumen hardware kopi spesialis dengan permukaan keramik neomorphic lembut, tombol kapsul debossed, dan hierarki data klinis yang tenang.
+        </p>
+<div class="pt-space-sm flex flex-wrap items-center gap-space-md">
+<div class="flex items-center gap-2 bg-surface-container-low px-space-md py-2 rounded-full tactile-inset">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-ui text-label-ui text-on-surface">Muted Sage Accent (#769E88)</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-space-md py-2 rounded-full tactile-inset">
+<span class="w-3 h-3 rounded-full bg-on-surface"></span>
+<span class="font-label-ui text-label-ui text-on-surface">Tactile Charcoal CTA (#191C1D)</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-space-md py-2 rounded-full tactile-inset">
+<span class="w-3 h-3 rounded-full bg-surface border border-outline-variant"></span>
+<span class="font-label-ui text-label-ui text-on-surface">Porcelain Surface (#F8FAFA)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SEKSI 01 — K2: BARIS TASK (Komponen Baris & Kartu Tugas) -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs border-b border-surface-variant pb-space-sm">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase tracking-wider">Modul K2</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Baris Task (Task Rows &amp; Compact Cards)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Varian baris data tabel desktop adaptif dan format mobile card dengan 6 representasi status fundamental.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-ui text-label-ui text-on-surface-variant px-3 py-1 rounded-full bg-surface-container tactile-inset">6 Status States</span>
+</div>
+</div>
+<!-- DESKTOP TABLE / ROW VIEW -->
+<div class="space-y-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="table_rows">table_rows</span>
+<span>Varian Desktop / Table Row Layout</span>
+</h3>
+<div class="space-y-3">
+<!-- State 1: Aktif Normal -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-md tactile-convex flex flex-col xl:flex-row xl:items-center justify-between gap-4 border border-white/60 hover:bg-surface-bright transition-colors">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<button class="w-6 h-6 rounded-full tactile-inset bg-surface-container-low border border-outline-variant/30 flex items-center justify-center text-transparent hover:text-primary transition-all shrink-0 mt-0.5 md:mt-0">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</button>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Susun kerangka bab 3</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-low tactile-inset text-[12px] font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-[2px] bg-primary"></span>
+<span>Skripsi Bab 3</span>
+</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span>19 Nov 2026 · 17.00</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span>Kesulitan: 3</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Stepper Progress 4/10 -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full tactile-inset self-start xl:self-auto">
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="remove">remove</span>
+</button>
+<!-- 10 Individual tactile segments -->
+<div class="flex items-center gap-1">
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold px-1 cursor-pointer" title="Klik untuk membuka sheet progress">4/10</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+</button>
+</div>
+<!-- Aksi Tombol -->
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface hover:bg-surface-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_task">add_task</span>
+<span>+ To-do</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-primary/10 text-primary tactile-button font-label-ui text-label-ui hover:bg-primary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="done_all">done_all</span>
+<span>✓ Selesai</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-on-surface hover:bg-surface-container">
+<span>Detail</span>
+</button>
+</div>
+</div>
+<!-- State 2: Telat -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-md tactile-convex flex flex-col xl:flex-row xl:items-center justify-between gap-4 border-l-4 border-l-error">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<button class="w-6 h-6 rounded-full tactile-inset bg-surface-container-low border border-outline-variant/30 flex items-center justify-center shrink-0 mt-0.5 md:mt-0 text-transparent">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</button>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Cari 10 jurnal rujukan</span>
+<!-- Badge Telat solid kontras -->
+<span class="px-2.5 py-0.5 rounded-full bg-error text-on-error font-label-ui text-label-ui shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="warning">warning</span>
+<span>Telat</span>
+</span>
+</div>
+<div class="flex items-center gap-space-md text-error font-body-sm text-body-sm mt-1">
+<span class="flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="event_busy">event_busy</span>
+<span>Deadline: 16 Nov 2026</span>
+</span>
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span>Kesulitan: 2</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Stepper Progress 7/10 -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full tactile-inset self-start xl:self-auto">
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1">
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold px-1">7/10</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add_task">add_task</span>
+<span>+ To-do</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-primary/10 text-primary tactile-button font-label-ui text-label-ui">
+<span>✓ Selesai</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-on-surface">
+<span>Detail</span>
+</button>
+</div>
+</div>
+<!-- State 3: Di Luar Periode -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-md tactile-convex flex flex-col xl:flex-row xl:items-center justify-between gap-4 border border-outline-variant/40">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<button class="w-6 h-6 rounded-full tactile-inset bg-surface-container-low border border-outline-variant/30 flex items-center justify-center shrink-0 mt-0.5 md:mt-0 text-transparent">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</button>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Rapikan sitasi pustaka</span>
+<!-- Outlined status badge -->
+<span class="px-2.5 py-0.5 rounded-full border border-secondary text-secondary font-label-ui text-label-ui">
+                    Di luar periode
+                  </span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span>27 Nov 2026</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span>Kesulitan: 2</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Stepper Progress 0/10 with Minus Disabled -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full tactile-inset self-start xl:self-auto">
+<button class="w-6 h-6 rounded-full bg-surface-container-low text-outline-variant cursor-not-allowed flex items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[14px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1">
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface-variant font-bold px-1">0/10</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface">
+<span>+ To-do</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-on-surface">
+<span>Detail</span>
+</button>
+</div>
+</div>
+<!-- State 4: Tanpa Deadline -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-md tactile-convex flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<button class="w-6 h-6 rounded-full tactile-inset bg-surface-container-low border border-outline-variant/30 flex items-center justify-center shrink-0 mt-0.5 md:mt-0 text-transparent">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</button>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Beli tinta printer EPSON</span>
+<!-- Independent label chip with dotted underline -->
+<span class="font-label-ui text-label-ui text-secondary underline decoration-dotted underline-offset-4 decoration-outline">
+                    #Rumah
+                  </span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="italic text-outline">Tanpa batas waktu</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span>Kesulitan: 1</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Stepper Progress 0/10 -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full tactile-inset self-start xl:self-auto">
+<button class="w-6 h-6 rounded-full bg-surface-container-low text-outline-variant cursor-not-allowed flex items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[14px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1">
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface-variant font-bold px-1">0/10</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface">
+<span>+ To-do</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-on-surface">
+<span>Detail</span>
+</button>
+</div>
+</div>
+<!-- State 5: Selesai (Completed Read-Only) -->
+<div class="bg-surface-container-low/70 rounded-DEFAULT p-space-md tactile-inset flex flex-col xl:flex-row xl:items-center justify-between gap-4 opacity-90">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 mt-0.5 md:mt-0 shadow-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface line-through text-on-surface-variant">Kirim proposal bab ke dosen</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-ui text-label-ui">
+                    Selesai
+                  </span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span>Selesai pada 10 Nov 2026</span>
+<span>Kesulitan: 3</span>
+</div>
+</div>
+</div>
+<!-- Progress 10/10 Segments (All Full) -->
+<div class="flex items-center gap-space-sm bg-surface-container-lowest/80 px-space-md py-1.5 rounded-full tactile-convex-sm self-start xl:self-auto">
+<div class="flex items-center gap-1">
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+<div class="w-2 h-4 rounded-full bg-primary shadow-xs"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold px-1">10/10</span>
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="task_alt">task_alt</span>
+</div>
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-on-surface">
+<span>Detail</span>
+</button>
+</div>
+</div>
+<!-- State 6: Batal (Cancelled) -->
+<div class="bg-surface-container-low/50 rounded-DEFAULT p-space-md tactile-inset flex flex-col xl:flex-row xl:items-center justify-between gap-4 opacity-75">
+<div class="flex items-start md:items-center gap-space-md min-w-[320px]">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-outline flex items-center justify-center shrink-0 mt-0.5 md:mt-0">
+<span class="material-symbols-outlined text-[14px]" data-icon="close">close</span>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-outline line-through">Survei lokasi lab uji material</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-outline font-label-ui text-label-ui">
+                    Batal
+                  </span>
+</div>
+<div class="flex items-center gap-space-md text-outline font-body-sm text-body-sm mt-1">
+<span>Dibatalkan pada 08 Nov 2026</span>
+</div>
+</div>
+</div>
+<!-- Progress 3/10 read only -->
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-1.5 rounded-full tactile-inset self-start xl:self-auto">
+<div class="flex items-center gap-1 opacity-60">
+<div class="w-2 h-4 rounded-full bg-outline"></div>
+<div class="w-2 h-4 rounded-full bg-outline"></div>
+<div class="w-2 h-4 rounded-full bg-outline"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-4 rounded-full bg-surface-container-highest"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-outline font-medium px-1">3/10</span>
+</div>
+<div class="flex items-center gap-2 self-end xl:self-auto">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-outline">
+<span>Detail</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MOBILE COMPACT STACKED CARD VARIANT -->
+<div class="pt-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="smartphone">smartphone</span>
+<span>Varian Mobile Compact (Stacked Tactile Card)</span>
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Mobile Card 1: Normal Active -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md tactile-convex flex flex-col justify-between space-y-4">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container tactile-inset text-[11px] font-medium text-on-surface-variant">
+<span class="w-2 h-2 rounded-[2px] bg-primary"></span>
+<span>Skripsi Bab 3</span>
+</span>
+<span class="font-label-ui text-label-ui text-primary">Normal</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Susun kerangka bab 3</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="calendar_today">calendar_today</span>
+<span>19 Nov 2026 · 17.00 (K:3)</span>
+</p>
+</div>
+<!-- Stepper tactile row -->
+<div class="bg-surface-container-low p-2 rounded-full tactile-inset flex items-center justify-between">
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[12px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-0.5">
+<div class="w-1.5 h-3 rounded-full bg-primary-container"></div>
+<div class="w-1.5 h-3 rounded-full bg-primary-container"></div>
+<div class="w-1.5 h-3 rounded-full bg-primary-container"></div>
+<div class="w-1.5 h-3 rounded-full bg-primary-container"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+<div class="w-1.5 h-3 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold">4/10</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[12px]" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-1.5 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-center text-on-surface">
+                + To-do
+              </button>
+<button class="flex-1 py-1.5 rounded-full bg-on-surface text-surface-container-lowest font-label-ui text-label-ui text-center">
+                Detail
+              </button>
+</div>
+</div>
+<!-- Mobile Card 2: Overdue / Telat -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md tactile-convex flex flex-col justify-between space-y-4 border-t-4 border-t-error">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error font-label-ui text-label-ui flex items-center gap-1">
+<span class="material-symbols-outlined text-[11px]" data-icon="warning">warning</span>
+<span>Telat</span>
+</span>
+<span class="font-label-ui text-label-ui text-error">16 Nov 2026</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Cari 10 jurnal rujukan</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="folder">folder</span>
+<span>Projek: Skripsi Bab 3</span>
+</p>
+</div>
+<div class="bg-surface-container-low p-2 rounded-full tactile-inset flex items-center justify-between">
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[12px]" data-icon="remove">remove</span>
+</button>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold">7/10 Segmen</span>
+<button class="w-6 h-6 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[12px]" data-icon="add">add</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-1.5 rounded-full bg-primary/10 text-primary font-label-ui text-label-ui text-center">
+                ✓ Selesai
+              </button>
+<button class="flex-1 py-1.5 rounded-full bg-on-surface text-surface-container-lowest font-label-ui text-label-ui text-center">
+                Detail
+              </button>
+</div>
+</div>
+<!-- Mobile Card 3: Completed / Selesai -->
+<div class="bg-surface-container-low/70 rounded-lg p-space-md tactile-inset flex flex-col justify-between space-y-4">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-ui text-label-ui">
+                  Selesai
+                </span>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold">10/10</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-through text-on-surface-variant">Kirim proposal ke dosen</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Selesai 10 Nov 2026</p>
+</div>
+<div class="bg-surface-container-lowest/80 p-2 rounded-full tactile-convex-sm flex items-center justify-center gap-2 text-primary font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Seluruh Subtask Selesai</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="w-full py-1.5 rounded-full bg-surface-container-lowest tactile-button font-label-ui text-label-ui text-center text-on-surface">
+                Lihat Detail
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SEKSI 02 — K3: CHIPS, TANDA (BADGES), KONTROL PROGRESS, & STATE KOSONG -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs border-b border-surface-variant pb-space-sm">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase tracking-wider">Modul K3</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Chips, Tanda (Badges), Kontrol Progress, &amp; State Kosong</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Kamus visual penanda status, swatch projek, tactile steppers, dan state penanganan data.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+<!-- Sub-blok 1: Koleksi Chips & Badges -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex space-y-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="label">label</span>
+<span>Koleksi Chips &amp; Status Badges</span>
+</h3>
+<!-- Koleksi Chips -->
+<div class="space-y-2">
+<p class="font-label-ui text-label-ui text-on-surface-variant">1. CHIPS KLASIFIKASI</p>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Chip Projek Swatch -->
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low tactile-inset text-body-sm font-medium text-on-surface">
+<span class="w-2.5 h-2.5 rounded-[3px] bg-primary"></span>
+<span>Projek Skripsi Bab 3</span>
+</span>
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low tactile-inset text-body-sm font-medium text-on-surface">
+<span class="w-2.5 h-2.5 rounded-[3px] bg-tertiary"></span>
+<span>Pengembangan IoT</span>
+</span>
+<!-- Chip Label Underline -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container text-body-sm text-secondary underline decoration-dotted underline-offset-4 decoration-outline">
+<span class="material-symbols-outlined text-[13px]" data-icon="tag">tag</span>
+<span>Rumah</span>
+</span>
+<!-- Chip Status Aktif Filter -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary text-body-sm font-medium shadow-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="filter_alt">filter_alt</span>
+<span>Aktif Saja</span>
+</span>
+</div>
+</div>
+<!-- 3 Tingkat Bobot Tanda/Badges -->
+<div class="space-y-3 pt-2">
+<p class="font-label-ui text-label-ui text-on-surface-variant">2. TIGA TINGKAT BOBOT BADGE (WEIGHT HIERARCHY)</p>
+<!-- Tingkat 1: Kotak Solid Kontras Penuh -->
+<div class="flex items-center gap-3">
+<span class="w-28 font-label-ui text-label-ui text-outline">Tinggi (Solid):</span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-error text-on-error font-label-ui text-label-ui shadow-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="error">error</span>
+<span>Telat</span>
+</span>
+<span class="px-2.5 py-0.5 rounded-full bg-on-surface text-surface-container-lowest font-label-ui text-label-ui flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="warning">warning</span>
+<span>Bentrok</span>
+</span>
+</div>
+</div>
+<!-- Tingkat 2: Kotak Bergaris Outlined -->
+<div class="flex items-center gap-3">
+<span class="w-28 font-label-ui text-label-ui text-outline">Sedang (Outline):</span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full border border-primary text-primary font-label-ui text-label-ui">
+                  Di luar periode
+                </span>
+<span class="px-2.5 py-0.5 rounded-full border border-outline text-on-surface-variant font-label-ui text-label-ui">
+                  Setelah deadline
+                </span>
+</div>
+</div>
+<!-- Tingkat 3: Teks Abu Minimalis -->
+<div class="flex items-center gap-3">
+<span class="w-28 font-label-ui text-label-ui text-outline">Rendah (Subtle):</span>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-ui text-label-ui">
+                  Selesai
+                </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-outline font-label-ui text-label-ui">
+                  Batal
+                </span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-ui text-label-ui">
+                  Hanya baca
+                </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sub-blok 2: Kontrol Progress Taktil & Offline Indicator -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex space-y-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="linear_scale">linear_scale</span>
+<span>Kontrol Progress Taktil &amp; Telemetri</span>
+</h3>
+<!-- State A: Interaktif 6/10 -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-ui text-label-ui text-on-surface-variant">
+<span>State Interaktif Normal (6/10)</span>
+<span class="text-primary cursor-pointer hover:underline">Buka Lembar Detail ↗</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1.5">
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-3 h-6 rounded-full bg-surface-container-high"></div>
+<div class="w-3 h-6 rounded-full bg-surface-container-high"></div>
+<div class="w-3 h-6 rounded-full bg-surface-container-high"></div>
+<div class="w-3 h-6 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-lg text-label-numeric-md text-primary font-bold">6/10</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface hover:text-primary">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- State B: 0/10 Minus Disabled -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-ui text-label-ui text-on-surface-variant">
+<span>State Awal (0/10) — Tombol [-] Nonaktif</span>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-DEFAULT tactile-inset flex items-center justify-between">
+<button class="w-7 h-7 rounded-full bg-surface-container-low text-outline-variant cursor-not-allowed flex items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[14px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1">
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-4 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface-variant font-bold">0/10</span>
+<button class="w-7 h-7 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- State C: 10/10 Read-Only Completed -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-ui text-label-ui text-on-surface-variant">
+<span>State Penuh (10/10) — Terkunci Read-Only</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-DEFAULT tactile-inset flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+<span>Terkunci Selesai</span>
+</span>
+<div class="flex items-center gap-1">
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+<div class="w-2.5 h-4 rounded-full bg-primary"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold">10/10</span>
+</div>
+</div>
+</div>
+</div>
+<!-- State Kosong (Empty States) & Offline Time Marker -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Empty State Card -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-lg p-space-xl tactile-convex text-center space-y-space-md flex flex-col items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-low tactile-inset flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]" data-icon="inbox">inbox</span>
+</div>
+<div class="space-y-1 max-w-md">
+<h4 class="font-headline-md text-headline-md text-on-surface">Belum ada task</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Daftar kegiatan Anda masih rapi dan kosong. Mulai dengan membuat task pertama atau pilih jadwal dari kalender sesi.
+            </p>
+</div>
+<button class="bg-on-surface text-surface-container-lowest px-space-xl py-2.5 rounded-full font-label-ui text-label-ui flex items-center gap-2 tactile-button hover:bg-black">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+<span>+ Tambah task</span>
+</button>
+</div>
+<!-- Offline Telemetry State Card -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex flex flex-col justify-between space-y-4">
+<div class="space-y-space-xs">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-ui text-label-ui">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>Mode Telemetri Offline</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Sinkronisasi Lokal</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Koneksi terputus. Data disimpan di memori taktil browser dan otomatis disinkronkan kembali saat online.
+            </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset space-y-1">
+<div class="text-on-surface-variant font-label-ui text-label-ui">CAP WAKTU TERAKHIR</div>
+<div class="font-label-numeric-md text-label-numeric-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="cloud_off">cloud_off</span>
+<span>18 Nov 2026, 13.20</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SEKSI 03 — K4 & K5: SISTEM DIALOG & KONFIRMASI -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs border-b border-surface-variant pb-space-sm">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase tracking-wider">Modul K4 &amp; K5</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sistem Dialog &amp; Modal Konfirmasi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Konvensi keselamatan UX: fokus aksi default pada 'Kembali' untuk mencegah kehilangan data secara tidak sengaja.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-xl items-start">
+<!-- K5 Dialog Ringan: Hapus Label -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex space-y-space-md border border-white">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface font-label-ui text-label-ui">K5 Dialog Ringan</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-low tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-space-xs">
+<div class="w-12 h-12 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]" data-icon="delete">delete</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Hapus label “Rumah”?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Label akan dilepas dari seluruh task terkait. Task itu sendiri tidak akan terhapus.
+            </p>
+</div>
+<!-- Tombol Aksi: Fokus default pada 'Kembali' -->
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button class="px-space-md py-2 rounded-full bg-surface-container-lowest border-2 border-primary text-primary font-headline-sm text-headline-sm tactile-button hover:bg-surface-container">
+              Kembali
+            </button>
+<button class="px-space-md py-2 rounded-full bg-error text-on-error font-headline-sm text-headline-sm shadow-md hover:bg-red-700 active:scale-95">
+              Hapus label
+            </button>
+</div>
+</div>
+<!-- K5 Modal Kelola Label -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex space-y-space-md border border-white">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface font-label-ui text-label-ui">K5 Kelola Label</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-low tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-md text-headline-md text-on-surface">Kelola Label</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Label yang digunakan oleh task tidak dapat dihapus langsung.</p>
+</div>
+<!-- Label Item List -->
+<div class="space-y-2">
+<!-- Label 1: Kuliah (5 task, lock) -->
+<div class="p-2.5 rounded-DEFAULT bg-surface-container-low tactile-inset flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="label">label</span>
+<span class="font-medium text-on-surface font-body-md text-body-md">Kuliah</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[11px] text-on-surface-variant">5 task</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+</button>
+<button class="p-1 text-outline-variant cursor-not-allowed" disabled="" title="Terkunci: memiliki 5 task">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+</button>
+</div>
+</div>
+<!-- Label 2: Rumah (0 task, active delete) -->
+<div class="p-2.5 rounded-DEFAULT bg-surface-container-low tactile-inset flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="label">label</span>
+<span class="font-medium text-on-surface font-body-md text-body-md">Rumah</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[11px] text-on-surface-variant">0 task</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+</button>
+<button class="p-1 text-error hover:text-red-700" title="Hapus label">
+<span class="material-symbols-outlined text-[16px]" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Label 3: Organisasi (2 task, lock) -->
+<div class="p-2.5 rounded-DEFAULT bg-surface-container-low tactile-inset flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="label">label</span>
+<span class="font-medium text-on-surface font-body-md text-body-md">Organisasi</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-[11px] text-on-surface-variant">2 task</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+</button>
+<button class="p-1 text-outline-variant cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="font-label-ui text-label-ui text-primary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+<span>+ Buat label baru</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-on-surface text-surface-container-lowest font-headline-sm text-headline-sm tactile-button">
+              Selesai
+            </button>
+</div>
+</div>
+<!-- K4 Dialog Konfirmasi Berat: Batalkan Projek -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg tactile-convex space-y-space-md border-2 border-error/20">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-ui text-label-ui font-semibold">K4 Konfirmasi Berat</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-low tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-1">
+<h3 class="font-headline-md text-headline-md text-error flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px]" data-icon="report">report</span>
+<span>Batalkan projek “Skripsi Bab 3”?</span>
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Periksa dampak pembatalan projek pada rincian berikut:</p>
+</div>
+<!-- 2 Kolom Rincian Taktil -->
+<div class="grid grid-cols-2 gap-2 text-body-sm">
+<div class="bg-error-container/40 p-2.5 rounded-DEFAULT tactile-inset space-y-1">
+<span class="font-label-ui text-label-ui text-on-error-container block font-bold">Akan Terjadi:</span>
+<ul class="text-[12px] text-on-surface-variant space-y-0.5 list-disc list-inside">
+<li>7 task dibatalkan</li>
+<li>Sesi berjalan batal</li>
+<li>Projek terkunci permanen</li>
+</ul>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-DEFAULT tactile-inset space-y-1">
+<span class="font-label-ui text-label-ui text-primary block font-bold">Tetap Ada:</span>
+<ul class="text-[12px] text-on-surface-variant space-y-0.5 list-disc list-inside">
+<li>Sesi yang telah lewat</li>
+<li>Task yang telah selesai</li>
+<li>Riwayat log progres</li>
+</ul>
+</div>
+</div>
+<!-- Kotak Peringatan -->
+<div class="p-2.5 rounded-DEFAULT bg-error text-on-error flex items-center gap-2 font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock_reset">lock_reset</span>
+<span>Tindakan ini tidak bisa diurungkan.</span>
+</div>
+<!-- Aksi: Fokus Primer pada 'Kembali', Destruktif Bersebelahan -->
+<div class="flex items-center justify-end gap-2 pt-2">
+<button class="flex-1 py-2 rounded-full bg-on-surface text-surface-container-lowest font-headline-sm text-headline-sm text-center tactile-button shadow-md">
+              Kembali
+            </button>
+<button class="py-2 px-3 rounded-full bg-surface-container-high text-error font-label-ui text-label-ui hover:bg-error-container transition-colors">
+              Ya, batalkan projek
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SEKSI 04 — K6: POLA FORMULIR (Dialog Laptop & Bottom Sheet HP) -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs border-b border-surface-variant pb-space-sm">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase tracking-wider">Modul K6</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pola Formulir (Modal Laptop &amp; Bottom Sheet HP)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Struktur formulir 'Tambah Sesi' dengan validasi bentrok periode bertabrakan dan counter karakter.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Form Dialog Laptop (7 Kolom) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-lg p-space-xl tactile-convex space-y-space-md border border-white">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-[3px] bg-primary"></span>
+<span class="font-headline-md text-headline-md text-on-surface">Tambah Sesi (Skripsi Bab 3)</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-ui text-label-ui">Desktop Dialog</span>
+</div>
+<!-- Banner Peringatan Galat Validasi Taktil -->
+<div class="p-space-md rounded-DEFAULT bg-error-container/70 border border-error/30 text-on-error-container flex items-start gap-3 tactile-inset">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5" data-icon="crisis_alert">crisis_alert</span>
+<div class="space-y-0.5">
+<span class="font-bold font-body-sm text-body-sm block">Validasi Tanggal Gagal:</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Periode bertabrakan dengan sesi “Sesi 1” (2 Nov – 14 Des 2026). Mulai paling cepat 15 Des 2026.
+              </p>
+</div>
+</div>
+<form class="space-y-space-md" onsubmit="event.preventDefault();">
+<!-- Field 1: Nama Sesi -->
+<div class="space-y-1">
+<div class="flex justify-between items-center">
+<label class="font-headline-sm text-headline-sm text-on-surface">Nama Sesi</label>
+<span class="font-label-numeric-md text-label-numeric-md text-outline font-normal">24/45</span>
+</div>
+<input class="w-full bg-surface-container-low px-space-md py-2.5 rounded-full tactile-inset border-0 focus:ring-2 focus:ring-primary text-on-surface font-body-md text-body-md" type="text" value="Penyusunan Draf Akhir"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Nama sesi harus unik di dalam projek ini.</p>
+</div>
+<!-- Field 2: Tanggal Mulai & Tanggal Akhir bersanding -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="calendar_month">calendar_month</span>
+<span>Tanggal Mulai</span>
+</label>
+<input class="w-full bg-surface-container-low px-space-md py-2.5 rounded-full tactile-inset border-2 border-error/50 focus:ring-2 focus:ring-error text-on-surface font-body-md text-body-md" type="date" value="2026-12-01"/>
+</div>
+<div class="space-y-1">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="event_available">event_available</span>
+<span>Tanggal Akhir</span>
+</label>
+<input class="w-full bg-surface-container-low px-space-md py-2.5 rounded-full tactile-inset border-0 focus:ring-2 focus:ring-primary text-on-surface font-body-md text-body-md" type="date" value="2026-12-20"/>
+</div>
+</div>
+<!-- Field 3: Textarea Deskripsi -->
+<div class="space-y-1">
+<div class="flex justify-between items-center">
+<label class="font-headline-sm text-headline-sm text-on-surface">Deskripsi Sesi</label>
+<span class="font-label-numeric-md text-label-numeric-md text-outline font-normal">22/500</span>
+</div>
+<textarea class="w-full bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset border-0 focus:ring-2 focus:ring-primary text-on-surface font-body-md text-body-md" placeholder="Tuliskan target spesifik sesi ini..." rows="3">Fokus revisi instrumen.</textarea>
+</div>
+<!-- Tombol Aksi Form -->
+<div class="flex items-center justify-end gap-space-md pt-2">
+<button class="px-space-xl py-2.5 rounded-full bg-surface-container-lowest tactile-button font-headline-sm text-headline-sm text-on-surface hover:bg-surface-container" type="button">
+                Batal
+              </button>
+<button class="px-space-xl py-2.5 rounded-full bg-on-surface text-surface-container-lowest font-headline-sm text-headline-sm tactile-button shadow-md hover:bg-black active:scale-95 flex items-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+<span>Simpan sesi</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Versi Bottom Sheet HP (5 Kolom) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-lg p-space-md tactile-convex space-y-space-md border border-white">
+<div class="flex items-center justify-between pb-2 border-b border-surface-variant">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-ui text-label-ui">Mobile Bottom Sheet Pattern</span>
+<span class="font-body-sm text-body-sm text-outline">Simulasi Layar 390px</span>
+</div>
+<!-- Frame Mockup Bottom Sheet -->
+<div class="bg-surface-container-high rounded-xl p-3 pb-6 shadow-inner space-y-3">
+<!-- Sheet Drag Handle -->
+<div class="w-12 h-1.5 rounded-full bg-outline-variant mx-auto mb-2"></div>
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Tambah Sesi</h4>
+<button class="w-7 h-7 rounded-full bg-surface-container-low tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Input ringkas sheet -->
+<div class="space-y-1">
+<label class="font-label-ui text-label-ui text-on-surface-variant">NAMA SESI (24/45)</label>
+<div class="bg-surface-container-low p-2 rounded-full tactile-inset text-body-sm font-medium text-on-surface">
+                  Penyusunan Draf Akhir
+                </div>
+</div>
+<div class="p-2 rounded-DEFAULT bg-error-container/50 text-[11px] text-on-error-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+<span>Bertabrakan dengan Sesi 1 (2 Nov – 14 Des)</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-low p-2 rounded-full tactile-inset text-[12px] text-error font-medium">
+                  Mulai: 01/12/2026
+                </div>
+<div class="bg-surface-container-low p-2 rounded-full tactile-inset text-[12px] text-on-surface font-medium">
+                  Akhir: 20/12/2026
+                </div>
+</div>
+<div class="pt-2 flex items-center gap-2">
+<button class="flex-1 py-2 rounded-full bg-surface-container-low tactile-button text-center font-label-ui text-label-ui text-on-surface">
+                  Batal
+                </button>
+<button class="flex-1 py-2 rounded-full bg-on-surface text-surface-container-lowest text-center font-label-ui text-label-ui shadow-sm">
+                  Simpan Sesi
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SEKSI 05 — K7: POLA PANEL DETAIL (Drawer Samping & Kartu Hari Terencana) -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-xs border-b border-surface-variant pb-space-sm">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase tracking-wider">Modul K7</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pola Panel Detail (Drawer Samping &amp; Fullscreen HP)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Drawer inspeksi mendalam: metadata task, riwayat log progres berkala, dan kartu integrasi jadwal hari terencana.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Drawer Detail Task (Laptop 8 Kolom) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-lg p-space-xl tactile-convex space-y-space-lg border border-white">
+<!-- Header Panel Detail -->
+<div class="flex items-center justify-between pb-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-md">
+<span class="w-3 h-3 rounded-[3px] bg-primary"></span>
+<div>
+<span class="font-label-ui text-label-ui text-primary">DRAWER DETAIL TASK</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Susun kerangka bab 3</h3>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-low tactile-button flex items-center justify-center text-on-surface hover:text-error" title="Tutup panel">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Metadata Grid Taktil -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset space-y-0.5">
+<span class="font-label-ui text-label-ui text-outline">DEADLINE</span>
+<p class="font-body-md text-body-md font-semibold text-on-surface">19 Nov 2026</p>
+<span class="text-[11px] text-on-surface-variant">17.00 WIB</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset space-y-0.5">
+<span class="font-label-ui text-label-ui text-outline">KESULITAN</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="font-label-numeric-md text-label-numeric-md font-bold">3</span>
+<span class="text-[12px] text-on-surface-variant">/ 5 Sedang</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset space-y-0.5">
+<span class="font-label-ui text-label-ui text-outline">SESI KERJA</span>
+<p class="font-body-md text-body-md font-semibold text-on-surface">Sesi 1</p>
+<span class="text-[11px] text-primary">Aktif Berjalan</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset space-y-0.5">
+<span class="font-label-ui text-label-ui text-outline">LABEL</span>
+<p class="font-body-md text-body-md font-semibold text-secondary">#Kuliah</p>
+<span class="text-[11px] text-on-surface-variant">Mandiri</span>
+</div>
+</div>
+<!-- Deskripsi Task -->
+<div class="space-y-1">
+<span class="font-label-ui text-label-ui text-outline">DESKRIPSI TUGAS</span>
+<p class="font-body-md text-body-md text-on-surface bg-surface-container-low/60 p-space-md rounded-DEFAULT tactile-inset leading-relaxed">
+              Menyusun poin-poin metodologi penelitian kuantitatif, batasan instrumen pengujian telemetri barista, dan validasi variabel operasional sesuai arahan dosen pembimbing 1.
+            </p>
+</div>
+<!-- Modul Stepper Tersemat Detail -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT tactile-inset flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div>
+<span class="font-label-ui text-label-ui text-primary uppercase font-bold">Progres Pengerjaan Task</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">4 dari 10 segmen berhasil dicapai</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+</button>
+<div class="flex items-center gap-1">
+<div class="w-2.5 h-5 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2.5 h-5 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2.5 h-5 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2.5 h-5 rounded-full bg-primary-container shadow-xs"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+<div class="w-2.5 h-5 rounded-full bg-surface-container-high"></div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold px-1">4/10</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Tombol Aksi Cepat Panel -->
+<div class="flex items-center justify-between pt-space-xs border-t border-surface-variant">
+<div class="flex items-center gap-2">
+<button class="px-space-md py-2 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface flex items-center gap-1 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+<span>Ubah</span>
+</button>
+<button class="px-space-md py-2 rounded-full bg-surface-container-low tactile-button font-label-ui text-label-ui text-on-surface flex items-center gap-1 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="drive_file_move">drive_file_move</span>
+<span>Pindah Projek</span>
+</button>
+</div>
+<button class="px-space-md py-2 rounded-full bg-error-container text-error font-label-ui text-label-ui hover:bg-red-200 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="cancel">cancel</span>
+<span>Batalkan task</span>
+</button>
+</div>
+</div>
+<!-- Kolom Samping: Riwayat Log Progres & Kartu Hari Terencana (Laptop 4 Kolom) -->
+<div class="lg:col-span-4 space-y-space-md">
+<!-- Kartu Hari Terencana -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md tactile-convex space-y-space-sm border border-white">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="event_note">event_note</span>
+<span>Hari Terencana</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-container font-label-ui text-label-ui">Terjadwal</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Task ini dialokasikan pada fokus harian Anda:
+            </p>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low tactile-inset flex items-center justify-between">
+<div>
+<span class="font-semibold text-on-surface font-body-md text-body-md block">Rabu, 18 Nov 2026</span>
+<span class="font-body-sm text-body-sm text-primary">Sesi Fokus 09.00 - 12.00</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest tactile-button flex items-center justify-center text-on-surface" title="Buka di Kalender">
+<span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+<button class="w-full py-2 rounded-full bg-on-surface text-surface-container-lowest font-label-ui text-label-ui tactile-button flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="checklist">checklist</span>
+<span>Buka di Halaman To-do</span>
+</button>
+</div>
+<!-- Kartu Riwayat Progress (Timeline Read-Only) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md tactile-convex space-y-space-sm border border-white">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="history">history</span>
+<span>Riwayat Progres Terakhir</span>
+</span>
+<div class="space-y-3 pt-1">
+<!-- Item Timeline 1 -->
+<div class="flex items-start gap-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-primary mt-1.5 shrink-0 shadow-xs"></div>
+<div class="flex-1 bg-surface-container-low p-2 rounded-DEFAULT tactile-inset text-[12px]">
+<div class="flex justify-between items-center text-on-surface-variant font-label-ui text-label-ui">
+<span>Progres dinaikkan ke 4/10</span>
+<span>18 Nov · 11.20</span>
+</div>
+<p class="text-on-surface mt-0.5">Menyelesaikan sub-bab 3.2 variabel riset.</p>
+</div>
+</div>
+<!-- Item Timeline 2 -->
+<div class="flex items-start gap-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container mt-1.5 shrink-0"></div>
+<div class="flex-1 bg-surface-container-low p-2 rounded-DEFAULT tactile-inset text-[12px]">
+<div class="flex justify-between items-center text-on-surface-variant font-label-ui text-label-ui">
+<span>Progres dinaikkan ke 3/10</span>
+<span>17 Nov · 16.45</span>
+</div>
+<p class="text-on-surface mt-0.5">Membuat matriks perbandingan instrumen.</p>
+</div>
+</div>
+<!-- Item Timeline 3 -->
+<div class="flex items-start gap-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant mt-1.5 shrink-0"></div>
+<div class="flex-1 bg-surface-container-low p-2 rounded-DEFAULT tactile-inset text-[12px]">
+<div class="flex justify-between items-center text-on-surface-variant font-label-ui text-label-ui">
+<span>Task Dibuat (0/10)</span>
+<span>15 Nov · 09.00</span>
+</div>
+<p class="text-on-surface-variant mt-0.5">Inisiasi task pada projek Skripsi Bab 3.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER INFORMASI DOKUMENTASI KATALOG -->
+<footer class="pt-space-xl pb-space-lg text-center border-t border-surface-variant/60 space-y-space-xs">
+<div class="flex items-center justify-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Perencana Modular UI Kit — Batch 0: K2–K7</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl mx-auto">
+        Seluruh komponen dalam katalog ini telah diselaraskan dengan arsitektur data wireframe bersama dan siap digunakan sebagai blok konstruksi (building blocks) untuk halaman-halaman produksi Perencana selanjutnya.
+      </p>
+<div class="text-[11px] font-label-ui text-outline pt-space-xs">
+        DOKUMENTASI SISTEM DESAIN • PORCELAIN TACTILE BARISTA MODERN • 2026
+      </div>
+</footer>
+</main>
+</body></html>

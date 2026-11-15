@@ -1,0 +1,708 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Perencana - Panel Penyusunan To-do &amp; Grid Jam Berpola</title>
+<!-- Google Fonts: Plus Jakarta Sans & Space Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#191c1d",
+            "inverse-surface": "#2e3131",
+            "tertiary": "#3d6752",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#e1e3e3",
+            "on-tertiary-container": "#073523",
+            "surface-variant": "#e1e3e3",
+            "outline": "#717973",
+            "on-primary-fixed-variant": "#284e3c",
+            "surface": "#f8fafa",
+            "secondary": "#5a5f5e",
+            "secondary-fixed": "#dfe3e1",
+            "on-tertiary-fixed": "#002114",
+            "inverse-on-surface": "#eff1f1",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "background": "#f8fafa",
+            "on-primary-fixed": "#002114",
+            "primary-fixed-dim": "#a6d0b8",
+            "surface-dim": "#d8dada",
+            "primary": "#406653",
+            "tertiary-container": "#739f87",
+            "on-secondary-container": "#5f6462",
+            "outline-variant": "#c1c8c2",
+            "secondary-container": "#dce1df",
+            "on-surface-variant": "#414844",
+            "surface-bright": "#f8fafa",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "surface-tint": "#406653",
+            "surface-container-low": "#f2f4f4",
+            "surface-container": "#eceeee",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed-variant": "#434847",
+            "surface-container-high": "#e6e8e8",
+            "tertiary-fixed": "#beedd2",
+            "primary-fixed": "#c2ecd3",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "inverse-primary": "#a6d0b8",
+            "on-background": "#191c1d",
+            "on-primary-container": "#0c3424",
+            "on-primary": "#ffffff",
+            "primary-container": "#769e88",
+            "on-secondary-fixed": "#181d1c",
+            "secondary-fixed-dim": "#c3c7c6"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-2xl": "3rem",
+            "space-md": "1rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "1.5rem",
+            "space-xl": "2rem",
+            "gutter": "1rem",
+            "gutter-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "label-ui": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-numeric-md": ["Space Mono"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-ui": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-numeric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-numeric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Neomorphic Tactile Shadows & Pattern Fills */
+    .tactile-convex {
+      box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.9), 6px 6px 16px rgba(30, 35, 34, 0.05), 2px 2px 6px rgba(30, 35, 34, 0.03);
+    }
+    .tactile-debossed {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.07), inset -2px -2px 5px rgba(255, 255, 255, 0.85);
+    }
+    .tactile-active-pill {
+      box-shadow: inset 2px 2px 5px rgba(12, 52, 36, 0.15), inset -2px -2px 5px rgba(255, 255, 255, 0.4);
+    }
+    .hatch-pattern {
+      background-image: repeating-linear-gradient(45deg, rgba(90, 95, 94, 0.12) 0, rgba(90, 95, 94, 0.12) 3px, transparent 3px, transparent 8px);
+    }
+    .hatch-pattern-accent {
+      background-image: repeating-linear-gradient(45deg, rgba(64, 102, 83, 0.18) 0, rgba(64, 102, 83, 0.18) 3px, transparent 3px, transparent 8px);
+    }
+    /* Subtle custom scrollbar */
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(225, 227, 227, 0.4);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c1c8c2;
+      border-radius: 9999px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased overflow-hidden min-h-screen selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+<!-- ROOT DESKTOP WORKSPACE VIEWPORT (1280px+) -->
+<div class="relative w-full h-screen flex overflow-hidden bg-surface-container-low">
+<!-- 1. LEFT SIDE NAV BAR (Shared Components Blueprint) -->
+<aside class="h-screen w-64 flex flex-col justify-between shrink-0 rounded-r-2xl bg-surface-container-low shadow-[6px_0_16px_rgba(30,35,34,0.04)] p-space-md z-10 border-r border-outline-variant/30">
+<div class="flex flex-col gap-space-lg">
+<!-- Brand Header Emblem -->
+<div class="flex items-center gap-space-sm px-space-xs pt-space-xs">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary tactile-convex">
+<span class="material-symbols-outlined text-headline-sm" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface">Perencana</h1>
+<span class="text-label-ui font-label-ui text-secondary">Workspace Pro</span>
+</div>
+</div>
+<!-- Primary Navigation Links (Active: Tugas / To-do) -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-space-xs">
+<a class="text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-on-surface-variant">dashboard</span>
+<span class="text-body-md font-body-md font-medium">Dashboard</span>
+</a>
+<!-- Active tab: Tugas / To-do -->
+<a class="bg-tertiary-fixed/40 text-on-tertiary-container font-semibold rounded-full px-space-md py-space-sm shadow-[-2px_-2px_6px_rgba(255,255,255,0.8),2px_2px_6px_rgba(30,35,34,0.05)] flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md font-body-md">Tugas</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+<span class="text-body-md font-body-md">Kalender</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+<span class="text-body-md font-body-md">Analisis</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+<span class="text-body-md font-body-md">Pengaturan</span>
+</a>
+</nav>
+</div>
+<!-- Footer & Tambah Tugas CTA -->
+<div class="flex flex-col gap-space-md">
+<button class="w-full py-space-sm px-space-md bg-inverse-surface text-inverse-on-surface rounded-full text-body-md font-body-md font-medium flex items-center justify-center gap-space-xs tactile-convex hover:opacity-95 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+          Tambah Tugas
+        </button>
+<a class="text-on-surface-variant hover:text-on-surface px-space-md py-space-sm rounded-full hover:bg-surface-container transition-all duration-150 flex items-center gap-space-sm" href="#">
+<span class="material-symbols-outlined text-on-surface-variant">help</span>
+<span class="text-body-md font-body-md">Bantuan</span>
+</a>
+</div>
+</aside>
+<!-- 2. UNDERLYING TO-DO WORKSPACE (Simulated background page being overridden) -->
+<div class="flex-1 flex flex-col h-full overflow-hidden opacity-30 pointer-events-none select-none filter blur-[1px]">
+<header class="sticky top-0 z-10 bg-surface/80 px-space-xl py-space-md flex items-center justify-between border-b border-outline-variant/20">
+<div class="flex items-center gap-space-md">
+<span class="text-headline-lg font-headline-lg font-semibold tracking-tight text-on-surface">Perencana</span>
+<div class="h-5 w-px bg-outline-variant"></div>
+<span class="text-body-md font-body-md text-secondary">Manajemen Tugas Personal</span>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="px-space-md py-space-xs rounded-full bg-surface-container text-body-md font-medium">+ Tambah task</button>
+</div>
+</header>
+<div class="p-space-xl grid grid-cols-3 gap-space-lg">
+<div class="h-64 rounded-xl bg-surface-container-high/60"></div>
+<div class="h-64 rounded-xl bg-surface-container-high/60"></div>
+<div class="h-64 rounded-xl bg-surface-container-high/60"></div>
+</div>
+</div>
+<!-- 3. FULL MODAL OVERLAY: P03 PANEL PENYUSUNAN TO-DO & GRID JAM BERPOLA -->
+<section aria-label="Panel Susun To-do" class="absolute inset-y-0 right-0 left-64 bg-surface flex flex-col z-30 shadow-[-8px_0_32px_rgba(30,35,34,0.12)] border-l border-outline-variant/30 animate-fade-in">
+<!-- HEADER PANEL P03 -->
+<div class="px-space-xl py-space-md bg-surface/90 backdrop-blur-md flex items-center justify-between border-b border-surface-container-highest">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<h2 class="text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">Susun to-do</h2>
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Modus Alokasi Jam</span>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">Menimpa halaman To-do. Hari lewat tidak bisa diubah.</p>
+</div>
+<!-- Tombol Tutup Panel ✕ -->
+<button aria-label="Tutup panel" class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface tactile-convex active:scale-95 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-sm">close</span>
+</button>
+</div>
+<!-- 4. DATE STRIP NAVIGASI HARI (Horizontal Date Selector) -->
+<div class="px-space-xl py-space-sm bg-surface-container-low border-b border-surface-container-highest/70 flex items-center justify-between gap-space-md">
+<!-- Tombol Panah Kiri (Disabled - Hari lewat tidak bisa diubah) -->
+<button aria-label="Hari sebelumnya" class="w-9 h-9 rounded-full bg-surface-container text-outline/50 flex items-center justify-center cursor-not-allowed opacity-60" disabled="" title="Hari lewat tidak bisa diubah">
+<span class="material-symbols-outlined text-body-lg">arrow_back_ios_new</span>
+</button>
+<!-- Date Strip Badges -->
+<div class="flex-1 flex items-center justify-center gap-space-sm overflow-x-auto py-1">
+<!-- Rab 18 (Hari Ini · 4 entri) -->
+<button class="group px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-on-surface tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-semibold text-secondary">Rab 18</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-label-ui font-label-ui text-secondary">hari ini · 4 entri</span>
+</button>
+<!-- Kam 19 (TERPILIH AKTIF · 2 entri) -->
+<button class="px-space-lg py-2 rounded-full bg-primary-container text-on-primary-container font-semibold tactile-active-pill ring-2 ring-primary/40 flex items-center gap-2.5 shadow-inner">
+<span class="material-symbols-outlined text-headline-sm text-on-primary-container" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-body-md font-body-md font-bold tracking-tight">Kam 19</span>
+<span class="w-2 h-2 rounded-full bg-on-primary-container"></span>
+<span class="text-label-ui font-label-ui bg-primary/20 px-2 py-0.5 rounded-full uppercase tracking-wider">2 entri</span>
+</button>
+<!-- Jum 20 (0 entri) -->
+<button class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-secondary tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-medium">Jum 20</span>
+<span class="text-label-ui font-label-ui text-outline">0 entri</span>
+</button>
+<!-- Sab 21 (1 entri) -->
+<button class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-secondary tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-medium">Sab 21</span>
+<span class="text-label-ui font-label-ui text-tertiary font-semibold">1 entri</span>
+</button>
+<!-- Min 22 (0 entri) -->
+<button class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-secondary tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-medium">Min 22</span>
+<span class="text-label-ui font-label-ui text-outline">0 entri</span>
+</button>
+<!-- Sen 23 (1 entri) -->
+<button class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-secondary tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-medium">Sen 23</span>
+<span class="text-label-ui font-label-ui text-tertiary font-semibold">1 entri</span>
+</button>
+<!-- Sel 24 (0 entri) -->
+<button class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-secondary tactile-convex transition-all flex items-center gap-2">
+<span class="text-body-sm font-body-sm font-medium">Sel 24</span>
+<span class="text-label-ui font-label-ui text-outline">0 entri</span>
+</button>
+</div>
+<!-- Tombol Panah Kanan Aktif (Hari Berikutnya) -->
+<button aria-label="Hari berikutnya" class="px-space-md py-1.5 rounded-full bg-surface hover:bg-surface-container text-on-surface tactile-convex flex items-center gap-1 active:scale-95 transition-all">
+<span class="text-body-sm font-body-sm font-medium">Hari berikutnya</span>
+<span class="material-symbols-outlined text-body-md text-primary">arrow_forward_ios</span>
+</button>
+</div>
+<!-- 5. MAIN CONTENT CANVAS: DUA KOLOM (Kiri: Task List, Kanan: Grid Jam Waktu) -->
+<div class="flex-1 flex overflow-hidden">
+<!-- KOLOM KIRI: DAFTAR TASK (Untuk Kamis 19 Nov) - 40% Width -->
+<div class="w-[420px] shrink-0 border-r border-surface-container-highest flex flex-col bg-surface p-space-lg overflow-y-auto custom-scroll gap-space-lg">
+<!-- SEKSI 1: Belum ada di 19 Nov (5 item) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-1 border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Belum ada di 19 Nov</span>
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-bold">5</span>
+</div>
+<span class="text-label-ui font-label-ui text-secondary">Pilih &amp; alokasikan</span>
+</div>
+<!-- Task Checklist Card Group -->
+<div class="flex flex-col gap-2.5">
+<!-- Task Item 1 [✓ Checked] -->
+<label class="group flex items-start gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container border border-primary/20 tactile-convex cursor-pointer transition-all">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline/40 accent-primary cursor-pointer" type="checkbox">
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-semibold text-on-surface leading-tight">Pesan truk pindahan</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed">Pindah Kos</span>
+<span class="text-label-ui font-label-ui text-error font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">alarm</span> deadline 21 Nov
+                    </span>
+</div>
+</div>
+</label>
+<!-- Task Item 2 [Unchecked] -->
+<label class="group flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container-highest tactile-convex cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline/40 accent-primary cursor-pointer" type="checkbox">
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-medium text-on-surface leading-tight">Daftar wisuda online</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-surface-container-high text-secondary">Kuliah</span>
+<span class="text-label-ui font-label-ui text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">calendar_today</span> deadline 30 Nov
+                    </span>
+</div>
+</div>
+</label>
+<!-- Task Item 3 [Unchecked] -->
+<label class="group flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container-highest tactile-convex cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline/40 accent-primary cursor-pointer" type="checkbox">
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-medium text-on-surface leading-tight">Rapikan sitasi</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-tertiary-fixed/30 text-tertiary font-semibold">Skripsi Bab 3</span>
+<span class="text-label-ui font-label-ui text-secondary">deadline 20 Des</span>
+</div>
+</div>
+</label>
+<!-- Task Item 4 [Unchecked] -->
+<label class="group flex items-start gap-3 p-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container-highest tactile-convex cursor-pointer transition-all">
+<input class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline/40 accent-primary cursor-pointer" type="checkbox">
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-medium text-on-surface leading-tight">Tulis pembahasan</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-tertiary-fixed/30 text-tertiary font-semibold">Skripsi Bab 3</span>
+<span class="text-label-ui font-label-ui text-secondary">deadline 5 Jan</span>
+</div>
+</div>
+</label>
+<!-- Task Item 5 [✓ Checked] -->
+<label class="group flex items-start gap-3 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container border border-primary/20 tactile-convex cursor-pointer transition-all">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary border-outline/40 accent-primary cursor-pointer" type="checkbox">
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-semibold text-on-surface leading-tight">Fotokopi KTM untuk berkas</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-surface-container-high text-secondary">Kuliah</span>
+<span class="text-label-ui font-label-ui text-outline italic">tanpa deadline</span>
+</div>
+</div>
+</label>
+</div>
+<!-- Tombol Aksi Pill Primer (Deep Charcoal/Jet #1e2322) -->
+<button class="mt-2 w-full py-2.5 px-space-md bg-inverse-surface text-inverse-on-surface rounded-full text-body-md font-body-md font-semibold tactile-convex hover:bg-inverse-surface/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">playlist_add</span>
+              Tambahkan 2 task ke 19 Nov
+            </button>
+</div>
+<!-- SEKSI 2: Sudah ada di 19 Nov (2 item) -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center justify-between pb-1 border-b border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm text-on-surface">Sudah ada di 19 Nov</span>
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-bold">2</span>
+</div>
+<span class="text-label-ui font-label-ui text-secondary">Tersinkron di grid</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Task Card 1: Susun kerangka bab 3 (Blok: 08.00–10.00) -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 tactile-convex flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="text-body-md font-body-md font-semibold text-on-surface">Susun kerangka bab 3</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-tertiary-fixed/30 text-tertiary font-semibold">Skripsi Bab 3</span>
+<span class="text-label-ui font-label-ui text-secondary">deadline 19 Nov</span>
+</div>
+</div>
+<span class="font-label-numeric-md text-label-numeric-md text-primary font-bold">08.00–10.00</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-highest">
+<span class="text-label-ui font-label-ui text-outline">Seret ke jam, atau</span>
+<button class="px-space-sm py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-label-ui font-label-ui font-medium flex items-center gap-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[13px]">add</span> Tambah blok
+                  </button>
+</div>
+</div>
+<!-- Task Card 2: Cari 10 jurnal rujukan (Sedang Diseret / Dragging State) -->
+<div class="relative p-3.5 rounded-xl bg-primary-fixed/20 border-2 border-dashed border-primary tactile-convex transform rotate-1 scale-[1.02] shadow-xl cursor-grabbing select-none">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary animate-bounce">drag_indicator</span>
+<h3 class="text-body-md font-body-md font-bold text-on-surface">Cari 10 jurnal rujukan</h3>
+</div>
+<div class="flex items-center gap-2 mt-1 ml-5">
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-tertiary-fixed/40 text-tertiary font-semibold">Skripsi Bab 3</span>
+<span class="text-label-ui font-label-ui text-error font-medium">deadline 16 Nov</span>
+</div>
+</div>
+<span class="text-label-ui font-label-ui bg-primary text-on-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Diseret</span>
+</div>
+<div class="mt-2.5 ml-5 text-label-ui font-label-ui text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">info</span> Jatuhkan di grid waktu sebelah kanan
+                </div>
+</div>
+</div>
+</div>
+<!-- Quick Tip Barista Workspace Footer -->
+<div class="mt-auto p-3 rounded-xl bg-surface-container-low border border-surface-container-highest flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-headline-sm">tune</span>
+<p class="text-body-sm font-body-sm text-secondary">
+              Gunakan grid jam untuk mengunci durasi fokus. Blok solid to-do otomatis disinkronkan ke kalender utama.
+            </p>
+</div>
+</div>
+<!-- KOLOM KANAN: GRID JAM INTERAKTIF (06.00–24.00) - 60% Width -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest/50 overflow-hidden relative">
+<!-- Header Grid & Legenda Taktil -->
+<div class="px-space-xl py-space-sm bg-surface/90 backdrop-blur-md border-b border-surface-container-highest flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">Kamis, 19 Nov 2026</span>
+<span class="text-label-ui font-label-ui px-2 py-0.5 rounded-full bg-surface-container text-secondary">Zona WIB (GMT+7)</span>
+</div>
+<span class="text-label-ui font-label-ui text-secondary">Grid 06.00–24.00. Gulir untuk jam lain.</span>
+</div>
+<!-- Legenda Taktil -->
+<div class="flex items-center gap-space-md">
+<!-- Legenda Jadwal (garis arsiran) -->
+<div class="flex items-center gap-1.5">
+<div class="w-4 h-4 rounded border border-outline/50 hatch-pattern"></div>
+<span class="text-label-ui font-label-ui text-on-surface-variant">Jadwal (arsiran)</span>
+</div>
+<!-- Legenda Blok to-do (solid) -->
+<div class="flex items-center gap-1.5">
+<div class="w-4 h-4 rounded bg-primary-container border border-primary/40"></div>
+<span class="text-label-ui font-label-ui text-on-surface-variant">Blok to-do (solid)</span>
+</div>
+<!-- Legenda Bentrok (garis putus-putus merah) -->
+<div class="flex items-center gap-1.5">
+<div class="w-4 h-4 rounded bg-error-container/60 border-2 border-dashed border-error"></div>
+<span class="text-label-ui font-label-ui text-error font-semibold">Bentrok</span>
+</div>
+</div>
+</div>
+<!-- BANNER ALERT BENTROK INTERAKTIF (Simulasi State K5) -->
+<div class="mx-space-xl mt-space-sm p-3.5 rounded-xl bg-error-container text-on-error-container border border-error/30 flex items-start gap-3 shadow-md animate-fade-in" role="alert">
+<div class="w-8 h-8 rounded-full bg-error text-on-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-body-lg">error</span>
+</div>
+<div class="flex-1 text-body-sm font-body-sm">
+<div class="font-bold flex items-center gap-1.5 text-error">
+<span>Blok tidak disimpan.</span>
+<span class="text-label-ui font-label-ui bg-error/15 px-2 py-0.2 rounded-full uppercase">Bentrok Jadwal</span>
+</div>
+<p class="mt-0.5 text-on-error-container leading-relaxed">
+<strong>11.00–12.00</strong> bentrok dengan Jadwal <strong class="underline decoration-error/50">"Kuliah Statistik"</strong> (10.30–12.00, tiap Kamis). Pilih jam lain.
+              </p>
+</div>
+<button aria-label="Tutup notifikasi" class="text-on-error-container hover:text-error p-1 rounded-full hover:bg-error/10">
+<span class="material-symbols-outlined text-body-md">close</span>
+</button>
+</div>
+<!-- AREA SCROLLABLE TIME GRID (06.00 s/d 22.00+) -->
+<div class="flex-1 overflow-y-auto custom-scroll p-space-xl relative"><div class="relative w-full min-h-[1120px]">
+  <!-- GRID HOUR ROWS (16 hours: 06.00 to 22.00, each 70px) -->
+  <div class="absolute inset-0 flex flex-col pointer-events-none">
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest flex flex-col justify-between">
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dashed border-surface-container-highest/60"></div>
+      <div class="h-0 border-t border-dotted border-surface-container-highest/60"></div>
+    </div>
+    <div class="h-[70px] border-t border-surface-container-highest"></div>
+  </div>
+
+  <!-- TIME LABELS COLUMN (Left: 06.00 to 22.00, positioned precisely at hour line ticks) -->
+  <div class="absolute left-0 top-0 bottom-0 w-16 select-none pointer-events-none">
+    <span class="absolute top-0 -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">06.00</span>
+    <span class="absolute top-[70px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">07.00</span>
+    <span class="absolute top-[140px] -mt-2.5 text-xs font-bold text-on-surface font-label-numeric-md">08.00</span>
+    <span class="absolute top-[210px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">09.00</span>
+    <span class="absolute top-[280px] -mt-2.5 text-xs font-bold text-on-surface font-label-numeric-md">10.00</span>
+    <span class="absolute top-[350px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">11.00</span>
+    <span class="absolute top-[420px] -mt-2.5 text-xs font-bold text-on-surface font-label-numeric-md">12.00</span>
+    <span class="absolute top-[490px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">13.00</span>
+    <span class="absolute top-[560px] -mt-2.5 text-xs font-bold text-on-surface font-label-numeric-md">14.00</span>
+    <span class="absolute top-[630px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">15.00</span>
+    <span class="absolute top-[700px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">16.00</span>
+    <span class="absolute top-[770px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">17.00</span>
+    <span class="absolute top-[840px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">18.00</span>
+    <span class="absolute top-[910px] -mt-2.5 text-xs font-bold text-on-surface font-label-numeric-md">19.00</span>
+    <span class="absolute top-[980px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">20.00</span>
+    <span class="absolute top-[1050px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">21.00</span>
+    <span class="absolute top-[1120px] -mt-2.5 text-xs font-medium text-secondary font-label-numeric-md">22.00</span>
+  </div>
+
+  <!-- EVENTS & SCHEDULE BLOCKS (Cleanly positioned on the timeline canvas) -->
+  <div class="absolute left-20 right-4 top-0 bottom-0">
+    <!-- 1. BLOK TO-DO SOLID: 08.00–10.00 (Top: 140px, Height: 140px) -->
+    <div class="absolute top-[140px] h-[134px] left-2 right-4 rounded-xl bg-primary text-on-primary p-3 shadow-md flex flex-col justify-between tactile-convex transition-transform hover:scale-[1.005]">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+            <h4 class="text-body-md font-body-md font-bold text-on-primary">Susun kerangka bab 3</h4>
+          </div>
+          <p class="text-label-ui font-label-ui text-primary-fixed opacity-90 mt-1">Skripsi Bab 3 · Fokus penyusunan metodologi</p>
+        </div>
+        <span class="font-label-numeric-md text-xs bg-on-tertiary/20 px-2.5 py-1 rounded-full font-bold tracking-tight text-on-primary shrink-0">08.00–10.00</span>
+      </div>
+      <div class="flex items-center justify-between text-label-ui font-label-ui pt-1.5 border-t border-on-tertiary/20">
+        <span class="flex items-center gap-1.5 text-primary-fixed font-medium">
+          <span class="w-2 h-2 rounded-full bg-primary-fixed"></span> Blok to-do terkonfirmasi
+        </span>
+        <span class="text-primary-fixed/80 italic">2 jam durasi</span>
+      </div>
+    </div>
+
+    <!-- 2. BLOK JADWAL BERPOLA ARSIRAN: 10.30–12.00 (Top: 315px, Height: 105px) -->
+    <div class="absolute top-[315px] h-[100px] left-2 right-4 rounded-xl border border-secondary/50 hatch-pattern bg-surface-container-high/60 p-3 flex flex-col justify-between backdrop-blur-xs">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm text-secondary">school</span>
+            <h4 class="text-body-md font-body-md font-bold text-on-surface">Kuliah Statistik</h4>
+          </div>
+          <p class="text-label-ui font-label-ui text-secondary mt-1">Ruang R.304 · Dosen: Dr. Hartono · Rutin tiap Kamis</p>
+        </div>
+        <span class="font-label-numeric-md text-xs bg-surface-container-highest px-2.5 py-0.5 rounded-full text-secondary font-bold shrink-0">10.30–12.00</span>
+      </div>
+      <div class="flex items-center justify-between text-label-ui font-label-ui pt-1">
+        <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-semibold">Jadwal Kalender</span>
+        <span class="text-outline font-medium">Terkunci (tidak dapat diubah)</span>
+      </div>
+    </div>
+
+    <!-- 3. SIMULASI AREA DROP & BENTROK (11.00–12.00: Top 350px, Height 70px) -->
+    <div class="absolute top-[350px] h-[65px] left-8 right-8 rounded-lg border-2 border-dashed border-error bg-error-container/60 p-2.5 flex items-center justify-between pointer-events-none z-10 shadow-sm">
+      <div class="flex items-center gap-2 text-error font-medium">
+        <span class="material-symbols-outlined text-sm">warning</span>
+        <span class="text-label-ui font-label-ui font-bold">Bentrok alokasi to-do (11.00–12.00) dengan Kuliah Statistik</span>
+      </div>
+      <span class="text-label-ui font-label-ui text-error bg-surface px-2.5 py-0.5 rounded-full font-bold shadow-xs">Tolak simpan</span>
+    </div>
+
+    <!-- 4. BLOK TO-DO HASIL DRAG: 14.15–15.15 (Top: 578px, Height: 70px) -->
+    <div class="absolute top-[578px] h-[70px] left-2 right-4 rounded-xl bg-tertiary text-on-tertiary p-2.5 shadow-lg border border-tertiary-fixed-dim/40 flex flex-col justify-between ring-2 ring-primary">
+      <!-- Floating timestamp badge -->
+      <div class="absolute -top-7 left-6 bg-inverse-surface text-inverse-on-surface px-2.5 py-0.5 rounded-full text-label-ui font-label-ui font-bold tracking-wider shadow-md flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-ping"></span>
+        <span>14.15–15.15</span>
+        <span class="text-outline-variant font-normal">| 1 jam</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm text-tertiary-fixed">move_to_inbox</span>
+          <div>
+            <h4 class="text-body-md font-body-md font-bold leading-tight">Cari 10 jurnal rujukan</h4>
+            <span class="text-label-ui font-label-ui text-tertiary-fixed/80">Skripsi Bab 3 · Alokasi baru via Drag &amp; Drop</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-label-ui font-label-ui px-2 py-0.5 rounded bg-on-tertiary/20 text-on-tertiary font-medium">Baru ditambahkan</span>
+          <button class="w-6 h-6 rounded-full bg-on-tertiary/20 hover:bg-on-tertiary/30 flex items-center justify-center text-xs" title="Hapus alokasi">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. BLOK JADWAL: 19.00–20.30 (Top: 910px, Height: 105px) -->
+    <div class="absolute top-[910px] h-[100px] left-2 right-4 rounded-xl border border-secondary/50 hatch-pattern bg-surface-container-high/60 p-3 flex flex-col justify-between">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm text-secondary">translate</span>
+            <h4 class="text-body-md font-body-md font-bold text-on-surface">Les Bahasa Jepang</h4>
+          </div>
+          <p class="text-label-ui font-label-ui text-secondary mt-1">Sensei Kenji · Persiapan JLPT N3</p>
+        </div>
+        <span class="font-label-numeric-md text-xs bg-surface-container-highest px-2.5 py-0.5 rounded-full text-secondary font-bold shrink-0">19.00–20.30</span>
+      </div>
+      <div class="flex items-center justify-between text-label-ui font-label-ui pt-1">
+        <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed font-semibold">Jadwal</span>
+        <span class="text-outline font-medium">Rutin Malam</span>
+      </div>
+    </div>
+  </div>
+</div></div>
+<!-- FOOTER TOOLBAR GRID WAKTU -->
+<div class="px-space-xl py-space-sm bg-surface border-t border-surface-container-highest flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="text-body-sm font-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+                2 task telah terisi (Total: 3 jam)
+              </span>
+<span class="text-outline-variant">•</span>
+<span class="text-body-sm font-body-sm text-secondary">
+                2 slot jadwal tetap (3 jam)
+              </span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-body-sm font-body-sm font-medium transition-all">
+                Reset Perubahan
+              </button>
+<button class="px-space-lg py-1.5 rounded-full bg-primary text-on-primary text-body-sm font-body-sm font-semibold tactile-convex hover:bg-primary/95 active:scale-[0.98] transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">done_all</span>
+                Simpan Penataan
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+
+</body></html>

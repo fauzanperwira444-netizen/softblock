@@ -1,0 +1,20 @@
+# Lingkungan lokal (DP-3): PostgreSQL 18, sama dengan Neon di produksi.
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: softblock
+      POSTGRES_USER: softblock
+      POSTGRES_PASSWORD: softblock
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U softblock -d softblock"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  pgdata:

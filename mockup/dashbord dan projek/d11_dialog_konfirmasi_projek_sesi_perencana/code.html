@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Perencana - D11 Dialog Konfirmasi Projek &amp; Sesi</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#eceeee",
+            "outline": "#717973",
+            "secondary": "#5a5f5e",
+            "surface-container-highest": "#e1e3e3",
+            "on-secondary-fixed-variant": "#434847",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#414844",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d8dada",
+            "on-primary": "#ffffff",
+            "primary-container": "#769e88",
+            "primary-fixed": "#c2ecd3",
+            "secondary-container": "#dce1df",
+            "surface-container-high": "#e6e8e8",
+            "on-tertiary-container": "#073523",
+            "on-surface": "#191c1d",
+            "primary": "#406653",
+            "surface-bright": "#f8fafa",
+            "background": "#f8fafa",
+            "surface": "#f8fafa",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eff1f1",
+            "on-secondary-fixed": "#181d1c",
+            "secondary-fixed-dim": "#c3c7c6",
+            "on-primary-fixed": "#002114",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#dfe3e1",
+            "tertiary-container": "#739f87",
+            "outline-variant": "#c1c8c2",
+            "on-background": "#191c1d",
+            "inverse-surface": "#2e3131",
+            "surface-variant": "#e1e3e3",
+            "tertiary": "#3d6752",
+            "on-secondary-container": "#5f6462",
+            "tertiary-fixed": "#beedd2",
+            "surface-container-low": "#f2f4f4",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#0c3424",
+            "on-tertiary-fixed": "#002114",
+            "on-primary-fixed-variant": "#284e3c",
+            "primary-fixed-dim": "#a6d0b8",
+            "on-error": "#ffffff",
+            "inverse-primary": "#a6d0b8",
+            "surface-tint": "#406653"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "gutter-lg": "1.5rem",
+            "margin": "1.5rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "label-numeric-md": ["Space Mono"],
+            "label-ui": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "body-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-numeric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "label-ui": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-numeric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Neomorphic Tactile Physics Tokens */
+    .tactile-surface-extrude {
+      box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.95), 6px 6px 16px rgba(30, 35, 34, 0.06), 2px 2px 6px rgba(30, 35, 34, 0.04);
+    }
+    .tactile-card-prominent {
+      box-shadow: -8px -8px 24px rgba(255, 255, 255, 0.9), 16px 20px 40px rgba(30, 35, 34, 0.12), 0 4px 12px rgba(30, 35, 34, 0.04);
+    }
+    .tactile-inset-well {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.07), inset -2px -2px 6px rgba(255, 255, 255, 0.9);
+    }
+    .tactile-inset-subtle {
+      box-shadow: inset 1px 1px 3px rgba(30, 35, 34, 0.05), inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+    }
+    .tactile-button {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.9), 3px 3px 8px rgba(30, 35, 34, 0.08);
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tactile-button:active {
+      box-shadow: inset 2px 2px 4px rgba(30, 35, 34, 0.15), inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+      transform: scale(0.98);
+    }
+    .tactile-pill-active {
+      box-shadow: inset 2px 2px 5px rgba(30, 35, 34, 0.1), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+    }
+    .luminescent-sage-halo {
+      background: radial-gradient(circle, rgba(143, 188, 163, 0.35) 0%, rgba(227, 239, 233, 0.15) 60%, transparent 100%);
+    }
+  </style>
+</head>
+<body class="bg-[#e9eceb] text-on-surface font-body-md text-body-md antialiased min-h-screen relative overflow-x-hidden p-space-md md:p-space-xl flex items-center justify-center">
+<!-- ===================================================================================== -->
+<!-- BACKGROUND LAYER: S12 DETAIL PROJEK CANVAS (Defocused / Tactile Espresso Monitor Base) -->
+<!-- ===================================================================================== -->
+<div class="fixed inset-0 p-space-md md:p-space-lg pointer-events-none select-none filter blur-[5px] opacity-40 scale-[0.99] transition-all">
+<div class="w-full h-full rounded-xl bg-surface-container-low border border-white/60 p-space-xl flex flex-col gap-space-lg shadow-inner">
+<!-- Defocused Header -->
+<div class="flex items-center justify-between pb-space-md border-b border-outline-variant/30">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container tactile-surface-extrude flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="coffee">coffee</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">Kursus Menulis Ilmiah</span>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm mt-0.5">
+<span>S12 Detail Projek</span>
+<span>•</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-ui text-label-ui">Aktif</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="px-space-md py-space-sm rounded-full bg-surface tactile-button text-on-surface-variant font-label-ui text-label-ui">
+            18 Task Total
+          </div>
+<div class="w-10 h-10 rounded-full bg-surface tactile-surface-extrude flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+<!-- Defocused Grid Content -->
+<div class="grid grid-cols-12 gap-space-lg flex-1">
+<div class="col-span-8 flex flex-col gap-space-lg">
+<div class="p-space-lg rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude flex items-center justify-between">
+<div>
+<p class="font-label-ui text-label-ui text-outline uppercase tracking-wider">Periode Sesi Berjalan</p>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">Sesi 1: Dasar penulisan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">01 Nov 2026 – 30 Nov 2026 (Sisa 13 Hari)</p>
+</div>
+<div class="w-24 h-24 rounded-full tactile-inset-well flex items-center justify-center relative">
+<span class="font-label-numeric-md text-label-numeric-md text-primary">68%</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-DEFAULT bg-surface tactile-surface-extrude">
+<p class="font-label-ui text-label-ui text-outline">Selesai</p>
+<p class="font-label-numeric-lg text-label-numeric-lg text-primary mt-1">6</p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface tactile-surface-extrude">
+<p class="font-label-ui text-label-ui text-outline">Berjalan</p>
+<p class="font-label-numeric-lg text-label-numeric-lg text-on-surface mt-1">2</p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface tactile-surface-extrude">
+<p class="font-label-ui text-label-ui text-outline">Mendatang</p>
+<p class="font-label-numeric-lg text-label-numeric-lg text-outline mt-1">10</p>
+</div>
+</div>
+</div>
+<div class="col-span-4 rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude p-space-lg">
+<p class="font-headline-sm text-headline-sm text-on-surface font-semibold">Garis Waktu Sesi</p>
+<div class="mt-space-md space-y-3">
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low tactile-inset-subtle">Sesi 1: Dasar penulisan</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface">Sesi 2: Latihan (Belum mulai)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ambient Backdrop Overlay (Dimmer & Blur Kaca Focus) -->
+<div aria-hidden="true" class="fixed inset-0 bg-[#1e2322]/45 backdrop-blur-[6px] transition-opacity z-20"></div>
+<!-- ===================================================================================== -->
+<!-- MAIN WORKSPACE & MODAL CONTAINER (D11 DIALOG KONFIRMASI INTERAKTIF) -->
+<!-- ===================================================================================== -->
+<main class="relative z-30 w-full max-w-4xl flex flex-col items-center gap-space-lg my-auto">
+<!-- TOP CONTROL: VARIANT SWITCHER TRAY (Tactile Hardware Barista Selector) -->
+<header class="w-full flex flex-col sm:flex-row items-center justify-between gap-space-sm px-space-md py-space-sm bg-surface-container-lowest/80 backdrop-blur-md rounded-full tactile-surface-extrude border border-white/80">
+<div class="flex items-center gap-space-sm pl-space-sm">
+<div class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]" data-icon="tune">tune</span>
+</div>
+<span class="font-label-ui text-label-ui text-on-surface-variant font-bold uppercase tracking-wider">Katalog Dialog D11:</span>
+</div>
+<!-- Segmented Pill Selector -->
+<nav aria-label="Pemilih Varian Dialog Konfirmasi" class="flex items-center gap-1 overflow-x-auto max-w-full p-1 bg-surface-container-low rounded-full tactile-inset-subtle">
+<button class="variant-btn px-space-md py-1.5 rounded-full font-label-ui text-label-ui transition-all duration-200 bg-surface text-primary font-bold tactile-button shadow-sm" id="tab-earlyFinish" onclick="switchVariant('earlyFinish')">
+          Selesai Dini (K4)
+        </button>
+<button class="variant-btn px-space-md py-1.5 rounded-full font-label-ui text-label-ui transition-all duration-200 text-on-surface-variant hover:text-on-surface" id="tab-cancelProject" onclick="switchVariant('cancelProject')">
+          Batal Projek (K4)
+        </button>
+<button class="variant-btn px-space-md py-1.5 rounded-full font-label-ui text-label-ui transition-all duration-200 text-on-surface-variant hover:text-on-surface" id="tab-changePeriod" onclick="switchVariant('changePeriod')">
+          Ubah Periode (K4)
+        </button>
+<button class="variant-btn px-space-md py-1.5 rounded-full font-label-ui text-label-ui transition-all duration-200 text-on-surface-variant hover:text-on-surface" id="tab-cancelSession" onclick="switchVariant('cancelSession')">
+          Batal Sesi (K4)
+        </button>
+<button class="variant-btn px-space-md py-1.5 rounded-full font-label-ui text-label-ui transition-all duration-200 text-on-surface-variant hover:text-on-surface" id="tab-lightDialog" onclick="switchVariant('lightDialog')">
+          Dialog Ringan (K5)
+        </button>
+</nav>
+</header>
+<!-- =============================================================================== -->
+<!-- DIALOG CARD 1 (UTAMA): SELESAIKAN PROJEK LEBIH AWAL / SELESAI DINI (K4 Berat) -->
+<!-- =============================================================================== -->
+<section class="dialog-pane w-full bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl tactile-card-prominent border border-white/95 relative overflow-hidden transition-all duration-300" id="dialog-earlyFinish">
+<!-- Top Decorative Luminescent Sage Ambient Glow -->
+<div aria-hidden="true" class="absolute -top-24 -right-24 w-80 h-80 luminescent-sage-halo rounded-full pointer-events-none"></div>
+<!-- Header Dialog & Telemetry Indicator -->
+<div class="flex items-start justify-between gap-space-md relative z-10 pb-space-md border-b border-surface-container-high/60">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container/40 text-on-secondary-fixed flex items-center justify-center shrink-0 tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="flag_circle">flag_circle</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed/60 text-on-tertiary-container font-label-ui text-label-ui">
+                A-04 • UC-11 • Konfirmasi K4
+              </span>
+<span class="font-label-numeric-md text-[11px] text-outline">ID: PRJ-2026-SC01</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+              Selesaikan projek “Kursus Menulis Ilmiah” lebih awal?
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Projek ini dijadwalkan berakhir pada <span class="font-semibold text-on-surface">30 Nov 2026</span>. Memilih penyelesaian dini akan merevisi rentang waktu aktif seluruh sesi.
+            </p>
+</div>
+</div>
+<!-- Escape Pill Indicator -->
+<button class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface tactile-button flex items-center justify-center shrink-0" onclick="dismissFeedback()" title="Tutup pratinjau">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Content Layout: Dua Blok Taktil Ergonomis -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md my-space-lg relative z-10">
+<!-- BLOK 1: AKAN TERJADI (Perubahan Struktural) -->
+<div class="rounded-DEFAULT bg-surface-container-low/70 p-space-md tactile-inset-well border border-surface-container-high/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm mb-space-md text-primary font-semibold">
+<span class="material-symbols-outlined text-[20px]" data-icon="published_with_changes">published_with_changes</span>
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Akan Terjadi</span>
+</div>
+<ul class="space-y-space-sm font-body-sm text-body-sm text-on-surface">
+<!-- Item 1: Sesi Berjalan -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-outline text-[18px] shrink-0 mt-0.5" data-icon="content_cut">content_cut</span>
+<div>
+<span class="font-medium text-on-surface">Sesi berjalan “Sesi 1: Dasar penulisan”</span>
+<div class="text-on-surface-variant mt-0.5">
+                    Dipotong dan berakhir hari ini: <span class="font-label-numeric-md text-[13px] text-primary font-bold">17 Nov 2026</span>.
+                  </div>
+</div>
+</li>
+<!-- Item 2: Sesi Belum Mulai -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5" data-icon="delete_sweep">delete_sweep</span>
+<div>
+<span class="font-medium text-on-surface">Sesi belum mulai “Sesi 2: Latihan”</span>
+<div class="text-on-surface-variant mt-0.5">
+                    Dihapus permanen dari jadwal karena berstatus kosong tanpa task aktif.
+                  </div>
+</div>
+</li>
+<!-- Item 3: Task di Luar Periode -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5" data-icon="label_off">label_off</span>
+<div>
+<span class="font-medium text-on-surface">2 task selesai dengan deadline setelah 17 Nov</span>
+<div class="text-on-surface-variant mt-0.5 flex items-center gap-1.5 flex-wrap">
+                    Diberi label penanda status:
+                    <span class="inline-flex items-center px-2 py-0.2 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui border border-outline-variant/60">
+                      di luar periode
+                    </span>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-space-md pt-space-xs text-[11px] font-label-ui text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="info">info</span>
+            Kompensasi timeline diterapkan secara otomatis.
+          </div>
+</div>
+<!-- BLOK 2: TETAP ADA (Integritas Data Aman) -->
+<div class="rounded-DEFAULT bg-surface-container-low/70 p-space-md tactile-inset-well border border-surface-container-high/50 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm mb-space-md text-primary font-semibold">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Tetap Tersimpan &amp; Ada</span>
+</div>
+<ul class="space-y-space-sm font-body-sm text-body-sm text-on-surface">
+<!-- Item 1: Sesi Lewat -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5" data-icon="history">history</span>
+<div>
+<span class="font-medium text-on-surface">Semua sesi yang telah lewat</span>
+<div class="text-on-surface-variant mt-0.5">
+                    Data historis, performa durasi, dan catatan log sesi lampau tidak disentuh.
+                  </div>
+</div>
+</li>
+<!-- Item 2: 6 Task Selesai -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5" data-icon="task_alt">task_alt</span>
+<div>
+<span class="font-medium text-on-surface">6 task selesai terdahulu</span>
+<div class="text-on-surface-variant mt-0.5">
+                    Catatan kontribusi waktu, checklist butir, dan bukti dokumen tetap utuh.
+                  </div>
+</div>
+</li>
+<!-- Item 3: Log Riwayat Telemetri -->
+<li class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface-container-lowest tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5" data-icon="analytics">analytics</span>
+<div>
+<span class="font-medium text-on-surface">Riwayat aktivitas &amp; kurva produktivitas</span>
+<div class="text-on-surface-variant mt-0.5">
+                    Terekam permanen dalam arsip telemetri kerja workspace.
+                  </div>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-space-md pt-space-xs text-[11px] font-label-ui text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock_clock">lock_clock</span>
+            Arsip data terlindungi enkripsi lokal perangkat.
+          </div>
+</div>
+</div>
+<!-- K4 Warning Box: Peringatan Tegas Destruktif / Status Terkunci -->
+<div class="mb-space-lg p-space-md rounded-DEFAULT bg-error-container/30 border border-error/20 flex items-start gap-space-md relative z-10 tactile-inset-subtle">
+<div class="w-9 h-9 rounded-full bg-error-container text-on-error-container flex items-center justify-center shrink-0 tactile-surface-extrude">
+<span class="material-symbols-outlined text-[20px]" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-sm text-headline-sm text-on-error-container font-bold">
+            Projek akan menjadi selesai dan terkunci
+          </h4>
+<p class="font-body-sm text-body-sm text-on-error-container/90 mt-0.5">
+            Tindakan ini tidak bisa diurungkan. Anda tidak akan dapat menambah task baru atau mengedit jadwal sesi pada projek yang telah diselesaikan.
+          </p>
+</div>
+<div class="hidden sm:block text-right">
+<span class="font-label-ui text-[10px] uppercase font-bold text-error bg-surface-container-lowest px-2 py-1 rounded-full border border-error/30">
+            Aksi Permanen
+          </span>
+</div>
+</div>
+<!-- Aksi Taktil: Sesuai Panduan K4 (Fokus Default pada Kembali, Tombol Destruktif Spesifik) -->
+<div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-space-md pt-space-md border-t border-surface-container-high/60 relative z-10">
+<div class="flex items-center gap-space-xs text-outline font-label-ui text-label-ui">
+<span class="material-symbols-outlined text-[16px]" data-icon="keyboard">keyboard</span>
+<span>Tekan <kbd class="px-1.5 py-0.5 bg-surface-container rounded tactile-inset-subtle text-[10px] font-label-numeric-md">ESC</kbd> untuk membatalkan</span>
+</div>
+<div class="flex items-center gap-space-md w-full sm:w-auto justify-end">
+<!-- Tombol Netral FOKUS DEFAULT (Rule K4: Keamanan Pengguna) -->
+<button autofocus="" class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-surface-container text-on-surface font-headline-sm text-headline-sm font-semibold tactile-button border border-white hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" onclick="simulateAction('Dibatalkan: Tidak ada perubahan pada projek.')" type="button">
+            Kembali
+          </button>
+<!-- Tombol Destruktif Primer Spesifik (Bukan "OK" generik) -->
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-[#1e2322] text-white font-headline-sm text-headline-sm font-semibold tactile-button hover:bg-[#2e3131] active:bg-[#121514] flex items-center justify-center gap-space-sm focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2 shadow-lg" onclick="simulateAction('Projek telah berhasil diselesaikan dini dan terkunci.')" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed" data-icon="check_circle">check_circle</span>
+<span>Ya, selesaikan projek</span>
+</button>
+</div>
+</div>
+</section>
+<!-- =============================================================================== -->
+<!-- DIALOG CARD 2: BATALKAN PROJEK (K4 Destruktif Penuh) -->
+<!-- =============================================================================== -->
+<section class="dialog-pane hidden w-full bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl tactile-card-prominent border border-white/95 relative overflow-hidden transition-all duration-300" id="dialog-cancelProject">
+<div class="flex items-start justify-between gap-space-md pb-space-md border-b border-surface-container-high/60">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-error-container/40 text-error flex items-center justify-center shrink-0 tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="delete_forever">delete_forever</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-ui text-label-ui">
+                K4 Destruktif • Hapus Data
+              </span>
+<span class="font-label-numeric-md text-[11px] text-outline">ID: PRJ-2026-VOID</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">
+              Batalkan projek “Riset Pasar Kopi Specialty”?
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Projek ini belum memiliki sesi bertask atau riwayat eksekusi aktif.
+            </p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface tactile-button flex items-center justify-center shrink-0" onclick="dismissFeedback()">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Detail Card List -->
+<div class="my-space-lg space-y-space-sm">
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low tactile-inset-well flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-semibold text-on-surface">0 Task Berjalan atau Selesai</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tidak ada jejak pengerjaan yang akan dikorbankan.</p>
+</div>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-error-container/20 border border-error/20 flex items-start gap-space-md tactile-inset-subtle">
+<span class="material-symbols-outlined text-error mt-0.5" data-icon="report">report</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+            Seluruh draft konfigurasi, target metrik, dan parameter resep akan dihapus dari sistem secara permanen. Tindakan ini tidak dapat dibatalkan.
+          </p>
+</div>
+</div>
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-md pt-space-md border-t border-surface-container-high/60">
+<button autofocus="" class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-surface-container text-on-surface font-headline-sm text-headline-sm font-semibold tactile-button border border-white hover:bg-surface-container-high" onclick="simulateAction('Dibatalkan.')" type="button">
+          Kembali
+        </button>
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-error text-white font-headline-sm text-headline-sm font-semibold tactile-button hover:bg-[#a01616] flex items-center justify-center gap-space-sm" onclick="simulateAction('Projek telah dihapus secara permanen.')" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+<span>Ya, hapus projek</span>
+</button>
+</div>
+</section>
+<!-- =============================================================================== -->
+<!-- DIALOG CARD 3: UBAH PERIODE SESI (6 Task Keluar Periode + List) -->
+<!-- =============================================================================== -->
+<section class="dialog-pane hidden w-full bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl tactile-card-prominent border border-white/95 relative overflow-hidden transition-all duration-300" id="dialog-changePeriod">
+<div class="flex items-start justify-between gap-space-md pb-space-md border-b border-surface-container-high/60">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0 tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="date_range">date_range</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-ui text-label-ui">
+                K4 Penataan Periode
+              </span>
+<span class="font-label-numeric-md text-[11px] text-outline">Kalibrasi Sesi 1</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">
+              Ubah periode “Sesi 1: Dasar penulisan”?
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Periode sesi diperpendek menjadi <span class="font-semibold text-on-surface">01 Nov – 15 Nov 2026</span>. Perubahan ini menyebabkan 6 task berada di luar rentang tanggal aktif sesi.
+            </p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface tactile-button flex items-center justify-center shrink-0" onclick="dismissFeedback()">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Task Di Luar Periode Panel -->
+<div class="my-space-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui uppercase tracking-wider text-outline font-bold">
+            Daftar Task Terdampak (Status: “di luar periode”)
+          </span>
+<span class="font-label-numeric-md text-xs text-primary font-bold">6 Total</span>
+</div>
+<div class="rounded-DEFAULT bg-surface-container-low p-space-sm tactile-inset-well space-y-1.5 max-h-48 overflow-y-auto">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest tactile-surface-extrude text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="assignment">assignment</span>
+<span class="font-medium text-on-surface">Draft Kajian Literatur Bab 2</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-numeric-md text-[11px] text-outline">18 Nov</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui">di luar periode</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest tactile-surface-extrude text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="assignment">assignment</span>
+<span class="font-medium text-on-surface">Review Peer Penulisan Metodologi</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-numeric-md text-[11px] text-outline">20 Nov</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui">di luar periode</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest tactile-surface-extrude text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="assignment">assignment</span>
+<span class="font-medium text-on-surface">Pengumpulan Abstrak Terjemahan</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-numeric-md text-[11px] text-outline">22 Nov</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui">di luar periode</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest tactile-surface-extrude text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="assignment">assignment</span>
+<span class="font-medium text-on-surface">Format Sitasi APA 7th Edition</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-numeric-md text-[11px] text-outline">25 Nov</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui">di luar periode</span>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest tactile-surface-extrude text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="assignment">assignment</span>
+<span class="font-medium text-on-surface">Pengecekan Similitude Turnitin</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-numeric-md text-[11px] text-outline">28 Nov</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-[10px] font-label-ui">di luar periode</span>
+</div>
+</div>
+<!-- Item 6 Footer Notice -->
+<div class="text-center py-1 text-on-surface-variant font-label-ui text-label-ui italic">
+            ... dan 1 task lainnya (Finalisasi Lampiran Data)
+          </div>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low text-[12px] text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="info">info</span>
+          Task tetap dapat diakses, namun tidak dihitung dalam target produktivitas aktif sesi ini.
+        </div>
+</div>
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-md pt-space-md border-t border-surface-container-high/60">
+<button autofocus="" class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-surface-container text-on-surface font-headline-sm text-headline-sm font-semibold tactile-button border border-white hover:bg-surface-container-high" onclick="simulateAction('Dibatalkan.')" type="button">
+          Kembali
+        </button>
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-[#1e2322] text-white font-headline-sm text-headline-sm font-semibold tactile-button hover:bg-[#2e3131]" onclick="simulateAction('Periode sesi berhasil diubah.')" type="button">
+          Terapkan Perubahan Periode
+        </button>
+</div>
+</section>
+<!-- =============================================================================== -->
+<!-- DIALOG CARD 4: BATALKAN SESI AKTIF (2 Task Aktif Dibatalkan) -->
+<!-- =============================================================================== -->
+<section class="dialog-pane hidden w-full bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl tactile-card-prominent border border-white/95 relative overflow-hidden transition-all duration-300" id="dialog-cancelSession">
+<div class="flex items-start justify-between gap-space-md pb-space-md border-b border-surface-container-high/60">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-error-container/30 text-error flex items-center justify-center shrink-0 tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-[24px]" data-icon="event_busy">event_busy</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-ui text-label-ui">
+                K4 Interupsi Alur
+              </span>
+<span class="font-label-numeric-md text-[11px] text-outline">Sesi 1 Sedang Berjalan</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">
+              Batalkan “Sesi 1: Dasar penulisan”?
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Membatalkan sesi ini akan segera menghentikan pelacakan waktu dan otomatis membatalkan <span class="font-semibold text-on-surface">2 task aktif</span> yang belum selesai.
+            </p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface tactile-button flex items-center justify-center shrink-0" onclick="dismissFeedback()">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="my-space-lg grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-DEFAULT bg-error-container/20 border border-error/20 tactile-inset-subtle">
+<p class="font-label-ui text-label-ui text-error font-bold uppercase">2 Task Aktif Dibatalkan</p>
+<ul class="mt-2 space-y-1 text-body-sm font-body-sm text-on-surface">
+<li>• Uji Sampel Paragraf Deduktif</li>
+<li>• Matriks Komparasi Jurnal</li>
+</ul>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low tactile-inset-subtle">
+<p class="font-label-ui text-label-ui text-outline font-bold uppercase">4 Task Selesai</p>
+<p class="mt-2 text-body-sm font-body-sm text-on-surface-variant">
+            Akan tetap dicatat sebagai task selesai dalam riwayat arsip projek.
+          </p>
+</div>
+</div>
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-md pt-space-md border-t border-surface-container-high/60">
+<button autofocus="" class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-surface-container text-on-surface font-headline-sm text-headline-sm font-semibold tactile-button border border-white hover:bg-surface-container-high" onclick="simulateAction('Dibatalkan.')" type="button">
+          Kembali
+        </button>
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-full bg-[#1e2322] text-white font-headline-sm text-headline-sm font-semibold tactile-button hover:bg-[#2e3131]" onclick="simulateAction('Sesi telah dibatalkan.')" type="button">
+          Ya, batalkan sesi
+        </button>
+</div>
+</section>
+<!-- =============================================================================== -->
+<!-- DIALOG CARD 5: DIALOG RINGAN (K5 Non-Destruktif / Cepat) -->
+<!-- =============================================================================== -->
+<section class="dialog-pane hidden w-full bg-surface-container-lowest rounded-xl p-space-lg tactile-card-prominent border border-white/95 relative overflow-hidden transition-all duration-300" id="dialog-lightDialog">
+<div class="flex items-start justify-between gap-space-md pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0 tactile-surface-extrude border border-white">
+<span class="material-symbols-outlined text-[20px]" data-icon="autorenew">autorenew</span>
+</div>
+<div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed/50 text-on-primary-fixed font-label-ui text-[10px]">
+              K5 Dialog Ringan
+            </span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface mt-0.5">
+              Buka kembali “Sesi 1: Dasar penulisan”?
+            </h3>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface tactile-button flex items-center justify-center shrink-0" onclick="dismissFeedback()">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="my-space-md p-space-md rounded-DEFAULT bg-surface-container-low tactile-inset-well">
+<p class="font-body-md text-body-md text-on-surface">
+          Sesi ini telah diselesaikan sebelumnya. Membuka kembali akan mengubah status sesi menjadi aktif dan memperbolehkan penambahan task baru.
+        </p>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button autofocus="" class="px-space-lg py-2 rounded-full bg-surface-container text-on-surface font-headline-sm text-headline-sm font-semibold tactile-button border border-white hover:bg-surface-container-high" onclick="simulateAction('Dibatalkan.')" type="button">
+          Batal
+        </button>
+<button class="px-space-lg py-2 rounded-full bg-primary text-white font-headline-sm text-headline-sm font-semibold tactile-button hover:bg-tertiary" onclick="simulateAction('Sesi telah diaktifkan kembali.')" type="button">
+          Lanjut ke sesi baru
+        </button>
+</div>
+</section>
+<!-- Interactive Feedback Toast (Simulated Action Alert) -->
+<aside aria-live="polite" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-space-lg py-space-sm rounded-full bg-[#1e2322] text-white font-body-sm text-body-sm shadow-2xl border border-white/20 flex items-center gap-space-sm animate-bounce" id="actionToast" role="status">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" data-icon="check_circle">check_circle</span>
+<span id="toastMessage">Tindakan berhasil diproses.</span>
+</aside>
+</main>
+<!-- =============================================================================== -->
+<!-- SCRIPT LOGIC: Interactive Switching & K4 Accessibility Controls -->
+<!-- =============================================================================== -->
+<script>
+    // Variant tab switcher
+    function switchVariant(variantId) {
+      // Hide all panes
+      const panes = document.querySelectorAll('.dialog-pane');
+      panes.forEach(pane => pane.classList.add('hidden'));
+
+      // Deactivate all buttons
+      const buttons = document.querySelectorAll('.variant-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-surface', 'text-primary', 'font-bold', 'tactile-button', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+      });
+
+      // Show selected pane
+      const targetPane = document.getElementById('dialog-' + variantId);
+      if (targetPane) {
+        targetPane.classList.remove('hidden');
+        // Trigger auto focus on default neutral button as per K4 guidelines
+        const defaultFocus = targetPane.querySelector('[autofocus]');
+        if (defaultFocus) {
+          setTimeout(() => defaultFocus.focus(), 50);
+        }
+      }
+
+      // Activate clicked button
+      const targetBtn = document.getElementById('tab-' + variantId);
+      if (targetBtn) {
+        targetBtn.classList.remove('text-on-surface-variant');
+        targetBtn.classList.add('bg-surface', 'text-primary', 'font-bold', 'tactile-button', 'shadow-sm');
+      }
+    }
+
+    // Action Toast Simulator
+    function simulateAction(message) {
+      const toast = document.getElementById('actionToast');
+      const toastMsg = document.getElementById('toastMessage');
+      if (toast && toastMsg) {
+        toastMsg.textContent = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3200);
+      }
+    }
+
+    function dismissFeedback() {
+      simulateAction('Dialog ditutup tanpa perubahan.');
+    }
+
+    // Global ESC listener for accessible modal behavior
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dismissFeedback();
+      }
+    });
+  </script>
+</body></html>

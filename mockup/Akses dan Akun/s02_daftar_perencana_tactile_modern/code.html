@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Perencana — Daftar Akun</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#073523",
+            "surface-tint": "#406653",
+            "surface-container-low": "#f2f4f4",
+            "primary-fixed-dim": "#a6d0b8",
+            "surface-container-highest": "#e1e3e3",
+            "surface-bright": "#f8fafa",
+            "outline-variant": "#c1c8c2",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#beedd2",
+            "on-secondary-fixed": "#181d1c",
+            "tertiary": "#3d6752",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#2e3131",
+            "background": "#f8fafa",
+            "primary-fixed": "#c2ecd3",
+            "inverse-primary": "#a6d0b8",
+            "surface-variant": "#e1e3e3",
+            "on-background": "#191c1d",
+            "on-primary-container": "#0c3424",
+            "on-secondary-fixed-variant": "#434847",
+            "on-tertiary-fixed": "#002114",
+            "on-primary-fixed-variant": "#284e3c",
+            "primary-container": "#769e88",
+            "secondary": "#5a5f5e",
+            "surface-dim": "#d8dada",
+            "surface": "#f8fafa",
+            "outline": "#717973",
+            "secondary-fixed-dim": "#c3c7c6",
+            "surface-container": "#eceeee",
+            "tertiary-fixed-dim": "#a3d1b7",
+            "surface-container-high": "#e6e8e8",
+            "on-tertiary-fixed-variant": "#244f3b",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#414844",
+            "on-primary-fixed": "#002114",
+            "inverse-on-surface": "#eff1f1",
+            "secondary-fixed": "#dfe3e1",
+            "on-surface": "#191c1d",
+            "on-primary": "#ffffff",
+            "primary": "#406653",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#739f87",
+            "secondary-container": "#dce1df",
+            "on-secondary-container": "#5f6462",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-ui": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-numeric-lg": ["Space Mono"],
+            "label-numeric-md": ["Space Mono"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-ui": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-numeric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "label-numeric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Tactile Neomorphic & debossed surfaces */
+    .tactile-card {
+      background: #f8fafa;
+      box-shadow: 
+        -8px -8px 20px rgba(255, 255, 255, 0.95),
+        10px 10px 24px rgba(30, 35, 34, 0.05),
+        2px 2px 8px rgba(30, 35, 34, 0.03);
+    }
+    
+    .tactile-well {
+      background: #f2f4f4;
+      box-shadow: 
+        inset 2px 2px 5px rgba(30, 35, 34, 0.07),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.85);
+    }
+
+    .tactile-well-error {
+      background: #fff8f7;
+      box-shadow: 
+        inset 2px 2px 5px rgba(186, 26, 26, 0.12),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+    }
+
+    .tactile-pill-btn {
+      box-shadow: 
+        -3px -3px 8px rgba(255, 255, 255, 0.9),
+        4px 4px 10px rgba(30, 35, 34, 0.06);
+    }
+
+    .tactile-pill-btn:active {
+      box-shadow: 
+        inset 2px 2px 5px rgba(30, 35, 34, 0.1),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-tertiary-fixed selection:text-on-tertiary-container relative overflow-x-hidden">
+<!-- Ambient Micro-Texture Glow Behind Card -->
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none rounded-full blur-3xl opacity-40 bg-[radial-gradient(circle,_rgba(163,209,183,0.3)_0%,_rgba(242,244,244,0.05)_70%,_transparent_100%)]"></div>
+<!-- Minimal Top Status Anchor -->
+<header class="w-full max-w-5xl mx-auto px-space-xl pt-space-lg flex items-center justify-between relative z-10">
+<div class="flex items-center gap-space-sm group cursor-pointer">
+<div class="w-8 h-8 rounded-DEFAULT bg-surface-container-lowest flex items-center justify-center border border-outline-variant/40 shadow-sm transition-transform group-hover:scale-95">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle">check_circle</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Perencana</span>
+<span class="font-label-ui text-label-ui px-2 py-0.5 rounded-full bg-surface-container-high text-secondary border border-outline-variant/30">v2.4 Pro</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-body-sm text-body-sm text-secondary hidden sm:inline">Sudah punya akun?</span>
+<a class="font-headline-sm text-headline-sm text-primary hover:text-on-primary-container px-space-md py-1.5 rounded-full transition-colors font-medium" href="#masuk">Masuk</a>
+</div>
+</header>
+<!-- Main Tactile Container -->
+<main class="w-full flex-1 flex items-center justify-center px-space-md py-space-xl relative z-10">
+<div class="w-full max-w-[500px]">
+<!-- Primary Neomorphic Elevation Chamber -->
+<div class="tactile-card rounded-lg p-space-xl border border-white/60 relative backdrop-blur-sm">
+<!-- Header Section -->
+<div class="mb-space-lg">
+<div class="flex items-center justify-between mb-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Daftar</h1>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse" title="Sistem Enkripsi Aktif"></div>
+</div>
+<p class="font-body-md text-body-md text-secondary">
+            Buat akun. Data tiap akun terpisah penuh.
+          </p>
+</div>
+<!-- Simulation Tool Trigger (Mini Control Pad) -->
+<div class="mb-space-md bg-surface-container-low rounded-DEFAULT p-space-xs flex items-center justify-between border border-outline-variant/30">
+<div class="flex items-center gap-1.5 pl-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="tune">tune</span>
+<span class="font-label-ui text-label-ui text-secondary">SIMULASI GALAT:</span>
+</div>
+<div class="flex gap-1">
+<button class="font-label-ui text-label-ui px-2 py-1 rounded-full bg-surface-container-lowest text-on-surface border border-outline-variant/40 hover:bg-surface-variant transition-all active:scale-95" id="sim-clear" type="button">Normal</button>
+<button class="font-label-ui text-label-ui px-2 py-1 rounded-full bg-surface-container-lowest text-error border border-error/20 hover:bg-error-container transition-all active:scale-95" id="sim-taken" type="button">Terdaftar</button>
+<button class="font-label-ui text-label-ui px-2 py-1 rounded-full bg-surface-container-lowest text-error border border-error/20 hover:bg-error-container transition-all active:scale-95" id="sim-mismatch" type="button">Beda</button>
+<button class="font-label-ui text-label-ui px-2 py-1 rounded-full bg-surface-container-lowest text-error border border-error/20 hover:bg-error-container transition-all active:scale-95" id="sim-short" type="button">&lt;8 Karakter</button>
+</div>
+</div>
+<!-- Form Elements -->
+<form class="space-y-space-md" id="register-form" onsubmit="event.preventDefault();">
+<!-- Field 1: Email -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-secondary flex items-center gap-1" for="input-email">
+                Email
+                <span class="text-error font-bold">*</span>
+</label>
+<span class="hidden font-body-sm text-body-sm text-error flex items-center gap-1" id="email-error-tag">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+<span id="email-error-text">Email sudah terdaftar</span>
+</span>
+</div>
+<div class="tactile-well rounded-DEFAULT flex items-center px-space-md py-2.5 transition-all duration-200 border border-transparent focus-within:border-primary" id="email-well">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-transparent border-none p-0 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-0 focus:outline-none" id="input-email" placeholder="nama@domain.com" required="" type="email"/>
+</div>
+</div>
+<!-- Field 2: Ulangi Email -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-secondary flex items-center gap-1" for="input-confirm-email">
+                Ulangi email
+                <span class="text-error font-bold">*</span>
+</label>
+<span class="hidden font-body-sm text-body-sm text-error flex items-center gap-1" id="confirm-error-tag">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+<span>Email tidak sama</span>
+</span>
+</div>
+<div class="tactile-well rounded-DEFAULT flex items-center px-space-md py-2.5 transition-all duration-200 border border-transparent focus-within:border-primary" id="confirm-well">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2" data-icon="mark_email_read">mark_email_read</span>
+<input class="w-full bg-transparent border-none p-0 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-0 focus:outline-none" id="input-confirm-email" placeholder="Ketik ulang email Anda" required="" type="email"/>
+</div>
+</div>
+<!-- Field 3: Password -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-secondary flex items-center gap-1" for="input-password">
+                Password
+                <span class="text-error font-bold">*</span>
+</label>
+<span class="hidden font-body-sm text-body-sm text-error flex items-center gap-1" id="password-error-tag">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+<span>Password minimal 8 karakter</span>
+</span>
+</div>
+<div class="tactile-well rounded-DEFAULT flex items-center px-space-md py-2.5 transition-all duration-200 border border-transparent focus-within:border-primary" id="password-well">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2" data-icon="lock">lock</span>
+<input class="w-full bg-transparent border-none p-0 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-0 focus:outline-none" id="input-password" maxlength="128" minlength="8" placeholder="Minimal 8 karakter" required="" type="password"/>
+<button class="text-outline hover:text-on-surface ml-2 focus:outline-none transition-colors" id="toggle-password" title="Tampilkan / Sembunyikan password" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility" id="pwd-icon">visibility</span>
+</button>
+</div>
+<div class="flex justify-between items-center px-1">
+<span class="font-body-sm text-body-sm text-secondary">Rentang 8 – 128 karakter</span>
+<span class="font-label-numeric-md text-[11px] text-outline" id="pwd-meter">0 baris</span>
+</div>
+</div>
+<!-- Field 4: Nama Tampil (Opsional) -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-secondary" for="input-display-name">
+                Nama tampil <span class="text-outline font-normal">(opsional)</span>
+</label>
+<span class="font-label-numeric-md text-[12px] text-secondary tracking-wider" id="name-counter">0/45</span>
+</div>
+<div class="tactile-well rounded-DEFAULT flex items-center px-space-md py-2.5 border border-transparent focus-within:border-primary transition-all duration-200">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2" data-icon="badge">badge</span>
+<input class="w-full bg-transparent border-none p-0 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-0 focus:outline-none" id="input-display-name" maxlength="45" placeholder="Contoh: Cah Anggara" type="text"/>
+</div>
+</div>
+<!-- Main CTA: Daftar Button -->
+<div class="pt-space-xs">
+<button class="w-full h-12 bg-on-surface text-surface rounded-full font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-space-sm shadow-[0_4px_12px_rgba(25,28,29,0.18)] hover:bg-black active:scale-[0.98] transition-all duration-200 cursor-pointer" type="submit">
+<span>Daftar</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Divider: atau -->
+<div class="relative flex py-space-xs items-center">
+<div class="flex-grow border-t border-outline-variant/50"></div>
+<span class="flex-shrink mx-4 font-body-sm text-body-sm text-outline">atau</span>
+<div class="flex-grow border-t border-outline-variant/50"></div>
+</div>
+<!-- Secondary CTA: Google Auth Tactile Button -->
+<button class="tactile-pill-btn w-full h-12 bg-surface-container-lowest text-on-surface rounded-full font-headline-sm text-headline-sm font-medium flex items-center justify-center gap-3 border border-outline-variant/40 hover:bg-surface-container transition-all duration-150 active:scale-[0.98]" type="button">
+<!-- Minimal Google Monochromatic Glyph -->
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.97 0 12s.45 3.83 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span>Daftar dengan Google</span>
+</button>
+</form>
+<!-- Card Footnote: Alternatif Masuk -->
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 text-center">
+<p class="font-body-md text-body-md text-secondary">
+            Sudah punya akun? 
+            <a class="text-primary hover:text-on-primary-container font-semibold transition-colors underline decoration-outline-variant underline-offset-4" href="#masuk">
+              Masuk
+            </a>
+</p>
+</div>
+</div>
+<!-- Trust Badges & Telemetry Bar Below Card -->
+<div class="mt-space-md px-space-md flex flex-wrap items-center justify-between text-secondary gap-2">
+<div class="flex items-center gap-1.5 font-label-ui text-label-ui text-outline">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock">lock</span>
+<span>Zero-Knowledge Workspace Storage</span>
+</div>
+<div class="flex items-center gap-2 font-label-numeric-md text-[11px] text-outline">
+<span>LATENSI 18ms</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>SSL 256-BIT</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Tactile Footer Station -->
+<footer class="w-full max-w-5xl mx-auto px-space-xl py-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm text-secondary font-body-sm text-body-sm relative z-10 border-t border-outline-variant/20">
+<div>
+      © 2026 Perencana Technologies. Hak cipta dilindungi.
+    </div>
+<div class="flex items-center gap-space-lg font-label-ui text-label-ui text-secondary">
+<a class="hover:text-on-surface transition-colors" href="#privasi">Kebijakan Privasi</a>
+<a class="hover:text-on-surface transition-colors" href="#ketentuan">Ketentuan Layanan</a>
+<a class="hover:text-on-surface transition-colors flex items-center gap-1" href="#status">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+        Sistem Operasional
+      </a>
+</div>
+</footer>
+<!-- Interactive Logic for Precision UX and Error Simulation -->
+<script>
+    // Character Counter for Nama Tampil
+    const nameInput = document.getElementById('input-display-name');
+    const nameCounter = document.getElementById('name-counter');
+    nameInput.addEventListener('input', (e) => {
+      const length = e.target.value.length;
+      nameCounter.textContent = `${length}/45`;
+      if (length >= 40) {
+        nameCounter.classList.add('text-error');
+        nameCounter.classList.remove('text-secondary');
+      } else {
+        nameCounter.classList.remove('text-error');
+        nameCounter.classList.add('text-secondary');
+      }
+    });
+
+    // Password Visibility Toggle
+    const pwdInput = document.getElementById('input-password');
+    const toggleBtn = document.getElementById('toggle-password');
+    const pwdIcon = document.getElementById('pwd-icon');
+    let isRevealed = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isRevealed = !isRevealed;
+      pwdInput.type = isRevealed ? 'text' : 'password';
+      pwdIcon.textContent = isRevealed ? 'visibility_off' : 'visibility';
+    });
+
+    // Password Length Meter indicator
+    pwdInput.addEventListener('input', (e) => {
+      const len = e.target.value.length;
+      const meter = document.getElementById('pwd-meter');
+      if (len === 0) {
+        meter.textContent = '0 baris';
+        meter.classList.remove('text-primary', 'text-error');
+      } else if (len < 8) {
+        meter.textContent = `${len}/8 min`;
+        meter.classList.add('text-error');
+        meter.classList.remove('text-primary');
+      } else {
+        meter.textContent = `${len} karakter (Aman)`;
+        meter.classList.remove('text-error');
+        meter.classList.add('text-primary');
+      }
+    });
+
+    // Error State Simulator controls
+    const emailWell = document.getElementById('email-well');
+    const emailErrorTag = document.getElementById('email-error-tag');
+    const emailErrorText = document.getElementById('email-error-text');
+
+    const confirmWell = document.getElementById('confirm-well');
+    const confirmErrorTag = document.getElementById('confirm-error-tag');
+
+    const passwordWell = document.getElementById('password-well');
+    const passwordErrorTag = document.getElementById('password-error-tag');
+
+    function resetErrors() {
+      emailWell.classList.remove('tactile-well-error', 'border-error');
+      emailErrorTag.classList.add('hidden');
+      
+      confirmWell.classList.remove('tactile-well-error', 'border-error');
+      confirmErrorTag.classList.add('hidden');
+
+      passwordWell.classList.remove('tactile-well-error', 'border-error');
+      passwordErrorTag.classList.add('hidden');
+    }
+
+    document.getElementById('sim-clear').addEventListener('click', () => {
+      resetErrors();
+    });
+
+    document.getElementById('sim-taken').addEventListener('click', () => {
+      resetErrors();
+      emailWell.classList.add('tactile-well-error', 'border-error');
+      emailErrorText.textContent = 'Email sudah terdaftar';
+      emailErrorTag.classList.remove('hidden');
+      document.getElementById('input-email').value = 'cah@perencana.app';
+    });
+
+    document.getElementById('sim-mismatch').addEventListener('click', () => {
+      resetErrors();
+      document.getElementById('input-email').value = 'pengguna@kampus.ac.id';
+      document.getElementById('input-confirm-email').value = 'pengguna@lain.ac.id';
+      confirmWell.classList.add('tactile-well-error', 'border-error');
+      confirmErrorTag.classList.remove('hidden');
+    });
+
+    document.getElementById('sim-short').addEventListener('click', () => {
+      resetErrors();
+      document.getElementById('input-password').value = 'pass12';
+      passwordWell.classList.add('tactile-well-error', 'border-error');
+      passwordErrorTag.classList.remove('hidden');
+    });
+  </script>
+</body></html>
