@@ -22,11 +22,17 @@ function pastikanCsrf(): Promise<void> {
   return csrfSiap
 }
 
-export async function request<T>(method: Method, path: string, body?: unknown): Promise<T> {
+type Opsi = {
+  /** Nomor revisi akun yang diketahui klien, untuk kendali konkurensi (7.2). */
+  ifMatch?: number
+}
+
+export async function request<T>(method: Method, path: string, body?: unknown, opsi: Opsi = {}): Promise<T> {
   if (method !== 'GET') await pastikanCsrf()
 
   const headers: Record<string, string> = { Accept: 'application/json', 'X-Build': BUILD }
   if (body !== undefined) headers['Content-Type'] = 'application/json'
+  if (opsi.ifMatch !== undefined) headers['If-Match'] = String(opsi.ifMatch)
   const xsrf = bacaCookie('XSRF-TOKEN')
   if (xsrf) headers['X-XSRF-TOKEN'] = xsrf
 

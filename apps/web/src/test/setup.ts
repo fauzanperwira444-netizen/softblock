@@ -1,4 +1,8 @@
 import '@testing-library/jest-dom/vitest'
+import { configure } from '@testing-library/react'
+
+// Aksi mock punya jeda jaringan buatan ditambah animasi; batas bawaan 1 detik terlalu ketat.
+configure({ asyncUtilTimeout: 4000 })
 
 if (typeof window !== 'undefined') {
   // jsdom tidak mengimplementasikan scrollTo; ScrollRestoration memanggilnya saat berpindah rute.

@@ -12,11 +12,11 @@ export function buatSeed(hariIni: Tanggal): IsiSeed {
   const v = 1
 
   const projek: Tabel['projek'][] = [
-    { id: 'p-skripsi', versi: v, nama: 'Skripsi Bab 3', deskripsi: 'Metodologi penelitian dan instrumen wawancara.', warna: '#406653', batal: false },
-    { id: 'p-kos', versi: v, nama: 'Pindah Kos', deskripsi: 'Survei, kemas barang, dan urus kontrak baru.', warna: '#3b5b8c', batal: false },
-    { id: 'p-jepang', versi: v, nama: 'Les Bahasa Jepang', deskripsi: 'Persiapan JLPT N4.', warna: '#8a5a00', batal: false },
-    { id: 'p-lomba', versi: v, nama: 'Lomba UI', deskripsi: 'Desain aplikasi untuk lomba kampus.', warna: '#7a4f7a', batal: false },
-    { id: 'p-riset', versi: v, nama: 'Riset Pasar', deskripsi: 'Ide usaha kecil; belum dijadwalkan.', warna: '#5f6462', batal: false },
+    { id: 'p-skripsi', versi: v, nama: 'Skripsi Bab 3', deskripsi: 'Metodologi penelitian dan instrumen wawancara.', warna: '#2e8b7a', batal: false },
+    { id: 'p-kos', versi: v, nama: 'Pindah Kos', deskripsi: 'Survei, kemas barang, dan urus kontrak baru.', warna: '#2f7fc1', batal: false },
+    { id: 'p-jepang', versi: v, nama: 'Les Bahasa Jepang', deskripsi: 'Persiapan JLPT N4.', warna: '#b26a00', batal: false },
+    { id: 'p-lomba', versi: v, nama: 'Lomba UI', deskripsi: 'Desain aplikasi untuk lomba kampus.', warna: '#8e5bb5', batal: false },
+    { id: 'p-riset', versi: v, nama: 'Riset Pasar', deskripsi: 'Ide usaha kecil; belum dijadwalkan.', warna: '#9a6b4f', batal: false },
   ]
 
   const sesi: Tabel['sesi'][] = [

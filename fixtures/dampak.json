@@ -1,0 +1,171 @@
+{
+  "aturan": "dampak",
+  "sumber": "Spesifikasi 2.4, A-04, A-05, B-05, B-06; Arsitektur Sistem 7.4 (daftar id terurut)",
+  "kasus": [
+    {
+      "nama": "selesai dini: sesi berjalan dipotong, sesi nanti kosong dihapus, sesi nanti bertask batal",
+      "aksi": "selesai_dini",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [
+          { "id": "s-lewat", "projek_id": "p1", "nama": "S0", "mulai": "2026-10-01", "akhir": "2026-10-31", "batal": false },
+          { "id": "s-jalan", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-10", "akhir": "2026-11-30", "batal": false },
+          { "id": "s-hari-ini", "projek_id": "p1", "nama": "S2", "mulai": "2026-11-18", "akhir": "2026-11-18", "batal": true },
+          { "id": "s-nanti-kosong", "projek_id": "p1", "nama": "S3", "mulai": "2026-12-01", "akhir": "2026-12-10", "batal": false },
+          { "id": "s-nanti-isi", "projek_id": "p1", "nama": "S4", "mulai": "2026-12-11", "akhir": "2026-12-20", "batal": false }
+        ],
+        "task": [
+          { "id": "t-awal", "sesi_id": "s-jalan", "progress": 10, "batal": false, "deadline_tanggal": "2026-11-12" },
+          { "id": "t-akhir", "sesi_id": "s-jalan", "progress": 10, "batal": false, "deadline_tanggal": "2026-11-25" },
+          { "id": "t-nanti", "sesi_id": "s-nanti-isi", "progress": 10, "batal": false, "deadline_tanggal": "2026-12-15" }
+        ]
+      },
+      "expected": {
+        "projek_menjadi": "selesai",
+        "task_batal": [],
+        "task_di_luar_periode": ["t-akhir"],
+        "sesi_dihapus": ["s-nanti-kosong"],
+        "sesi_batal": ["s-nanti-isi"],
+        "sesi_dipotong": [{ "id": "s-jalan", "akhir_baru": "2026-11-17" }]
+      }
+    },
+    {
+      "nama": "selesai dini: satu-satunya sesi mulai hari ini menjadi belum dijadwalkan",
+      "aksi": "selesai_dini",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [{ "id": "s1", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-18", "akhir": "2026-11-30", "batal": false }],
+        "task": []
+      },
+      "expected": {
+        "projek_menjadi": "belum_dijadwalkan",
+        "task_batal": [],
+        "task_di_luar_periode": [],
+        "sesi_dihapus": ["s1"],
+        "sesi_batal": [],
+        "sesi_dipotong": []
+      }
+    },
+    {
+      "nama": "batal projek dengan sesi bertask",
+      "aksi": "batal_projek",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [
+          { "id": "s-lewat", "projek_id": "p1", "nama": "S0", "mulai": "2026-10-01", "akhir": "2026-10-31", "batal": false },
+          { "id": "s-jalan", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-10", "akhir": "2026-11-30", "batal": false },
+          { "id": "s-nanti", "projek_id": "p1", "nama": "S2", "mulai": "2026-12-01", "akhir": "2026-12-10", "batal": false }
+        ],
+        "task": [
+          { "id": "t-b", "sesi_id": "s-jalan", "progress": 3, "batal": false, "deadline_tanggal": "2026-11-20" },
+          { "id": "t-a", "sesi_id": "s-lewat", "progress": 5, "batal": false, "deadline_tanggal": "2026-10-20" },
+          { "id": "t-selesai", "sesi_id": "s-lewat", "progress": 10, "batal": false, "deadline_tanggal": "2026-10-21" }
+        ]
+      },
+      "expected": {
+        "projek_menjadi": "batal",
+        "task_batal": ["t-a", "t-b"],
+        "task_di_luar_periode": [],
+        "sesi_dihapus": [],
+        "sesi_batal": ["s-jalan", "s-nanti"],
+        "sesi_dipotong": []
+      }
+    },
+    {
+      "nama": "batal projek tanpa sesi bertask berarti dihapus",
+      "aksi": "batal_projek",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [{ "id": "s1", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-20", "akhir": "2026-11-30", "batal": false }],
+        "task": []
+      },
+      "expected": {
+        "projek_menjadi": "dihapus",
+        "task_batal": [],
+        "task_di_luar_periode": [],
+        "sesi_dihapus": [],
+        "sesi_batal": ["s1"],
+        "sesi_dipotong": []
+      }
+    },
+    {
+      "nama": "batal sesi terakhir yang berjalan membuat projek selesai",
+      "aksi": "batal_sesi",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "sesi_id": "s-jalan",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [
+          { "id": "s-lewat", "projek_id": "p1", "nama": "S0", "mulai": "2026-10-01", "akhir": "2026-10-31", "batal": false },
+          { "id": "s-jalan", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-10", "akhir": "2026-11-30", "batal": false }
+        ],
+        "task": [
+          { "id": "t1", "sesi_id": "s-jalan", "progress": 4, "batal": false, "deadline_tanggal": "2026-11-20" },
+          { "id": "t0", "sesi_id": "s-lewat", "progress": 10, "batal": false, "deadline_tanggal": "2026-10-20" }
+        ]
+      },
+      "expected": {
+        "projek_menjadi": "selesai",
+        "task_batal": ["t1"],
+        "task_di_luar_periode": [],
+        "sesi_dihapus": [],
+        "sesi_batal": ["s-jalan"],
+        "sesi_dipotong": []
+      }
+    },
+    {
+      "nama": "ubah periode: hanya task yang baru keluar periode",
+      "aksi": "ubah_periode",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "sesi_id": "s1",
+        "rentang": { "mulai": "2026-11-10", "akhir": "2026-11-22" },
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [{ "id": "s1", "projek_id": "p1", "nama": "S1", "mulai": "2026-11-10", "akhir": "2026-11-30", "batal": false }],
+        "task": [
+          { "id": "t-dalam", "sesi_id": "s1", "progress": 2, "batal": false, "deadline_tanggal": "2026-11-20" },
+          { "id": "t-keluar", "sesi_id": "s1", "progress": 2, "batal": false, "deadline_tanggal": "2026-11-28" },
+          { "id": "t-batal", "sesi_id": "s1", "progress": 2, "batal": true, "deadline_tanggal": "2026-11-29" }
+        ]
+      },
+      "expected": {
+        "projek_menjadi": "berjalan",
+        "task_batal": [],
+        "task_di_luar_periode": ["t-keluar"],
+        "sesi_dihapus": [],
+        "sesi_batal": [],
+        "sesi_dipotong": []
+      }
+    },
+    {
+      "nama": "hapus satu-satunya sesi yang belum mulai",
+      "aksi": "hapus_sesi",
+      "today": "2026-11-18",
+      "input": {
+        "projek_id": "p1",
+        "sesi_id": "s1",
+        "projek": [{ "id": "p1", "batal": false }],
+        "sesi": [{ "id": "s1", "projek_id": "p1", "nama": "S1", "mulai": "2026-12-01", "akhir": "2026-12-10", "batal": false }],
+        "task": []
+      },
+      "expected": {
+        "projek_menjadi": "belum_dijadwalkan",
+        "task_batal": [],
+        "task_di_luar_periode": [],
+        "sesi_dihapus": ["s1"],
+        "sesi_batal": [],
+        "sesi_dipotong": []
+      }
+    }
+  ]
+}

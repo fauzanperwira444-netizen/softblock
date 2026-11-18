@@ -1,5 +1,7 @@
-import { createContext, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { ApiError } from '../api/errors'
 import { useAuth } from '../app/auth'
+import type { ResponsMutasi } from '../domain/tipe'
 import { gantiPemilikPerangkat, penyimpananIdb, type Penyimpanan } from './penyimpanan'
 import { MesinSinkron, type StateData } from './sinkron'
 
@@ -41,6 +43,27 @@ export function useData(): StateData & { segarkan: () => void } {
   const mesin = useMesin()
   const state = useSyncExternalStore(mesin.subscribe, mesin.getState)
   return { ...state, segarkan: () => void mesin.segarkan() }
+}
+
+/**
+ * Menjalankan aksi pengubah dengan If-Match = revisi snapshot, lalu menerapkan hasilnya.
+ * 409 versi_konflik atau dampak_berubah memicu sinkron delta sebelum galat diteruskan ke formulir.
+ */
+export function useMutasi() {
+  const mesin = useMesin()
+  return useCallback(
+    async (aksi: (revisi: number) => Promise<ResponsMutasi>): Promise<ResponsMutasi> => {
+      try {
+        const hasil = await aksi(mesin.getState().snapshot?.revisi ?? 0)
+        await mesin.terapkanMutasi(hasil)
+        return hasil
+      } catch (e) {
+        if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
+        throw e
+      }
+    },
+    [mesin],
+  )
 }
 
 /**

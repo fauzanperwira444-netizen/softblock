@@ -2,11 +2,11 @@ import { http, HttpResponse, delay } from 'msw'
 import type { Akun } from '../akun'
 import { PASSWORD_MAX, PASSWORD_MIN } from '../akun'
 import { waktuLokal } from '../../domain/tanggal'
-import type { ResponsSinkron } from '../../domain/tipe'
 import { AKUN_CONTOH } from './seed'
-import { buatSeed } from './seedData'
+import { dbAkun, resetDb, responsSinkron } from './db'
+import { handlersProjek } from './handlersProjek'
 
-const AKUN_BERDATA = new Set([AKUN_CONTOH.email, 'google.demo@softblock.test'])
+export const AKUN_BERDATA = new Set([AKUN_CONTOH.email, 'google.demo@softblock.test'])
 
 export type SimulasiJaringan = 'normal' | 'lambat' | 'mati' | 'usang'
 export const KUNCI_SIMULASI = 'softblock-mock-jaringan'
@@ -76,6 +76,12 @@ function simpan(s: Status) {
 
 export function resetMock() {
   simpan(awal())
+  resetDb()
+}
+
+/** Akun yang sedang masuk di mock, dipakai handler modul lain. */
+export function penggunaAktif(): AkunMock | undefined {
+  return aktif(baca())
 }
 
 function publik({ password, ...akun }: AkunMock): Akun {
@@ -128,14 +134,8 @@ export const handlers = [
     if (!akun) return galat(401, 'sesi_habis', 'Sesi habis. Masuk lagi.')
     const hariIni = waktuLokal(new Date(), akun.zona_waktu).tanggal
     const sejak = Number(new URL(request.url).searchParams.get('sejak') ?? '0')
-    const revisi = 1
-    const meta = { hari_ini: hariIni, zona_waktu: akun.zona_waktu }
-    // Data mock tidak berubah lewat mutasi (belum ada), jadi delta dari revisi terkini selalu kosong.
-    if (sejak === revisi) {
-      return HttpResponse.json<ResponsSinkron>({ revisi, penuh: false, ubah: {}, hapus: [], meta })
-    }
-    const ubah = AKUN_BERDATA.has(akun.email) ? buatSeed(hariIni) : {}
-    return HttpResponse.json<ResponsSinkron>({ revisi, penuh: true, ubah, hapus: [], meta })
+    const db = dbAkun(akun.id, akun.zona_waktu, AKUN_BERDATA.has(akun.email))
+    return HttpResponse.json(responsSinkron(db, sejak, { hari_ini: hariIni, zona_waktu: akun.zona_waktu }))
   }),
 
   http.get('/api/akun', async () => {
@@ -295,4 +295,5 @@ export const handlers = [
     simpan(s)
     return new HttpResponse(null, { status: 204 })
   }),
+  ...handlersProjek,
 ]

@@ -1,6 +1,6 @@
 import { sinkronApi } from '../api/sinkron'
 import { ApiError } from '../api/errors'
-import type { ResponsSinkron } from '../domain/tipe'
+import type { ResponsMutasi, ResponsSinkron } from '../domain/tipe'
 import type { Penyimpanan } from './penyimpanan'
 import { terapkan, type Snapshot } from './snapshot'
 
@@ -140,6 +140,34 @@ export class MesinSinkron {
     await this.api.kesehatan()
     const respons = await this.api.sinkron(this.state.snapshot?.revisi ?? 0)
     return terapkan(this.state.snapshot, respons, this.sekarang())
+  }
+
+  /** Terapkan respons aksi pengubah; bila ada perubahan lain di antaranya, tarik delta (10.2). */
+  async terapkanMutasi(respons: ResponsMutasi) {
+    const lama = this.state.snapshot
+    if (!lama) return
+    const terlewat = respons.revisi_sebelum !== lama.revisi
+    const baru = terapkan(lama, { ...respons, penuh: false, meta: { hari_ini: lama.hari_ini, zona_waktu: lama.zona_waktu } }, this.sekarang())
+    // Waktu sinkron tetap dari sinkron penuh terakhir; mutasi bukan pengganti sinkron.
+    this.set({ snapshot: { ...baru, disinkron_pada: terlewat ? lama.disinkron_pada : baru.disinkron_pada } })
+    await this.opsi.penyimpanan.simpan(this.opsi.akunId, this.state.snapshot as Snapshot).catch(() => undefined)
+    if (terlewat) await this.sinkronDiam()
+  }
+
+  /** Tarik delta tanpa mengubah bilah status; dipakai setelah 409 atau mutasi yang melompati revisi. */
+  async sinkronDiam() {
+    try {
+      const respons = await this.api.sinkron(this.state.snapshot?.revisi ?? 0)
+      const baru = terapkan(this.state.snapshot, respons, this.sekarang())
+      this.set({ snapshot: baru })
+      await this.opsi.penyimpanan.simpan(this.opsi.akunId, baru).catch(() => undefined)
+    } catch (e) {
+      if (e instanceof ApiError && e.kode === 'sesi_habis') {
+        this.opsi.onSesiHabis()
+        return
+      }
+      await this.segarkan()
+    }
   }
 
   saatOffline = () => {

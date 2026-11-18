@@ -52,6 +52,23 @@ import visibility from '@material-symbols/svg-400/outlined/visibility.svg?raw'
 import visibilityOff from '@material-symbols/svg-400/outlined/visibility_off.svg?raw'
 import warning from '@material-symbols/svg-400/outlined/warning.svg?raw'
 import wifiOff from '@material-symbols/svg-400/outlined/wifi_off.svg?raw'
+import description from '@material-symbols/svg-400/outlined/description.svg?raw'
+import link from '@material-symbols/svg-400/outlined/link.svg?raw'
+import noteAdd from '@material-symbols/svg-400/outlined/note_add.svg?raw'
+import addCircle from '@material-symbols/svg-400/outlined/add_circle.svg?raw'
+import flag from '@material-symbols/svg-400/outlined/flag.svg?raw'
+import restartAlt from '@material-symbols/svg-400/outlined/restart_alt.svg?raw'
+import cancel from '@material-symbols/svg-400/outlined/cancel.svg?raw'
+import history from '@material-symbols/svg-400/outlined/history.svg?raw'
+import block from '@material-symbols/svg-400/outlined/block.svg?raw'
+import keyboardArrowDown from '@material-symbols/svg-400/outlined/keyboard_arrow_down.svg?raw'
+import event from '@material-symbols/svg-400/outlined/event.svg?raw'
+import speed from '@material-symbols/svg-400/outlined/speed.svg?raw'
+import openInNew from '@material-symbols/svg-400/outlined/open_in_new.svg?raw'
+import createNewFolder from '@material-symbols/svg-400/outlined/create_new_folder.svg?raw'
+import folderOff from '@material-symbols/svg-400/outlined/folder_off.svg?raw'
+import playArrow from '@material-symbols/svg-400/outlined/play_arrow.svg?raw'
+import pause from '@material-symbols/svg-400/outlined/pause.svg?raw'
 
 // Ikon diimpor per berkas agar bundel hanya memuat glyph yang dipakai (font ikon penuh ~4 MB).
 const raw = {
@@ -109,6 +126,23 @@ const raw = {
   visibility_off: visibilityOff,
   warning,
   wifi_off: wifiOff,
+  description,
+  link,
+  note_add: noteAdd,
+  add_circle: addCircle,
+  flag,
+  restart_alt: restartAlt,
+  cancel,
+  history,
+  block,
+  keyboard_arrow_down: keyboardArrowDown,
+  event,
+  speed,
+  open_in_new: openInNew,
+  create_new_folder: createNewFolder,
+  folder_off: folderOff,
+  play_arrow: playArrow,
+  pause,
 } as const
 
 export type IconName = keyof typeof raw

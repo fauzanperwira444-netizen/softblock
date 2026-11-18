@@ -9,6 +9,15 @@ export function formatTanggal(t: Tanggal): string {
   return `${Number(d)} ${BULAN[Number(m) - 1] ?? ''} ${y}`
 }
 
+/** "2 Nov – 14 Des 2026"; tahun awal dihapus bila sama, satu tanggal bila awal = akhir. */
+export function formatRentang(mulai: Tanggal, akhir: Tanggal): string {
+  if (mulai === akhir) return formatTanggal(mulai)
+  const [ya] = mulai.split('-')
+  const [yb] = akhir.split('-')
+  const awal = formatTanggal(mulai)
+  return `${ya === yb ? awal.slice(0, awal.lastIndexOf(' ')) : awal} – ${formatTanggal(akhir)}`
+}
+
 /** "13.20" (titik sebagai pemisah jam). */
 export function formatJam(menit: Menit): string {
   const j = Math.floor(menit / 60)

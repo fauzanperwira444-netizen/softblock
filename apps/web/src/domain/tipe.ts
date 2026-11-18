@@ -102,6 +102,17 @@ export const NAMA_TABEL: NamaTabel[] = [
 
 export type IsiTabel = { [K in NamaTabel]: Record<string, Tabel[K]> }
 
+/** Respons aksi pengubah: bentuk "perubahan" yang sama dengan sinkron, ditambah revisi_sebelum (7.3). */
+export type ResponsMutasi = {
+  revisi: number
+  revisi_sebelum: number
+  ubah: { [K in NamaTabel]?: Tabel[K][] }
+  hapus: Array<{ tabel: NamaTabel; id: string }>
+  peringatan: string[]
+  /** Id baris baru yang dibuat aksi ini, bila ada. */
+  id?: string
+}
+
 /** Respons GET /api/sinkron (7.3). */
 export type ResponsSinkron = {
   revisi: number

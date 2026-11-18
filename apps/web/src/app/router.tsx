@@ -7,6 +7,8 @@ import { LupaPasswordPage } from '../ui/pages/auth/LupaPasswordPage'
 import { MasukPage } from '../ui/pages/auth/MasukPage'
 import { ResetPasswordPage } from '../ui/pages/auth/ResetPasswordPage'
 import { DashboardPage } from '../ui/pages/dashboard/DashboardPage'
+import { DetailProjekPage } from '../ui/pages/projek/DetailProjekPage'
+import { ProjekPage } from '../ui/pages/projek/ProjekPage'
 import { SedangDibangun } from '../ui/pages/SedangDibangun'
 import { TidakDitemukanPage } from '../ui/pages/TidakDitemukanPage'
 import { AppShell } from '../ui/shell/AppShell'
@@ -28,8 +30,8 @@ const ruteMasuk: RouteObject = {
       element: <AppShell />,
       children: [
         { index: true, element: <DashboardPage /> },
-        { path: 'projek', element: <SedangDibangun judul="Projek" icon="folder" tahap="Tahap 3" /> },
-        { path: 'projek/:id', element: <SedangDibangun judul="Detail projek" icon="folder" tahap="Tahap 3" /> },
+        { path: 'projek', element: <ProjekPage /> },
+        { path: 'projek/:id', element: <DetailProjekPage /> },
         { path: 'task', element: <SedangDibangun judul="Task" icon="check_circle" tahap="Tahap 4" /> },
         { path: 'todo', element: <SedangDibangun judul="To-do" icon="checklist" tahap="Tahap 5" /> },
         { path: 'kalender', element: <SedangDibangun judul="Kalender" icon="calendar_today" tahap="Tahap 6" /> },
