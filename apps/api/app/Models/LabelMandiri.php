@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
+
+/**
+ * @property string $id
+ * @property string $akun_id
+ * @property int $versi
+ * @property string $nama
+ * @property CarbonImmutable|null $terakhir_dipakai
+ */
 final class LabelMandiri extends ModelAkun
 {
     public const TABEL = 'label_mandiri';

@@ -10,9 +10,9 @@ namespace App\Domain;
  * Hasil harus identik dengan TS: daftar id terurut, karena server membandingkan
  * dampak kiriman klien dan membalas 409 dampak_berubah bila berbeda (AD-4).
  *
- * @phpstan-type Projek array{id: string, batal: bool}
+ * @phpstan-type Projek array{id: string, batal: bool, nama?: string, warna?: string}
  * @phpstan-type Sesi array{id: string, projek_id: string, nama?: string, mulai: string, akhir: string, batal: bool}
- * @phpstan-type Task array{id: string, sesi_id: string|null, progress: int, batal: bool, deadline_tanggal: string|null}
+ * @phpstan-type Task array{id: string, sesi_id: string|null, progress: int, batal: bool, deadline_tanggal: string|null, label_id?: string|null, nama?: string, deadline_menit?: int|null}
  * @phpstan-type Data array{projek: list<Projek>, sesi: list<Sesi>, task: list<Task>}
  * @phpstan-type HasilDampak array{projek_menjadi: string, task_batal: list<string>, task_di_luar_periode: list<string>, sesi_dihapus: list<string>, sesi_batal: list<string>, sesi_dipotong: list<array{id: string, akhir_baru: string}>}
  */

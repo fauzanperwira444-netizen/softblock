@@ -4,6 +4,27 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Carbon;
+
+/**
+ * @property string $id
+ * @property string $akun_id
+ * @property int $versi
+ * @property string|null $sesi_id
+ * @property string|null $label_id
+ * @property string $nama
+ * @property string $deskripsi
+ * @property Carbon|null $deadline_tanggal
+ * @property int|null $deadline_menit
+ * @property int $kesulitan
+ * @property int $progress
+ * @property bool $batal
+ * @property CarbonImmutable|null $dibatalkan_pada
+ * @property Carbon|null $dibatalkan_tanggal_lokal
+ * @property int|null $dibatalkan_menit_lokal
+ * @property Carbon $dibuat_tanggal_lokal
+ */
 final class Task extends ModelAkun
 {
     public const TABEL = 'task';

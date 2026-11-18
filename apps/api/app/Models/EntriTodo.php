@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+
+/**
+ * @property string $id
+ * @property string $akun_id
+ * @property int $versi
+ * @property string $task_id
+ * @property Carbon $tanggal
+ * @property bool $ceklis
+ */
 final class EntriTodo extends ModelAkun
 {
     public const TABEL = 'entri_todo';
