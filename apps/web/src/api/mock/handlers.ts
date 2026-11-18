@@ -7,6 +7,7 @@ import { dbAkun, resetDb, responsSinkron } from './db'
 import { handlersProjek } from './handlersProjek'
 import { handlersTask } from './handlersTask'
 import { handlersTodo } from './handlersTodo'
+import { handlersJadwal } from './handlersJadwal'
 
 export const AKUN_BERDATA = new Set([AKUN_CONTOH.email, 'google.demo@softblock.test'])
 
@@ -300,4 +301,5 @@ export const handlers = [
   ...handlersProjek,
   ...handlersTask,
   ...handlersTodo,
+  ...handlersJadwal,
 ]

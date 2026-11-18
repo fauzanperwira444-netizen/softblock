@@ -152,14 +152,14 @@ export function BarisEntri({ entri }: { entri: EntriTodo }) {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {aktif && (
+          {aktif && !lewat && (
             <ProgressStepper
               value={task.progress}
               taskName={task.nama}
               {...(!alasan && !kunciTask ? { onChange: (n: number) => void jalankan(() => layanan.ubahProgress(task, n)) } : { disabled: true, disabledReason: alasan ?? kunciTask ?? '' })}
             />
           )}
-          {!aktif && (
+          {(!aktif || lewat) && (
             <span className="font-mono font-bold text-ink-muted" aria-label={`Progress ${task.progress} dari 10`}>
               {taskSelesai(task) ? '10/10' : `${task.progress}/10`}
             </span>

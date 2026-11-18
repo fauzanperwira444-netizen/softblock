@@ -7,11 +7,11 @@ import { LupaPasswordPage } from '../ui/pages/auth/LupaPasswordPage'
 import { MasukPage } from '../ui/pages/auth/MasukPage'
 import { ResetPasswordPage } from '../ui/pages/auth/ResetPasswordPage'
 import { DashboardPage } from '../ui/pages/dashboard/DashboardPage'
+import { KalenderPage } from '../ui/pages/kalender/KalenderPage'
 import { DetailProjekPage } from '../ui/pages/projek/DetailProjekPage'
 import { ProjekPage } from '../ui/pages/projek/ProjekPage'
 import { TaskPage } from '../ui/pages/task/TaskPage'
 import { TodoPage } from '../ui/pages/todo/TodoPage'
-import { SedangDibangun } from '../ui/pages/SedangDibangun'
 import { TidakDitemukanPage } from '../ui/pages/TidakDitemukanPage'
 import { AppShell } from '../ui/shell/AppShell'
 import { HanyaTamu, WajibMasuk } from './guards'
@@ -36,7 +36,7 @@ const ruteMasuk: RouteObject = {
         { path: 'projek/:id', element: <DetailProjekPage /> },
         { path: 'task', element: <TaskPage /> },
         { path: 'todo', element: <TodoPage /> },
-        { path: 'kalender', element: <SedangDibangun judul="Kalender" icon="calendar_today" tahap="Tahap 6" /> },
+        { path: 'kalender', element: <KalenderPage /> },
         { path: 'akun', element: <AkunPage /> },
       ],
     },

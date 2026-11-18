@@ -23,7 +23,7 @@ export const NAMA_HARI = ['', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabt
 // Pilihan jam 06.00–24.00 setiap 5 menit (E-04). Pakai daftar pilihan karena input waktu tidak bisa memuat 24.00.
 const PILIHAN_JAM = Array.from({ length: (JAM_AKHIR - JAM_AWAL) / 5 + 1 }, (_, i) => JAM_AWAL + i * 5)
 
-export type AwalFormBlok = { entri: EntriTodo; blok?: BlokJam }
+export type AwalFormBlok = { entri: EntriTodo; blok?: BlokJam; /** Jam mulai usulan dari slot kosong yang diklik. */ mulai?: number }
 
 /** F-15: tambah atau ubah blok jam sebuah entri to-do. */
 export function FormBlok({ awal, onClose }: { awal: AwalFormBlok | null; onClose: () => void }) {
@@ -40,7 +40,7 @@ export function FormBlok({ awal, onClose }: { awal: AwalFormBlok | null; onClose
   if (awal !== sebelumnya) {
     setSebelumnya(awal)
     if (awal) {
-      const usul = awal.blok ? awal.blok.mulai_menit : Math.max(JAM_AWAL, Math.min(JAM_AKHIR - 60, Math.ceil(((waktu?.menit ?? 540) + 1) / 15) * 15))
+      const usul = awal.blok ? awal.blok.mulai_menit : awal.mulai ?? Math.max(JAM_AWAL, Math.min(JAM_AKHIR - 60, Math.ceil(((waktu?.menit ?? 540) + 1) / 15) * 15))
       setMulai(usul)
       setSelesai(awal.blok ? awal.blok.selesai_menit : Math.min(JAM_AKHIR, usul + 60))
       setGalat(TANPA_GALAT)

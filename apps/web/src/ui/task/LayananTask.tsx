@@ -9,6 +9,9 @@ import { dampakTask, infoLabel, namaBentrokBukaKembali, progressSebelumSelesai }
 import type { Task } from '../../domain/tipe'
 import { galatForm } from '../formGalat'
 import { HeavyConfirmDialog, LightConfirmDialog } from '../overlay/ConfirmDialog'
+import { FormJadwal, type AwalFormJadwal } from '../kalender/FormJadwal'
+import { PanelHari } from '../kalender/PanelHari'
+import { PilihSlot } from '../kalender/PilihSlot'
 import { FormBlok, type AwalFormBlok } from '../todo/FormBlok'
 import { PilihHari } from '../todo/PilihHari'
 import { FormBukaKembali } from './FormBukaKembali'
@@ -36,6 +39,9 @@ type LayananTaskValue = {
   /** Pilihan hari untuk menambah task ke to-do (E-02). */
   tambahKeTodo: (task: Task) => void
   bukaFormBlok: (awal: AwalFormBlok) => void
+  /** Panel hari (P-02), dari Kalender dan kalender mini Dashboard. */
+  bukaHari: (tanggal: string) => void
+  bukaFormJadwal: (awal: AwalFormJadwal) => void
 }
 
 const LayananContext = createContext<LayananTaskValue | null>(null)
@@ -61,6 +67,10 @@ export function LayananTask({ children }: { children: ReactNode }) {
   const [formBuka, setFormBuka] = useState<Task | null>(null)
   const [pilihHari, setPilihHari] = useState<Task | null>(null)
   const [formBlok, setFormBlok] = useState<AwalFormBlok | null>(null)
+  const [hari, setHari] = useState<string | null>(null)
+  const [hariAsal, setHariAsal] = useState<string | null>(null)
+  const [slot, setSlot] = useState<{ tanggal: string; mulai: number } | null>(null)
+  const [formJadwal, setFormJadwal] = useState<AwalFormJadwal | null>(null)
   const [konfirmasiBatal, setKonfirmasiBatal] = useState<Task | null>(null)
   const [penutupan, setPenutupan] = useState<Penutupan | null>(null)
   const [proses, setProses] = useState(false)
@@ -70,11 +80,16 @@ export function LayananTask({ children }: { children: ReactNode }) {
 
   const bukaDetail = useCallback(
     (id: string) => {
+      // Panel tidak menumpuk: Detail task menggantikan panel hari dan menyediakan Kembali ke hari (6.3).
+      if (hari) {
+        setHariAsal(hari)
+        setHari(null)
+      }
       const p = new URLSearchParams(params)
       p.set('task', id)
       navigate({ search: p.toString() }, { state: { panelTask: true } })
     },
-    [navigate, params],
+    [navigate, params, hari],
   )
 
   const tutupDetail = useCallback(() => {
@@ -174,6 +189,8 @@ export function LayananTask({ children }: { children: ReactNode }) {
       bukaKembali,
       tambahKeTodo: setPilihHari,
       bukaFormBlok: setFormBlok,
+      bukaHari: setHari,
+      bukaFormJadwal: setFormJadwal,
     }),
     [bukaDetail, ubahProgress, mintaBatal, bukaKembali],
   )
@@ -185,7 +202,49 @@ export function LayananTask({ children }: { children: ReactNode }) {
   return (
     <LayananContext.Provider value={value}>
       {children}
-      <PanelTask task={taskPanel} open={!!taskPanel} onClose={tutupDetail} />
+      <PanelTask
+        task={taskPanel}
+        open={!!taskPanel}
+        onClose={() => {
+          tutupDetail()
+          setHariAsal(null)
+        }}
+        {...(hariAsal
+          ? {
+              onKembaliKeHari: () => {
+                tutupDetail()
+                setHari(hariAsal)
+                setHariAsal(null)
+              },
+            }
+          : {})}
+      />
+      <PanelHari
+        tanggal={hari}
+        onClose={() => setHari(null)}
+        onSlot={(tanggal, mulai) => setSlot({ tanggal, mulai })}
+        onItem={(_tanggal, it) => {
+          if (it.jenis === 'jadwal') setFormJadwal({ mode: 'ubah', jadwalId: it.jadwalId })
+          else {
+            const entri = data?.entri.find((e) => e.id === it.blok.entri_id)
+            if (entri) setFormBlok({ entri, blok: it.blok })
+          }
+        }}
+        onJadwalBaru={(tanggal) => setFormJadwal({ mode: 'buat', sekaliJalan: true, tanggal })}
+      />
+      <PilihSlot
+        slot={slot}
+        onClose={() => setSlot(null)}
+        onJadwal={(tanggal, mulai) => {
+          setSlot(null)
+          setFormJadwal({ mode: 'buat', sekaliJalan: true, tanggal, mulai })
+        }}
+        onBlok={(entri, mulai) => {
+          setSlot(null)
+          setFormBlok({ entri, mulai })
+        }}
+      />
+      <FormJadwal awal={formJadwal} onClose={() => setFormJadwal(null)} />
       <FormTask awal={formTask} onClose={() => setFormTask(null)} />
       <FormProgress task={formProgress} onClose={() => setFormProgress(null)} />
       <FormPindah task={formPindah} onClose={() => setFormPindah(null)} />

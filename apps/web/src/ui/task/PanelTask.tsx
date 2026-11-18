@@ -34,7 +34,17 @@ function BarisInfo({ icon, label, children }: { icon: IconName; label: string; c
 }
 
 /** P-01: panel detail task. Panel samping di laptop, layar penuh di HP; tercermin di alamat (J-04). */
-export function PanelTask({ task, open, onClose }: { task: Task | undefined; open: boolean; onClose: () => void }) {
+export function PanelTask({
+  task,
+  open,
+  onClose,
+  onKembaliKeHari,
+}: {
+  task: Task | undefined
+  open: boolean
+  onClose: () => void
+  onKembaliKeHari?: () => void
+}) {
   const data = useDataProjek()
   const waktu = useWaktu()
   const layanan = useLayananTask()
@@ -73,6 +83,11 @@ export function PanelTask({ task, open, onClose }: { task: Task | undefined; ope
     <Dialog open={open} onClose={onClose} title="Detail task" kind="panel">
       <motion.div key={t.id} variants={staggerParent} initial="hidden" animate="show" className="flex flex-col gap-5">
         <motion.div variants={riseChild} className="flex flex-wrap gap-2">
+          {onKembaliKeHari && (
+            <Button variant="ghost" size="sm" icon="arrow_back" onClick={onKembaliKeHari}>
+              Kembali ke hari
+            </Button>
+          )}
           {aktif && (
             <>
               <Button variant="tactile" size="sm" icon="edit" disabled={!!alasanUbah} title={alasanUbah ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'ubah', task: t })}>

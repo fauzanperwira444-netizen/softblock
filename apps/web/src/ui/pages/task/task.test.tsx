@@ -33,7 +33,8 @@ describe('Daftar Task', () => {
     await user.type(screen.getByLabelText('Cari task, projek, atau label'), 'rumah')
     expect(await screen.findByRole('button', { name: 'Servis kipas' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Beli tinta printer' })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Survei 3 kos' })).not.toBeInTheDocument()
+    // Baris yang tidak cocok lagi keluar dengan animasi, jadi tunggu sampai benar-benar dilepas.
+    await waitFor(() => expect(screen.queryByRole('button', { name: 'Survei 3 kos' })).not.toBeInTheDocument())
   })
 
   test('progress instan tampil langsung, lalu dipulihkan dengan Coba lagi saat server gagal', async () => {
