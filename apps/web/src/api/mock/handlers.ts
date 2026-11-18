@@ -5,6 +5,7 @@ import { waktuLokal } from '../../domain/tanggal'
 import { AKUN_CONTOH } from './seed'
 import { dbAkun, resetDb, responsSinkron } from './db'
 import { handlersProjek } from './handlersProjek'
+import { handlersTask } from './handlersTask'
 
 export const AKUN_BERDATA = new Set([AKUN_CONTOH.email, 'google.demo@softblock.test'])
 
@@ -296,4 +297,5 @@ export const handlers = [
     return new HttpResponse(null, { status: 204 })
   }),
   ...handlersProjek,
+  ...handlersTask,
 ]

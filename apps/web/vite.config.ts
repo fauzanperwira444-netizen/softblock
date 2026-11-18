@@ -21,5 +21,7 @@ export default defineConfig({
     environment: 'node',
     include: ['src/**/*.test.{ts,tsx}'],
     setupFiles: ['./src/test/setup.ts'],
+    // Tes alur memakai mock dengan jeda jaringan buatan; 5 detik bawaan terlalu ketat saat suite paralel.
+    testTimeout: 15_000,
   },
 })

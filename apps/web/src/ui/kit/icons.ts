@@ -40,6 +40,7 @@ import password from '@material-symbols/svg-400/outlined/password.svg?raw'
 import powerSettingsNew from '@material-symbols/svg-400/outlined/power_settings_new.svg?raw'
 import refresh from '@material-symbols/svg-400/outlined/refresh.svg?raw'
 import remove from '@material-symbols/svg-400/outlined/remove.svg?raw'
+import search from '@material-symbols/svg-400/outlined/search.svg?raw'
 import schedule from '@material-symbols/svg-400/outlined/schedule.svg?raw'
 import sell from '@material-symbols/svg-400/outlined/sell.svg?raw'
 import sync from '@material-symbols/svg-400/outlined/sync.svg?raw'
@@ -115,6 +116,7 @@ const raw = {
   refresh,
   remove,
   schedule,
+  search,
   sell,
   sync,
   task_alt: taskAlt,

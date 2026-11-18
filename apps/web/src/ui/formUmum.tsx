@@ -1,13 +1,14 @@
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import { ApiError } from '../../../api/errors'
-import { useBolehUbah } from '../../../data/DataProvider'
-import { cx } from '../../cx'
-import { Button } from '../../kit/Button'
-import { Alert } from '../../kit/display'
-import { Icon } from '../../kit/Icon'
-import { galatForm, TANPA_GALAT, type FormGalat } from '../../formGalat'
-import { SPRING_SNAPPY } from '../../motion'
+import { ApiError } from '../api/errors'
+import { useBolehUbah } from '../data/DataProvider'
+import { cx } from './cx'
+import { Button } from './kit/Button'
+import { Alert } from './kit/display'
+import { Icon } from './kit/Icon'
+import type { IconName } from './kit/icons'
+import { galatForm, TANPA_GALAT, type FormGalat } from './formGalat'
+import { SPRING_SNAPPY } from './motion'
 
 /** Status kirim formulir: galat per kolom, galat umum, dan konflik versi (AU-3, N-46). */
 export function useKirimForm() {
@@ -61,7 +62,7 @@ export function KakiForm({
 }: {
   formId: string
   label: string
-  icon?: 'check' | 'add' | 'refresh'
+  icon?: IconName
   proses: boolean
   konflik: boolean
   onBatal: () => void

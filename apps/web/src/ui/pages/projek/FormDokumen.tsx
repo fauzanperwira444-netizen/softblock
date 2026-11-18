@@ -7,7 +7,7 @@ import { Alert } from '../../kit/display'
 import { TextField } from '../../kit/fields'
 import { TANPA_GALAT } from '../../formGalat'
 import { Dialog } from '../../overlay/Dialog'
-import { BannerKonflik, KakiForm, useKirimForm } from './formUmum'
+import { BannerKonflik, KakiForm, useKirimForm } from '../../formUmum'
 
 const NAMA_DOKUMEN_MAX = 60
 

@@ -17,7 +17,7 @@ import { Alert } from '../../kit/display'
 import { TANPA_GALAT } from '../../formGalat'
 import { TextareaField, TextField } from '../../kit/fields'
 import { Dialog } from '../../overlay/Dialog'
-import { BannerKonflik, KakiForm, PilihWarna, useKirimForm } from './formUmum'
+import { BannerKonflik, KakiForm, PilihWarna, useKirimForm } from '../../formUmum'
 
 type Props = { open: boolean; onClose: () => void; projek?: Projek | undefined }
 

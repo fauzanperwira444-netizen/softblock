@@ -45,7 +45,8 @@ import { galatForm } from '../../formGalat'
 import { DUR, riseChild, SPRING_SOFT, staggerParent } from '../../motion'
 import { HeavyConfirmDialog, LightConfirmDialog } from '../../overlay/ConfirmDialog'
 import { usePageTitle } from '../../usePageTitle'
-import { BarisTask } from './BarisTask'
+import { BarisTask } from '../../task/BarisTask'
+import { useLayananTask } from '../../task/LayananTask'
 import { FormDokumen } from './FormDokumen'
 import { FormProjek } from './FormProjek'
 import { FormSesi, type ModeSesi } from './FormSesi'
@@ -99,22 +100,21 @@ export function DetailProjekPage() {
       </EmptyState>
     )
   }
-  return <IsiDetail data={data} projek={projek} hariIni={waktu.hariIni} menit={waktu.menit} />
+  return <IsiDetail data={data} projek={projek} hariIni={waktu.hariIni} />
 }
 
 function IsiDetail({
   data,
   projek,
   hariIni,
-  menit,
 }: {
   data: DataProjek & { dokumen: Dokumen[] }
   projek: Projek
   hariIni: string
-  menit: number
 }) {
   const navigate = useNavigate()
   const mutasi = useMutasi()
+  const layanan = useLayananTask()
   const { boleh, alasan: alasanOffline } = useBolehUbah()
 
   const [formProjek, setFormProjek] = useState(false)
@@ -355,16 +355,21 @@ function IsiDetail({
               </div>
             </div>
             {isi.length === 0 ? (
-              <p className="rounded-field bg-well px-4 py-3 text-body-md text-ink-muted tactile-inset">Sesi ini belum punya task. Task dibuat dari halaman Task.</p>
+              <p className="rounded-field bg-well px-4 py-3 text-body-md text-ink-muted tactile-inset">Sesi ini belum punya task.</p>
             ) : (
               <ul className="flex flex-col gap-2">
                 {isi.map((t) => (
-                  <BarisTask key={t.id} task={t} sesi={s} hariIni={hariIni} menit={menit} />
+                  <li key={t.id}>
+                    <BarisTask task={t} />
+                  </li>
                 ))}
               </ul>
             )}
             {!tertutup && (
-              <div className="flex flex-wrap justify-end gap-2 border-t border-ink/7 pt-4">
+              <div className="flex flex-wrap items-center gap-2 border-t border-ink/7 pt-4">
+                <Button variant="tactile" size="sm" icon="add_circle" className="mr-auto" disabled={!boleh} title={alasanOffline ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat', sesiId: s.id })}>
+                  Tambah task
+                </Button>
                 <TombolAksi icon="edit" onClick={() => setFormSesi({ mode: 'ubah', sesi: s })} alasan={kunciTerbuka()}>
                   Ubah sesi
                 </TombolAksi>
@@ -427,7 +432,9 @@ function IsiDetail({
                       className="flex basis-full flex-col gap-2"
                     >
                       {isi.map((t) => (
-                        <BarisTask key={t.id} task={t} sesi={s} hariIni={hariIni} menit={menit} />
+                        <li key={t.id}>
+                          <BarisTask task={t} />
+                        </li>
                       ))}
                     </motion.ul>
                   )}

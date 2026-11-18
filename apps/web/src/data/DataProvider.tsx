@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { ApiError } from '../api/errors'
 import { useAuth } from '../app/auth'
-import type { ResponsMutasi } from '../domain/tipe'
+import type { NamaTabel, ResponsMutasi, Tabel } from '../domain/tipe'
 import { gantiPemilikPerangkat, penyimpananIdb, type Penyimpanan } from './penyimpanan'
 import { MesinSinkron, type StateData } from './sinkron'
 
@@ -58,6 +58,31 @@ export function useMutasi() {
         await mesin.terapkanMutasi(hasil)
         return hasil
       } catch (e) {
+        if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
+        throw e
+      }
+    },
+    [mesin],
+  )
+}
+
+/**
+ * Pembaruan instan untuk ceklis, progress, tambah ke to-do, dan hapus entri (N-50):
+ * baris diubah di perangkat lebih dulu, lalu dipulihkan bila server menolak atau tidak menjawab.
+ */
+export function useMutasiInstan() {
+  const mesin = useMesin()
+  return useCallback(
+    async <K extends NamaTabel>(
+      lokal: { tabel: K; baris: Tabel[K] },
+      aksi: (revisi: number) => Promise<ResponsMutasi>,
+    ): Promise<void> => {
+      const revisi = mesin.getState().snapshot?.revisi ?? 0
+      const lama = mesin.ubahLokal(lokal.tabel, lokal.baris)
+      try {
+        await mesin.terapkanMutasi(await aksi(revisi))
+      } catch (e) {
+        mesin.pulihkanLokal(lokal.tabel, lokal.baris.id, lama)
         if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
         throw e
       }

@@ -1,6 +1,6 @@
 import { sinkronApi } from '../api/sinkron'
 import { ApiError } from '../api/errors'
-import type { ResponsMutasi, ResponsSinkron } from '../domain/tipe'
+import type { NamaTabel, ResponsMutasi, ResponsSinkron, Tabel } from '../domain/tipe'
 import type { Penyimpanan } from './penyimpanan'
 import { terapkan, type Snapshot } from './snapshot'
 
@@ -152,6 +152,27 @@ export class MesinSinkron {
     this.set({ snapshot: { ...baru, disinkron_pada: terlewat ? lama.disinkron_pada : baru.disinkron_pada } })
     await this.opsi.penyimpanan.simpan(this.opsi.akunId, this.state.snapshot as Snapshot).catch(() => undefined)
     if (terlewat) await this.sinkronDiam()
+  }
+
+  /**
+   * Pembaruan instan (N-50): ubah baris di snapshot sebelum server menjawab.
+   * Mengembalikan baris lama agar bisa dipulihkan bila server menolak.
+   */
+  ubahLokal<K extends NamaTabel>(tabel: K, baris: Tabel[K]): Tabel[K] | undefined {
+    const s = this.state.snapshot
+    if (!s) return undefined
+    const lama = s.isi[tabel][baris.id] as Tabel[K] | undefined
+    this.set({ snapshot: { ...s, isi: { ...s.isi, [tabel]: { ...s.isi[tabel], [baris.id]: baris } } } })
+    return lama
+  }
+
+  pulihkanLokal<K extends NamaTabel>(tabel: K, id: string, lama: Tabel[K] | undefined) {
+    const s = this.state.snapshot
+    if (!s) return
+    const isiTabel = { ...s.isi[tabel] } as Record<string, Tabel[K]>
+    if (lama) isiTabel[id] = lama
+    else delete isiTabel[id]
+    this.set({ snapshot: { ...s, isi: { ...s.isi, [tabel]: isiTabel } } })
   }
 
   /** Tarik delta tanpa mengubah bilah status; dipakai setelah 409 atau mutasi yang melompati revisi. */

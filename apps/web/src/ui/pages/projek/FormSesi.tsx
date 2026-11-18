@@ -25,7 +25,7 @@ import { formatRentang } from '../../format'
 import { TANPA_GALAT } from '../../formGalat'
 import { HeavyConfirmDialog } from '../../overlay/ConfirmDialog'
 import { Dialog } from '../../overlay/Dialog'
-import { BannerKonflik, KakiForm, PilihWarna, useKirimForm } from './formUmum'
+import { BannerKonflik, KakiForm, PilihWarna, useKirimForm } from '../../formUmum'
 import { uraianDampak } from './uraianDampak'
 
 export type ModeSesi = 'tambah' | 'ubah' | 'buka'
