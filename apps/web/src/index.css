@@ -1,1 +1,283 @@
 @import "tailwindcss";
+@import "@fontsource/plus-jakarta-sans/latin-400.css";
+@import "@fontsource/plus-jakarta-sans/latin-500.css";
+@import "@fontsource/plus-jakarta-sans/latin-600.css";
+@import "@fontsource/plus-jakarta-sans/latin-700.css";
+@import "@fontsource/space-mono/latin-400.css";
+@import "@fontsource/space-mono/latin-700.css";
+
+/*
+  Token dari design system Softblock (Tactile Barista Modern). Sumber hanya punya tema terang;
+  tema gelap (N-56) diturunkan di sini dengan bayangan yang didesain ulang, bukan dibalik.
+*/
+:root {
+  color-scheme: light;
+  --sb-canvas: #f8fafa;
+  --sb-card: #ffffff;
+  --sb-well: #f2f4f4;
+  --sb-raised: #eceeee;
+  --sb-high: #e6e8e8;
+  --sb-ink: #191c1d;
+  --sb-ink-muted: #414844;
+  --sb-line: #c1c8c2;
+  --sb-line-strong: #717973;
+  --sb-primary: #406653;
+  --sb-on-primary: #ffffff;
+  --sb-sage: #769e88;
+  --sb-sage-light: #8fbca3;
+  --sb-mist: #e3efe9;
+  --sb-on-mist: #406653;
+  --sb-mint: #beedd2;
+  --sb-on-mint: #073523;
+  --sb-avatar: #c2ecd3;
+  --sb-on-avatar: #284e3c;
+  --sb-cta: #191c1d;
+  --sb-cta-hover: #1e2322;
+  --sb-on-cta: #ffffff;
+  --sb-danger: #ba1a1a;
+  --sb-on-danger: #ffffff;
+  --sb-danger-soft: #ffdad6;
+  --sb-on-danger-soft: #93000a;
+  --sb-inverse: #2e3131;
+  --sb-on-inverse: #eff1f1;
+  /* Kuning "menyambungkan" dari layar L01 prototipe. */
+  --sb-warn-soft: #fdf6e6;
+  --sb-warn-line: #ecd29a;
+  --sb-warn: #8a5300;
+  --sb-on-warn-soft: #5c3d00;
+  --sb-glow: rgb(143 188 163 / 0.3);
+  --sb-scrim: rgb(25 28 29 / 0.42);
+
+  --sb-shadow-convex: -4px -4px 10px rgb(255 255 255 / 0.95), 6px 6px 16px rgb(30 35 34 / 0.05),
+    2px 2px 6px rgb(30 35 34 / 0.03);
+  --sb-shadow-convex-sm: -2px -2px 6px rgb(255 255 255 / 0.9), 3px 3px 8px rgb(30 35 34 / 0.05);
+  --sb-shadow-button: -3px -3px 8px rgb(255 255 255 / 0.9), 4px 4px 10px rgb(30 35 34 / 0.06);
+  --sb-shadow-pressed: inset 2px 2px 5px rgb(30 35 34 / 0.12), inset -2px -2px 5px rgb(255 255 255 / 0.7);
+  --sb-shadow-inset: inset 2px 2px 5px rgb(30 35 34 / 0.07), inset -2px -2px 5px rgb(255 255 255 / 0.85);
+  --sb-shadow-pill: inset 1.5px 1.5px 4px rgb(30 35 34 / 0.08), inset -1.5px -1.5px 4px rgb(255 255 255 / 0.7);
+  --sb-shadow-cta: 0 4px 12px rgb(25 28 29 / 0.16), 0 1px 3px rgb(25 28 29 / 0.2);
+  --sb-shadow-header: 0 2px 12px rgb(30 35 34 / 0.04);
+  --sb-shadow-overlay: 0 24px 64px rgb(25 28 29 / 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --sb-canvas: #111413;
+    --sb-card: #1b1f1e;
+    --sb-well: #161a19;
+    --sb-raised: #242928;
+    --sb-high: #2c3230;
+    --sb-ink: #e1e3e3;
+    --sb-ink-muted: #c1c8c2;
+    --sb-line: #414844;
+    --sb-line-strong: #8b938d;
+    --sb-primary: #a6d0b8;
+    --sb-on-primary: #0c3424;
+    --sb-sage: #5f8a73;
+    --sb-sage-light: #769e88;
+    --sb-mist: #20342a;
+    --sb-on-mist: #a6d0b8;
+    --sb-mint: #284e3c;
+    --sb-on-mint: #c2ecd3;
+    --sb-avatar: #284e3c;
+    --sb-on-avatar: #c2ecd3;
+    --sb-cta: #e1e3e3;
+    --sb-cta-hover: #f2f4f4;
+    --sb-on-cta: #191c1d;
+    --sb-danger: #ffb4ab;
+    --sb-on-danger: #690005;
+    --sb-danger-soft: #5c1a16;
+    --sb-on-danger-soft: #ffdad6;
+    --sb-inverse: #e1e3e3;
+    --sb-on-inverse: #191c1d;
+    --sb-warn-soft: #2e2410;
+    --sb-warn-line: #5c4415;
+    --sb-warn: #e0a33c;
+    --sb-on-warn-soft: #f3dfb1;
+    --sb-glow: rgb(118 158 136 / 0.16);
+    --sb-scrim: rgb(0 0 0 / 0.6);
+
+    --sb-shadow-convex: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 6px 16px rgb(0 0 0 / 0.35);
+    --sb-shadow-convex-sm: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 3px 8px rgb(0 0 0 / 0.3);
+    --sb-shadow-button: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 3px 8px rgb(0 0 0 / 0.35);
+    --sb-shadow-pressed: inset 2px 2px 5px rgb(0 0 0 / 0.5);
+    --sb-shadow-inset: inset 2px 2px 6px rgb(0 0 0 / 0.45), inset -1px -1px 2px rgb(255 255 255 / 0.03);
+    --sb-shadow-pill: inset 1.5px 1.5px 4px rgb(0 0 0 / 0.4);
+    --sb-shadow-cta: 0 4px 12px rgb(0 0 0 / 0.45);
+    --sb-shadow-header: 0 2px 12px rgb(0 0 0 / 0.3);
+    --sb-shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.55);
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--sb-canvas);
+  --color-card: var(--sb-card);
+  --color-well: var(--sb-well);
+  --color-raised: var(--sb-raised);
+  --color-high: var(--sb-high);
+  --color-ink: var(--sb-ink);
+  --color-ink-muted: var(--sb-ink-muted);
+  --color-line: var(--sb-line);
+  --color-line-strong: var(--sb-line-strong);
+  --color-primary: var(--sb-primary);
+  --color-on-primary: var(--sb-on-primary);
+  --color-sage: var(--sb-sage);
+  --color-sage-light: var(--sb-sage-light);
+  --color-mist: var(--sb-mist);
+  --color-on-mist: var(--sb-on-mist);
+  --color-mint: var(--sb-mint);
+  --color-on-mint: var(--sb-on-mint);
+  --color-avatar: var(--sb-avatar);
+  --color-on-avatar: var(--sb-on-avatar);
+  --color-cta: var(--sb-cta);
+  --color-cta-hover: var(--sb-cta-hover);
+  --color-on-cta: var(--sb-on-cta);
+  --color-danger: var(--sb-danger);
+  --color-on-danger: var(--sb-on-danger);
+  --color-danger-soft: var(--sb-danger-soft);
+  --color-on-danger-soft: var(--sb-on-danger-soft);
+  --color-inverse: var(--sb-inverse);
+  --color-on-inverse: var(--sb-on-inverse);
+  --color-warn-soft: var(--sb-warn-soft);
+  --color-warn-line: var(--sb-warn-line);
+  --color-warn: var(--sb-warn);
+  --color-on-warn-soft: var(--sb-on-warn-soft);
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --text-headline-xl: 2.25rem;
+  --text-headline-xl--line-height: 2.75rem;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-headline-xl--font-weight: 600;
+  --text-headline-xl-mobile: 1.75rem;
+  --text-headline-xl-mobile--line-height: 2.25rem;
+  --text-headline-xl-mobile--letter-spacing: -0.01em;
+  --text-headline-xl-mobile--font-weight: 600;
+  --text-auth: 1.875rem;
+  --text-auth--line-height: 2.375rem;
+  --text-auth--letter-spacing: -0.02em;
+  --text-auth--font-weight: 600;
+  --text-headline-lg: 1.5rem;
+  --text-headline-lg--line-height: 2rem;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.25rem;
+  --text-headline-md--line-height: 1.75rem;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 1rem;
+  --text-headline-sm--line-height: 1.5rem;
+  --text-headline-sm--font-weight: 600;
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.5rem;
+  --text-body-md: 0.875rem;
+  --text-body-md--line-height: 1.25rem;
+  --text-body-sm: 0.75rem;
+  --text-body-sm--line-height: 1.125rem;
+  --text-numeric-lg: 1.75rem;
+  --text-numeric-lg--line-height: 2rem;
+  --text-numeric-lg--font-weight: 700;
+  --text-numeric-md: 1.125rem;
+  --text-numeric-md--line-height: 1.5rem;
+
+  --radius-sm: 0.5rem;
+  --radius-field: 1rem;
+  --radius-tile: 1.5rem;
+  --radius-card: 2rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-press: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@utility tactile-convex {
+  box-shadow: var(--sb-shadow-convex);
+}
+@utility tactile-convex-sm {
+  box-shadow: var(--sb-shadow-convex-sm);
+}
+@utility tactile-button {
+  box-shadow: var(--sb-shadow-button);
+}
+@utility tactile-pressed {
+  box-shadow: var(--sb-shadow-pressed);
+}
+@utility tactile-inset {
+  box-shadow: var(--sb-shadow-inset);
+}
+@utility tactile-pill {
+  box-shadow: var(--sb-shadow-pill);
+}
+@utility shadow-cta {
+  box-shadow: var(--sb-shadow-cta);
+}
+@utility shadow-header {
+  box-shadow: var(--sb-shadow-header);
+}
+@utility shadow-overlay {
+  box-shadow: var(--sb-shadow-overlay);
+}
+/* Label field dan seksi: label-ui design system (uppercase kecil, warna sekunder). */
+@utility lbl {
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sb-ink-muted);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas font-sans text-body-md text-ink antialiased;
+    min-height: 100dvh;
+  }
+  :where(a[href], button:not(:disabled), summary, select:not(:disabled), label[for],
+    input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled),
+    [role="button"], [role="tab"], [role="switch"]) {
+    cursor: pointer;
+  }
+  :where(button:disabled, select:disabled, input:disabled, textarea:disabled, [aria-disabled="true"]) {
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--sb-primary);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--sb-mint);
+    color: var(--sb-on-mint);
+  }
+  dialog::backdrop {
+    background: var(--sb-scrim);
+    backdrop-filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open]::backdrop {
+    animation: sb-fade 220ms var(--ease-out) both;
+  }
+}
+@keyframes sb-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

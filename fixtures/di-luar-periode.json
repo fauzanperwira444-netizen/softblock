@@ -1,0 +1,11 @@
+{
+  "aturan": "di_luar_periode",
+  "sumber": "Spesifikasi A-04, B-05: deadline task sesi di luar rentang inklusif sesinya",
+  "kasus": [
+    { "nama": "di dalam periode", "input": { "task": { "deadline_tanggal": "2026-11-20" }, "sesi": { "mulai": "2026-11-15", "akhir": "2026-11-30" } }, "expected": false },
+    { "nama": "tepat di hari akhir", "input": { "task": { "deadline_tanggal": "2026-11-30" }, "sesi": { "mulai": "2026-11-15", "akhir": "2026-11-30" } }, "expected": false },
+    { "nama": "setelah periode dipotong", "input": { "task": { "deadline_tanggal": "2026-11-25" }, "sesi": { "mulai": "2026-11-15", "akhir": "2026-11-17" } }, "expected": true },
+    { "nama": "sebelum mulai", "input": { "task": { "deadline_tanggal": "2026-11-14" }, "sesi": { "mulai": "2026-11-15", "akhir": "2026-11-30" } }, "expected": true },
+    { "nama": "task mandiri tidak punya periode", "input": { "task": { "deadline_tanggal": "2026-11-25" }, "sesi": null }, "expected": false }
+  ]
+}

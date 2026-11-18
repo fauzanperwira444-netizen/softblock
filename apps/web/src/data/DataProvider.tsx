@@ -1,0 +1,64 @@
+import { createContext, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { useAuth } from '../app/auth'
+import { gantiPemilikPerangkat, penyimpananIdb, type Penyimpanan } from './penyimpanan'
+import { MesinSinkron, type StateData } from './sinkron'
+
+const MesinContext = createContext<MesinSinkron | null>(null)
+
+type Props = { children: ReactNode; penyimpanan?: Penyimpanan }
+
+/** Satu mesin sinkron per akun yang sedang masuk; dibuang saat keluar. */
+export function DataProvider({ children, penyimpanan = penyimpananIdb }: Props) {
+  const { akun, tandaiSesiHabis } = useAuth()
+  const akunId = akun?.id ?? null
+  const [mesin, setMesin] = useState<MesinSinkron | null>(null)
+
+  useEffect(() => {
+    if (!akunId) return
+    const m = new MesinSinkron({ akunId, penyimpanan, onSesiHabis: tandaiSesiHabis })
+    setMesin(m)
+    void gantiPemilikPerangkat(akunId, penyimpanan).then(() => m.mulai())
+    window.addEventListener('online', m.saatOnline)
+    window.addEventListener('offline', m.saatOffline)
+    return () => {
+      window.removeEventListener('online', m.saatOnline)
+      window.removeEventListener('offline', m.saatOffline)
+      m.hentikan()
+    }
+  }, [akunId, penyimpanan, tandaiSesiHabis])
+
+  if (!mesin) return null
+  return <MesinContext.Provider value={mesin}>{children}</MesinContext.Provider>
+}
+
+function useMesin(): MesinSinkron {
+  const m = useContext(MesinContext)
+  if (!m) throw new Error('useData dipakai di luar DataProvider')
+  return m
+}
+
+export function useData(): StateData & { segarkan: () => void } {
+  const mesin = useMesin()
+  const state = useSyncExternalStore(mesin.subscribe, mesin.getState)
+  return { ...state, segarkan: () => void mesin.segarkan() }
+}
+
+/**
+ * Aksi ubah hanya boleh saat tersambung dan sinkron selesai (N-47, AU-2).
+ * `alasan` ditampilkan di dekat tombol yang dinonaktifkan (I-10).
+ */
+export function useBolehUbah(): { boleh: boolean; alasan: string | null } {
+  const { koneksi } = useData()
+  switch (koneksi) {
+    case 'online':
+      return { boleh: true, alasan: null }
+    case 'offline':
+      return { boleh: false, alasan: 'Offline. Perubahan dinonaktifkan sampai tersambung lagi.' }
+    case 'usang':
+      return { boleh: false, alasan: 'Muat ulang aplikasi untuk memakai versi baru sebelum menyimpan.' }
+    case 'galat':
+      return { boleh: false, alasan: 'Belum tersambung ke server. Tekan Coba lagi di bilah atas.' }
+    default:
+      return { boleh: false, alasan: 'Menunggu data selesai diperbarui.' }
+  }
+}

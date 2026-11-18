@@ -1,0 +1,12 @@
+{
+  "aturan": "status_sesi",
+  "sumber": "Spesifikasi B-04; tanggal inklusif",
+  "kasus": [
+    { "nama": "sebelum mulai", "today": "2026-11-18", "input": { "mulai": "2026-11-19", "akhir": "2026-11-30", "batal": false }, "expected": "belum_mulai" },
+    { "nama": "hari pertama termasuk", "today": "2026-11-19", "input": { "mulai": "2026-11-19", "akhir": "2026-11-30", "batal": false }, "expected": "berjalan" },
+    { "nama": "hari terakhir termasuk", "today": "2026-11-30", "input": { "mulai": "2026-11-19", "akhir": "2026-11-30", "batal": false }, "expected": "berjalan" },
+    { "nama": "sehari setelah akhir", "today": "2026-12-01", "input": { "mulai": "2026-11-19", "akhir": "2026-11-30", "batal": false }, "expected": "selesai" },
+    { "nama": "sesi satu hari", "today": "2026-11-18", "input": { "mulai": "2026-11-18", "akhir": "2026-11-18", "batal": false }, "expected": "berjalan" },
+    { "nama": "batal mengalahkan tanggal", "today": "2026-11-20", "input": { "mulai": "2026-11-19", "akhir": "2026-11-30", "batal": true }, "expected": "batal" }
+  ]
+}

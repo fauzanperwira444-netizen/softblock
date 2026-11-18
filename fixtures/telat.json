@@ -1,0 +1,15 @@
+{
+  "aturan": "telat",
+  "sumber": "Spesifikasi 2.1: task aktif yang deadline-nya sudah lewat; tanpa jam dianggap 23.59",
+  "kasus": [
+    { "nama": "deadline kemarin", "today": "2026-11-18", "nowMinutes": 480, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-17", "deadline_menit": null }, "expected": true },
+    { "nama": "deadline besok", "today": "2026-11-18", "nowMinutes": 1430, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-19", "deadline_menit": 0 }, "expected": false },
+    { "nama": "hari ini, jam belum lewat", "today": "2026-11-18", "nowMinutes": 1019, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-18", "deadline_menit": 1020 }, "expected": false },
+    { "nama": "hari ini, tepat di jam deadline belum telat", "today": "2026-11-18", "nowMinutes": 1020, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-18", "deadline_menit": 1020 }, "expected": false },
+    { "nama": "hari ini, jam sudah lewat", "today": "2026-11-18", "nowMinutes": 1021, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-18", "deadline_menit": 1020 }, "expected": true },
+    { "nama": "hari ini tanpa jam tidak telat sampai akhir hari", "today": "2026-11-18", "nowMinutes": 1439, "input": { "progress": 2, "batal": false, "deadline_tanggal": "2026-11-18", "deadline_menit": null }, "expected": false },
+    { "nama": "task selesai tidak telat", "today": "2026-11-18", "nowMinutes": 480, "input": { "progress": 10, "batal": false, "deadline_tanggal": "2026-11-10", "deadline_menit": null }, "expected": false },
+    { "nama": "task batal tidak telat", "today": "2026-11-18", "nowMinutes": 480, "input": { "progress": 3, "batal": true, "deadline_tanggal": "2026-11-10", "deadline_menit": null }, "expected": false },
+    { "nama": "tanpa deadline tidak pernah telat", "today": "2026-11-18", "nowMinutes": 480, "input": { "progress": 3, "batal": false, "deadline_tanggal": null, "deadline_menit": null }, "expected": false }
+  ]
+}

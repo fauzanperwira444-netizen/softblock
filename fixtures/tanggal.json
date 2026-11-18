@@ -1,0 +1,35 @@
+{
+  "aturan": "pembantu_tanggal",
+  "sumber": "Arsitektur Sistem 5.3: pembantu tanggal dan hari lewat; minggu dimulai Senin",
+  "tambah_hari": [
+    { "input": ["2026-11-30", 1], "expected": "2026-12-01" },
+    { "input": ["2026-12-31", 1], "expected": "2027-01-01" },
+    { "input": ["2028-02-28", 1], "expected": "2028-02-29" },
+    { "input": ["2026-03-01", -1], "expected": "2026-02-28" }
+  ],
+  "selisih_hari": [
+    { "input": ["2026-11-18", "2026-11-25"], "expected": 7 },
+    { "input": ["2026-11-25", "2026-11-18"], "expected": -7 },
+    { "input": ["2026-12-31", "2027-01-01"], "expected": 1 }
+  ],
+  "hari_iso": [
+    { "input": "2026-11-16", "expected": 1 },
+    { "input": "2026-11-18", "expected": 3 },
+    { "input": "2026-11-22", "expected": 7 }
+  ],
+  "awal_minggu": [
+    { "input": "2026-11-18", "expected": "2026-11-16" },
+    { "input": "2026-11-22", "expected": "2026-11-16" },
+    { "input": "2026-11-16", "expected": "2026-11-16" }
+  ],
+  "hari_lewat": [
+    { "today": "2026-11-18", "input": "2026-11-17", "expected": true },
+    { "today": "2026-11-18", "input": "2026-11-18", "expected": false },
+    { "today": "2026-11-18", "input": "2026-11-19", "expected": false }
+  ],
+  "hari_ini_terjaga": [
+    { "nama": "zona digeser ke barat tidak membuat mundur", "input": ["2026-11-17", "2026-11-18"], "expected": "2026-11-18" },
+    { "nama": "hari baru maju", "input": ["2026-11-19", "2026-11-18"], "expected": "2026-11-19" },
+    { "nama": "tanpa nilai tersimpan", "input": ["2026-11-18", null], "expected": "2026-11-18" }
+  ]
+}

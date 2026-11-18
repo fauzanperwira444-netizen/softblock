@@ -1,0 +1,93 @@
+{
+  "aturan": "status_projek",
+  "sumber": "Spesifikasi 2.2 dan A-03; hanya task aktif yang membedakan melewati jadwal dan selesai",
+  "kasus": [
+    {
+      "nama": "tanpa sesi",
+      "today": "2026-11-18",
+      "input": { "projek": { "batal": false }, "sesi": [], "tasks": [] },
+      "expected": "belum_dijadwalkan"
+    },
+    {
+      "nama": "hanya sesi batal dihitung sebagai tanpa sesi",
+      "today": "2026-11-18",
+      "input": { "projek": { "batal": false }, "sesi": [{ "mulai": "2026-11-01", "akhir": "2026-11-30", "batal": true }], "tasks": [] },
+      "expected": "belum_dijadwalkan"
+    },
+    {
+      "nama": "semua sesi belum mulai",
+      "today": "2026-11-18",
+      "input": { "projek": { "batal": false }, "sesi": [{ "mulai": "2026-11-20", "akhir": "2026-11-30", "batal": false }], "tasks": [] },
+      "expected": "belum_mulai"
+    },
+    {
+      "nama": "hari ini di dalam sesi",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": false },
+        "sesi": [
+          { "mulai": "2026-11-01", "akhir": "2026-11-10", "batal": false },
+          { "mulai": "2026-11-15", "akhir": "2026-11-18", "batal": false }
+        ],
+        "tasks": [{ "progress": 3, "batal": false }]
+      },
+      "expected": "berjalan"
+    },
+    {
+      "nama": "di antara dua sesi",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": false },
+        "sesi": [
+          { "mulai": "2026-11-01", "akhir": "2026-11-10", "batal": false },
+          { "mulai": "2026-12-07", "akhir": "2026-12-20", "batal": false }
+        ],
+        "tasks": []
+      },
+      "expected": "jeda"
+    },
+    {
+      "nama": "sesi terakhir lewat dengan task aktif",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": false },
+        "sesi": [{ "mulai": "2026-11-01", "akhir": "2026-11-17", "batal": false }],
+        "tasks": [{ "progress": 10, "batal": false }, { "progress": 6, "batal": false }]
+      },
+      "expected": "melewati_jadwal"
+    },
+    {
+      "nama": "sesi terakhir lewat tanpa task aktif",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": false },
+        "sesi": [{ "mulai": "2026-11-01", "akhir": "2026-11-17", "batal": false }],
+        "tasks": [{ "progress": 10, "batal": false }, { "progress": 4, "batal": true }]
+      },
+      "expected": "selesai"
+    },
+    {
+      "nama": "sesi batal yang sedang berjalan tidak membuat berjalan",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": false },
+        "sesi": [
+          { "mulai": "2026-11-01", "akhir": "2026-11-10", "batal": false },
+          { "mulai": "2026-11-15", "akhir": "2026-11-30", "batal": true }
+        ],
+        "tasks": []
+      },
+      "expected": "selesai"
+    },
+    {
+      "nama": "batal disimpan",
+      "today": "2026-11-18",
+      "input": {
+        "projek": { "batal": true },
+        "sesi": [{ "mulai": "2026-11-01", "akhir": "2026-11-30", "batal": false }],
+        "tasks": [{ "progress": 2, "batal": false }]
+      },
+      "expected": "batal"
+    }
+  ]
+}
