@@ -170,6 +170,9 @@ export function PanelTask({ task, open, onClose }: { task: Task | undefined; ope
               <Button size="sm" icon="check" disabled={!!alasanUbah} onClick={() => void jalankan(() => layanan.ubahProgress(t, PROGRESS_SELESAI))}>
                 Selesai
               </Button>
+              <Button variant="tactile" size="sm" icon="checklist" className="col-span-2 sm:col-span-3" disabled={!!alasanUbah} onClick={() => layanan.tambahKeTodo(t)}>
+                Tambah ke to-do
+              </Button>
             </div>
           )}
           {bisaBuka && (

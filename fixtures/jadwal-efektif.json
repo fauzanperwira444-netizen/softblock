@@ -1,0 +1,30 @@
+{
+  "aturan": "jadwal_efektif",
+  "sumber": "Spesifikasi F-01..F-04: versi berlaku per tanggal, pola mingguan hari ISO, sekali jalan, pengecualian rentang (semua = dinamis)",
+  "data": {
+    "jadwal": [
+      { "id": "j-kuliah", "nama": "Kuliah" },
+      { "id": "j-rapat", "nama": "Rapat" },
+      { "id": "j-futsal", "nama": "Futsal" }
+    ],
+    "versi": [
+      { "id": "v1", "jadwal_id": "j-kuliah", "hari": [1, 3], "mulai_menit": 480, "selesai_menit": 600, "berlaku_mulai": "2026-09-01", "berlaku_akhir": "2026-11-17", "sekali_jalan": false },
+      { "id": "v2", "jadwal_id": "j-kuliah", "hari": [1, 3], "mulai_menit": 540, "selesai_menit": 660, "berlaku_mulai": "2026-11-18", "berlaku_akhir": null, "sekali_jalan": false },
+      { "id": "v3", "jadwal_id": "j-rapat", "hari": [], "mulai_menit": 780, "selesai_menit": 840, "berlaku_mulai": "2026-11-18", "berlaku_akhir": "2026-11-18", "sekali_jalan": true },
+      { "id": "v4", "jadwal_id": "j-futsal", "hari": [5], "mulai_menit": 1140, "selesai_menit": 1260, "berlaku_mulai": "2026-10-01", "berlaku_akhir": null, "sekali_jalan": false }
+    ],
+    "pengecualian": [
+      { "id": "x1", "jadwal_id": "j-futsal", "mulai": "2026-11-20", "akhir": "2026-11-20", "keterangan": "Libur" },
+      { "id": "x2", "jadwal_id": null, "mulai": "2026-12-25", "akhir": "2026-12-26", "keterangan": "Natal" }
+    ]
+  },
+  "kasus": [
+    { "nama": "Senin sebelum versi baru memakai jam lama", "tanggal": "2026-11-16", "expected": [{ "jadwal_id": "j-kuliah", "mulai": 480, "selesai": 600 }] },
+    { "nama": "Rabu memakai versi baru dan sekali jalan di hari yang sama", "tanggal": "2026-11-18", "expected": [{ "jadwal_id": "j-kuliah", "mulai": 540, "selesai": 660 }, { "jadwal_id": "j-rapat", "mulai": 780, "selesai": 840 }] },
+    { "nama": "Selasa tanpa jadwal", "tanggal": "2026-11-17", "expected": [] },
+    { "nama": "Jumat dikecualikan untuk Futsal saja", "tanggal": "2026-11-20", "expected": [] },
+    { "nama": "Jumat berikutnya Futsal kembali", "tanggal": "2026-11-27", "expected": [{ "jadwal_id": "j-futsal", "mulai": 1140, "selesai": 1260 }] },
+    { "nama": "Pengecualian semua mencakup Jadwal apa pun", "tanggal": "2026-12-25", "expected": [] },
+    { "nama": "Sekali jalan tidak berulang", "tanggal": "2026-11-25", "expected": [{ "jadwal_id": "j-kuliah", "mulai": 540, "selesai": 660 }] }
+  ]
+}

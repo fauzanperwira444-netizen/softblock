@@ -74,15 +74,16 @@ export function useMutasiInstan() {
   const mesin = useMesin()
   return useCallback(
     async <K extends NamaTabel>(
-      lokal: { tabel: K; baris: Tabel[K] },
+      /** Baris baru atau hasil ubah; `baris: null` menghapus baris `id` secara instan. */
+      lokal: { tabel: K; id: string; baris: Tabel[K] | null },
       aksi: (revisi: number) => Promise<ResponsMutasi>,
     ): Promise<void> => {
       const revisi = mesin.getState().snapshot?.revisi ?? 0
-      const lama = mesin.ubahLokal(lokal.tabel, lokal.baris)
+      const lama = mesin.ubahLokal(lokal.tabel, lokal.id, lokal.baris)
       try {
         await mesin.terapkanMutasi(await aksi(revisi))
       } catch (e) {
-        mesin.pulihkanLokal(lokal.tabel, lokal.baris.id, lama)
+        mesin.pulihkanLokal(lokal.tabel, lokal.id, lama)
         if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
         throw e
       }

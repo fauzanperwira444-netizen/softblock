@@ -158,11 +158,14 @@ export class MesinSinkron {
    * Pembaruan instan (N-50): ubah baris di snapshot sebelum server menjawab.
    * Mengembalikan baris lama agar bisa dipulihkan bila server menolak.
    */
-  ubahLokal<K extends NamaTabel>(tabel: K, baris: Tabel[K]): Tabel[K] | undefined {
+  ubahLokal<K extends NamaTabel>(tabel: K, id: string, baris: Tabel[K] | null): Tabel[K] | undefined {
     const s = this.state.snapshot
     if (!s) return undefined
-    const lama = s.isi[tabel][baris.id] as Tabel[K] | undefined
-    this.set({ snapshot: { ...s, isi: { ...s.isi, [tabel]: { ...s.isi[tabel], [baris.id]: baris } } } })
+    const lama = s.isi[tabel][id] as Tabel[K] | undefined
+    const isiTabel = { ...s.isi[tabel] } as Record<string, Tabel[K]>
+    if (baris) isiTabel[id] = baris
+    else delete isiTabel[id]
+    this.set({ snapshot: { ...s, isi: { ...s.isi, [tabel]: isiTabel } } })
     return lama
   }
 

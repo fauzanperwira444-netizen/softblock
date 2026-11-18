@@ -1,0 +1,15 @@
+{
+  "aturan": "bentrok_blok_jadwal",
+  "sumber": "Spesifikasi E-04 dan F-08: rentang jam [mulai, selesai), berbatasan tidak bentrok",
+  "jadwal": {
+    "jadwal": [{ "id": "j-kuliah", "nama": "Kuliah" }],
+    "versi": [{ "id": "v1", "jadwal_id": "j-kuliah", "hari": [3], "mulai_menit": 480, "selesai_menit": 600, "berlaku_mulai": "2026-11-01", "berlaku_akhir": null, "sekali_jalan": false }],
+    "pengecualian": []
+  },
+  "kasus": [
+    { "nama": "blok menimpa jam kuliah", "blok": { "tanggal": "2026-11-18", "mulai_menit": 570, "selesai_menit": 630 }, "expected": "j-kuliah" },
+    { "nama": "blok tepat setelah kuliah selesai", "blok": { "tanggal": "2026-11-18", "mulai_menit": 600, "selesai_menit": 660 }, "expected": null },
+    { "nama": "blok berakhir tepat saat kuliah mulai", "blok": { "tanggal": "2026-11-18", "mulai_menit": 420, "selesai_menit": 480 }, "expected": null },
+    { "nama": "hari lain tanpa kuliah", "blok": { "tanggal": "2026-11-19", "mulai_menit": 480, "selesai_menit": 600 }, "expected": null }
+  ]
+}

@@ -90,6 +90,7 @@ export function buatSeed(hariIni: Tanggal): IsiSeed {
     { id: 'e-2', versi: v, task_id: 't-4', tanggal: h(0), ceklis: false },
     { id: 'e-3', versi: v, task_id: 't-7', tanggal: h(0), ceklis: true },
     { id: 'e-4', versi: v, task_id: 't-2', tanggal: h(-1), ceklis: false },
+    { id: 'e-5', versi: v, task_id: 't-8', tanggal: h(-2), ceklis: false },
   ]
 
   const blok_jam: Tabel['blok_jam'][] = [

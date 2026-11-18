@@ -166,6 +166,11 @@ export function BarisTask({ task, onPilihLabel }: Props) {
           />
           <div className="flex items-center gap-2">
             {aktif && (
+              <Button variant="tactile" size="sm" icon="checklist" disabled={!!alasanUbah} title={alasanUbah ?? undefined} onClick={() => layanan.tambahKeTodo(task)}>
+                To-do
+              </Button>
+            )}
+            {aktif && (
               <Button
                 variant="sage"
                 size="sm"

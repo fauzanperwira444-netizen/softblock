@@ -9,6 +9,8 @@ import { dampakTask, infoLabel, namaBentrokBukaKembali, progressSebelumSelesai }
 import type { Task } from '../../domain/tipe'
 import { galatForm } from '../formGalat'
 import { HeavyConfirmDialog, LightConfirmDialog } from '../overlay/ConfirmDialog'
+import { FormBlok, type AwalFormBlok } from '../todo/FormBlok'
+import { PilihHari } from '../todo/PilihHari'
 import { FormBukaKembali } from './FormBukaKembali'
 import { FormPindah } from './FormPindah'
 import { FormProgress } from './FormProgress'
@@ -31,6 +33,9 @@ type LayananTaskValue = {
   ubahProgress: (task: Task, nilai: number, catatan?: string) => Promise<void>
   mintaBatal: (task: Task) => void
   bukaKembali: (task: Task) => Promise<void>
+  /** Pilihan hari untuk menambah task ke to-do (E-02). */
+  tambahKeTodo: (task: Task) => void
+  bukaFormBlok: (awal: AwalFormBlok) => void
 }
 
 const LayananContext = createContext<LayananTaskValue | null>(null)
@@ -54,6 +59,8 @@ export function LayananTask({ children }: { children: ReactNode }) {
   const [formProgress, setFormProgress] = useState<Task | null>(null)
   const [formPindah, setFormPindah] = useState<Task | null>(null)
   const [formBuka, setFormBuka] = useState<Task | null>(null)
+  const [pilihHari, setPilihHari] = useState<Task | null>(null)
+  const [formBlok, setFormBlok] = useState<AwalFormBlok | null>(null)
   const [konfirmasiBatal, setKonfirmasiBatal] = useState<Task | null>(null)
   const [penutupan, setPenutupan] = useState<Penutupan | null>(null)
   const [proses, setProses] = useState(false)
@@ -82,7 +89,7 @@ export function LayananTask({ children }: { children: ReactNode }) {
 
   const kirimProgress = useCallback(
     async (task: Task, nilai: number, catatan: string, dampak: ReturnType<typeof dampakTask>) => {
-      await mutasiInstan({ tabel: 'task', baris: { ...task, progress: nilai } }, (v) => taskApi.progress(v, task.id, nilai, catatan, dampak))
+      await mutasiInstan({ tabel: 'task', id: task.id, baris: { ...task, progress: nilai } }, (v) => taskApi.progress(v, task.id, nilai, catatan, dampak))
     },
     [mutasiInstan],
   )
@@ -119,7 +126,7 @@ export function LayananTask({ children }: { children: ReactNode }) {
         return
       }
       const kembali = progressSebelumSelesai(data.riwayat, task.id)
-      await mutasiInstan({ tabel: 'task', baris: { ...task, progress: kembali } }, (v) => taskApi.bukaKembali(v, task.id, null))
+      await mutasiInstan({ tabel: 'task', id: task.id, baris: { ...task, progress: kembali } }, (v) => taskApi.bukaKembali(v, task.id, null))
     },
     [data, mutasiInstan],
   )
@@ -165,6 +172,8 @@ export function LayananTask({ children }: { children: ReactNode }) {
       ubahProgress,
       mintaBatal,
       bukaKembali,
+      tambahKeTodo: setPilihHari,
+      bukaFormBlok: setFormBlok,
     }),
     [bukaDetail, ubahProgress, mintaBatal, bukaKembali],
   )
@@ -181,6 +190,8 @@ export function LayananTask({ children }: { children: ReactNode }) {
       <FormProgress task={formProgress} onClose={() => setFormProgress(null)} />
       <FormPindah task={formPindah} onClose={() => setFormPindah(null)} />
       <FormBukaKembali task={formBuka} onClose={() => setFormBuka(null)} />
+      <PilihHari task={pilihHari} onClose={() => setPilihHari(null)} />
+      <FormBlok awal={formBlok} onClose={() => setFormBlok(null)} />
 
       <LightConfirmDialog
         open={!!konfirmasiBatal}
