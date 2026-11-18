@@ -11,6 +11,8 @@
     "lint:web": "pnpm --filter web lint",
     "typecheck:web": "pnpm --filter web typecheck",
     "test:web": "pnpm --filter web test",
-    "e2e:web": "pnpm --filter web e2e"
+    "e2e:web": "pnpm --filter web e2e",
+    "test:api": "cd apps/api && composer test",
+    "analyse:api": "cd apps/api && composer analyse"
   }
 }

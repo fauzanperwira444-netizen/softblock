@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\SinkronController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,8 @@ Route::get('/kesehatan/siap', function () {
     DB::select('select 1');
 
     return response()->json(['status' => 'siap', 'build' => config('app.build')]);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/sinkron', SinkronController::class);
 });
