@@ -1,0 +1,15 @@
+{
+  "name": "Softblock",
+  "short_name": "Softblock",
+  "description": "Perencana task, to-do harian, dan blok jam.",
+  "lang": "id",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fafa",
+  "theme_color": "#406653",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

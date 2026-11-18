@@ -10,6 +10,7 @@
     "build:web": "pnpm --filter web build",
     "lint:web": "pnpm --filter web lint",
     "typecheck:web": "pnpm --filter web typecheck",
-    "test:web": "pnpm --filter web test"
+    "test:web": "pnpm --filter web test",
+    "e2e:web": "pnpm --filter web e2e"
   }
 }

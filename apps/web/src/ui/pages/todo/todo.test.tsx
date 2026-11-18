@@ -74,4 +74,31 @@ describe('To-do', () => {
     await router.navigate('/todo')
     expect(await screen.findByRole('button', { name: 'Beli tinta printer' })).toBeInTheDocument()
   })
+
+  test('panel penyusunan: tambah banyak task ke satu hari lalu taruh blok jam', async () => {
+    const { user } = await masukLalu('/todo')
+    await user.click(await screen.findByRole('button', { name: 'Susun to-do' }))
+    const panel = await screen.findByRole('dialog', { name: 'Susun to-do' })
+
+    const hari = within(panel).getAllByRole('button', { pressed: false }).filter((b) => /entri$/.test(b.getAttribute('aria-label') ?? ''))
+    const besok = hari[0]
+    if (!besok) throw new Error('hari besok tidak ada')
+    await user.click(besok)
+
+    const belum = within(panel).getByRole('region', { name: /^Belum ada di/ })
+    const centang = within(belum).getAllByRole('checkbox').slice(0, 2)
+    const nama = centang.map((c) => c.closest('label')?.querySelector('.font-semibold')?.textContent ?? '')
+    for (const c of centang) await user.click(c)
+    await user.click(within(panel).getByRole('button', { name: /^Tambahkan 2 task ke/ }))
+
+    const sudah = within(panel).getByRole('region', { name: /^Sudah ada/ })
+    expect(await within(panel).findByText(/^2 task ditambahkan ke/)).toBeInTheDocument()
+    const baris = within(sudah).getByText(nama[0] ?? '').closest('li')
+    if (!baris) throw new Error('baris entri tidak ada')
+    await user.click(within(baris).getByRole('button', { name: /Beri jam|Tambah blok/ }))
+    await user.selectOptions(within(panel).getByLabelText(/^Mulai blok/), '21.00')
+    await user.click(within(panel).getByRole('button', { name: 'Taruh blok' }))
+    expect(await within(panel).findByText(/Blok 21\.00–22\.00 untuk/)).toBeInTheDocument()
+    expect(within(baris).getByText('21.00–22.00')).toBeInTheDocument()
+  })
 })

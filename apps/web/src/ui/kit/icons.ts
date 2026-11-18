@@ -70,6 +70,10 @@ import createNewFolder from '@material-symbols/svg-400/outlined/create_new_folde
 import folderOff from '@material-symbols/svg-400/outlined/folder_off.svg?raw'
 import playArrow from '@material-symbols/svg-400/outlined/play_arrow.svg?raw'
 import pause from '@material-symbols/svg-400/outlined/pause.svg?raw'
+import monitoring from '@material-symbols/svg-400/outlined/monitoring.svg?raw'
+import hourglassEmpty from '@material-symbols/svg-400/outlined/hourglass_empty.svg?raw'
+import playlistAdd from '@material-symbols/svg-400/outlined/playlist_add.svg?raw'
+import installDesktop from '@material-symbols/svg-400/outlined/install_desktop.svg?raw'
 
 // Ikon diimpor per berkas agar bundel hanya memuat glyph yang dipakai (font ikon penuh ~4 MB).
 const raw = {
@@ -145,6 +149,10 @@ const raw = {
   folder_off: folderOff,
   play_arrow: playArrow,
   pause,
+  monitoring,
+  hourglass_empty: hourglassEmpty,
+  playlist_add: playlistAdd,
+  install_desktop: installDesktop,
 } as const
 
 export type IconName = keyof typeof raw

@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
 import { MODE_MOCK } from './api/mode'
 import { AuthProvider } from './app/auth'
+import { daftarkanServiceWorker } from './app/pwa'
 import { buatRouter } from './app/router'
 import './index.css'
 
@@ -30,3 +31,4 @@ async function mulai() {
 }
 
 void mulai()
+daftarkanServiceWorker()

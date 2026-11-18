@@ -15,6 +15,9 @@ type AuthValue = {
   alasanTamu: 'keluar' | 'sesi_habis' | null
   /** Dipanggil lapisan data saat server menjawab 401 sesi_habis. */
   tandaiSesiHabis: () => void
+  /** Sesi habis saat formulir terbuka: dialog login ulang tampil di atasnya (U-13). */
+  loginUlang: boolean
+  masukUlang: (password: string) => Promise<void>
   muatUlang: () => void
   masuk: (email: string, password: string) => Promise<void>
   daftar: (data: { email: string; password: string; nama_tampil: string }) => Promise<void>
@@ -31,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [galat, setGalat] = useState<ApiError | null>(null)
   const [percobaan, setPercobaan] = useState(0)
   const [alasanTamu, setAlasanTamu] = useState<AuthValue['alasanTamu']>(null)
+  const [loginUlang, setLoginUlang] = useState(false)
 
   useEffect(() => {
     let batal = false
@@ -59,10 +63,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAkun(a)
     setGalat(null)
     setAlasanTamu(null)
+    setLoginUlang(false)
     setStatus('masuk')
   }, [])
 
   const tandaiSesiHabis = useCallback(() => {
+    // Formulir dan panel memakai <dialog> native; bila ada yang terbuka, isiannya dijaga (7.5).
+    if (document.querySelector('dialog[open]')) {
+      setLoginUlang(true)
+      return
+    }
     setAkun(null)
     setAlasanTamu('sesi_habis')
     setStatus('tamu')
@@ -75,6 +85,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       galat,
       alasanTamu,
       tandaiSesiHabis,
+      loginUlang,
+      masukUlang: async (password) => {
+        if (!akun) return
+        masukSebagai(await akunApi.masuk(akun.email, password))
+      },
       muatUlang: () => {
         setStatus('memuat')
         setPercobaan((n) => n + 1)
@@ -90,16 +105,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         window.location.assign(GOOGLE_REDIRECT)
       },
       keluar: async () => {
-        await akunApi.keluar()
+        // Sesi yang sudah habis tidak perlu diakhiri lagi di server.
+        await akunApi.keluar().catch((e: unknown) => {
+          if (!(e instanceof ApiError && e.kode === 'sesi_habis')) throw e
+        })
         // Snapshot offline dan draf ikut dihapus saat keluar (N-60).
         if (akun) await lupakanPemilikPerangkat(akun.id, penyimpananIdb).catch(() => undefined)
         setAkun(null)
         setAlasanTamu('keluar')
+        setLoginUlang(false)
         setStatus('tamu')
       },
       perbarui: setAkun,
     }),
-    [status, akun, galat, alasanTamu, masukSebagai, tandaiSesiHabis],
+    [status, akun, galat, alasanTamu, loginUlang, masukSebagai, tandaiSesiHabis],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

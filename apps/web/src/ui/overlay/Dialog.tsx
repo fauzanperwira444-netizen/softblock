@@ -9,7 +9,7 @@ import type { IconName } from '../kit/icons'
   <dialog> native dengan showModal(): fokus terkurung, latar inert, Esc menutup lapisan teratas (J-06).
   Gerak masuk dan keluar dijalankan motion pada elemen dialog sebelum close().
 */
-type Kind = 'form' | 'confirm' | 'panel'
+type Kind = 'form' | 'confirm' | 'panel' | 'penuh'
 
 const kindStyles: Record<Kind, string> = {
   // Formulir: sheet dari bawah di HP, dialog tengah di laptop.
@@ -17,6 +17,8 @@ const kindStyles: Record<Kind, string> = {
   confirm: 'm-auto w-[calc(100%-2rem)] max-w-[460px] rounded-card max-h-[90dvh]',
   // Panel: layar penuh di HP, panel samping kanan di laptop.
   panel: 'm-0 h-dvh max-h-none w-full max-w-none md:ml-auto md:w-[30rem] md:rounded-l-card',
+  // Panel penyusunan (E-03) menimpa halaman di semua lebar layar.
+  penuh: 'm-0 h-dvh max-h-none w-full max-w-none',
 }
 
 type Motion = { from: DOMKeyframesDefinition; to: DOMKeyframesDefinition; out: DOMKeyframesDefinition; enter: Transition }
@@ -27,6 +29,9 @@ function gerak(kind: Kind): Motion {
     return lebar
       ? { from: { x: '100%' }, to: { x: '0%' }, out: { x: '100%' }, enter: SPRING_SOFT }
       : { from: { y: 24, opacity: 0 }, to: { y: 0, opacity: 1 }, out: { y: 24, opacity: 0 }, enter: { duration: DUR.slow, ease: EASE_OUT } }
+  }
+  if (kind === 'penuh') {
+    return { from: { opacity: 0, scale: 0.985 }, to: { opacity: 1, scale: 1 }, out: { opacity: 0, scale: 0.985 }, enter: { duration: DUR.slow, ease: EASE_OUT } }
   }
   if (kind === 'form' && !lebar) {
     return { from: { y: '100%' }, to: { y: '0%' }, out: { y: '100%' }, enter: SPRING_SOFT }

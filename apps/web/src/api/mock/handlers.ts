@@ -1,6 +1,7 @@
 import { http, HttpResponse, delay } from 'msw'
 import type { Akun } from '../akun'
 import { PASSWORD_MAX, PASSWORD_MIN } from '../akun'
+import { hitungPolaKerja } from '../../domain/polaKerja'
 import { waktuLokal } from '../../domain/tanggal'
 import { AKUN_CONTOH } from './seed'
 import { dbAkun, resetDb, responsSinkron } from './db'
@@ -21,6 +22,11 @@ function simulasiJaringan(): SimulasiJaringan {
   } catch {
     return 'normal'
   }
+}
+
+/** Simulasi "Klien usang" juga berlaku untuk aksi pengubah, agar bilah versi baru bisa dicoba dari aksi. */
+export function klienUsang(): boolean {
+  return simulasiJaringan() === 'usang'
 }
 
 /*
@@ -139,6 +145,23 @@ export const handlers = [
     const sejak = Number(new URL(request.url).searchParams.get('sejak') ?? '0')
     const db = dbAkun(akun.id, akun.zona_waktu, AKUN_BERDATA.has(akun.email))
     return HttpResponse.json(responsSinkron(db, sejak, { hari_ini: hariIni, zona_waktu: akun.zona_waktu }))
+  }),
+
+  http.get('/api/pola-kerja', async ({ request }) => {
+    await delay(450)
+    if (simulasiJaringan() === 'mati') return HttpResponse.error()
+    const akun = aktif(baca())
+    if (!akun) return galat(401, 'sesi_habis', 'Sesi habis. Masuk lagi.')
+    const url = new URL(request.url)
+    const dari = url.searchParams.get('dari') ?? ''
+    const sampai = url.searchParams.get('sampai') ?? ''
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dari) || !/^\d{4}-\d{2}-\d{2}$/.test(sampai) || dari > sampai) {
+      return galat(422, 'validasi_gagal', 'Rentang tanggal tidak valid.')
+    }
+    const hariIni = waktuLokal(new Date(), akun.zona_waktu).tanggal
+    const db = dbAkun(akun.id, akun.zona_waktu, AKUN_BERDATA.has(akun.email))
+    const isi = { task: Object.values(db.isi.task), riwayat: Object.values(db.isi.riwayat_progress), entri: Object.values(db.isi.entri_todo) }
+    return HttpResponse.json(hitungPolaKerja(isi, dari, sampai < hariIni ? sampai : hariIni, hariIni))
   }),
 
   http.get('/api/akun', async () => {

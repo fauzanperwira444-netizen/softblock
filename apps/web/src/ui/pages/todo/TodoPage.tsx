@@ -77,9 +77,14 @@ export function TodoPage() {
       title="To-do"
       subtitle="Pilih task untuk tiap hari, lalu beri blok jam di antara Jadwal tetapmu."
       actions={
-        <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
-          Tambah task
-        </Button>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button variant="tactile" icon="playlist_add" onClick={() => layanan.bukaSusun({ tanggal: waktu.hariIni })}>
+            Susun to-do
+          </Button>
+          <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
+            Tambah task
+          </Button>
+        </div>
       }
     >
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">

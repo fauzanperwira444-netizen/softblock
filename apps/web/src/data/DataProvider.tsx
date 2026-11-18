@@ -59,6 +59,7 @@ export function useMutasi() {
         return hasil
       } catch (e) {
         if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
+        mesin.laporGalatAksi(e)
         throw e
       }
     },
@@ -85,6 +86,7 @@ export function useMutasiInstan() {
       } catch (e) {
         mesin.pulihkanLokal(lokal.tabel, lokal.id, lama)
         if (e instanceof ApiError && (e.kode === 'versi_konflik' || e.kode === 'dampak_berubah')) await mesin.sinkronDiam()
+        mesin.laporGalatAksi(e)
         throw e
       }
     },

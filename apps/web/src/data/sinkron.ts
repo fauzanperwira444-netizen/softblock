@@ -178,6 +178,13 @@ export class MesinSinkron {
     this.set({ snapshot: { ...s, isi: { ...s.isi, [tabel]: isiTabel } } })
   }
 
+  /** Galat aksi yang berlaku untuk seluruh aplikasi: sesi habis (U-13) dan klien usang (bilah versi baru). */
+  laporGalatAksi(e: unknown) {
+    if (!(e instanceof ApiError)) return
+    if (e.kode === 'sesi_habis') this.opsi.onSesiHabis()
+    if (e.kode === 'klien_usang') this.set({ koneksi: 'usang', galat: null })
+  }
+
   /** Tarik delta tanpa mengubah bilah status; dipakai setelah 409 atau mutasi yang melompati revisi. */
   async sinkronDiam() {
     try {

@@ -66,6 +66,34 @@ export const penyimpananIdb: Penyimpanan = {
   },
 }
 
+/** Draf formulir sebelum pengalihan ke Google untuk login ulang (DA-10); hanya di perangkat. */
+export async function simpanDraf(akunId: string, draf: Record<string, unknown>): Promise<void> {
+  const db = await buka(akunId)
+  try {
+    const tx = db.transaction(STORE_DRAF, 'readwrite')
+    for (const [kunci, nilai] of Object.entries(draf)) await tx.store.put(nilai, kunci)
+    await tx.done
+  } finally {
+    db.close()
+  }
+}
+
+/** Mengambil lalu menghapus semua draf: draf hanya dipulihkan sekali (N-60). */
+export async function ambilDraf(akunId: string): Promise<Record<string, unknown>> {
+  const db = await buka(akunId)
+  try {
+    const tx = db.transaction(STORE_DRAF, 'readwrite')
+    const kunci = (await tx.store.getAllKeys()) as string[]
+    const hasil: Record<string, unknown> = {}
+    for (const k of kunci) hasil[k] = await tx.store.get(k)
+    await tx.store.clear()
+    await tx.done
+    return hasil
+  } finally {
+    db.close()
+  }
+}
+
 /** Pengganti IndexedDB untuk tes. */
 export function penyimpananMemori(): Penyimpanan & { isi: Map<string, Snapshot> } {
   const isi = new Map<string, Snapshot>()

@@ -4,7 +4,7 @@ import { waktuLokal } from '../../domain/tanggal'
 import { validasiBlok, type DataJadwal } from '../../domain/todo'
 import type { BlokJam, EntriTodo } from '../../domain/tipe'
 import { galatMock, transaksi, type Transaksi } from './db'
-import { AKUN_BERDATA, penggunaAktif } from './handlers'
+import { AKUN_BERDATA, klienUsang, penggunaAktif } from './handlers'
 
 /* Handler modul To-do untuk mode mock: entri, ceklis, dan blok jam (E-01..E-10). */
 
@@ -52,6 +52,7 @@ function ubah(kerja: (c: Ctx) => { id?: string } | void) {
     await delay(200)
     const akun = penggunaAktif()
     if (!akun) return HttpResponse.json({ kode: 'sesi_habis', pesan: 'Sesi habis. Masuk lagi.' }, { status: 401 })
+    if (klienUsang()) return HttpResponse.json({ kode: 'klien_usang', pesan: 'Ada versi baru aplikasi.' }, { status: 409 })
     const body = (await request.json().catch(() => ({}))) as Json
     const { tanggal } = waktuLokal(new Date(), akun.zona_waktu)
     const p = Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)]))

@@ -101,6 +101,9 @@ export function TaskPage() {
           <Button variant="tactile" icon="sell" onClick={() => setLabelBuka(true)}>
             Kelola label
           </Button>
+          <Button variant="tactile" icon="playlist_add" onClick={() => waktu && layanan.bukaSusun({ tanggal: waktu.hariIni })}>
+            Susun to-do
+          </Button>
           <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
             Tambah task
           </Button>

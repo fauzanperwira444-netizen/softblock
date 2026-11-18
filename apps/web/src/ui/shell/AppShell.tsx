@@ -8,6 +8,7 @@ import { SPRING_SOFT } from '../motion'
 import { BrandMark } from './Brand'
 import { NAV_UTAMA } from './nav'
 import { LayananTask } from '../task/LayananTask'
+import { DialogLoginUlang } from './DialogLoginUlang'
 import { GerbangData } from './GerbangData'
 import { StatusBar } from './StatusBar'
 import { SyncPill } from './SyncPill'
@@ -214,6 +215,7 @@ export function AppShell() {
         </main>
       </div>
       <BottomNav />
+      <DialogLoginUlang />
       <ScrollRestoration />
     </div>
   )

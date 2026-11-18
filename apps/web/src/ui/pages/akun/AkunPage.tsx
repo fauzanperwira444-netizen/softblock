@@ -11,6 +11,7 @@ import { SPRING_SNAPPY } from '../../motion'
 import { LightConfirmDialog } from '../../overlay/ConfirmDialog'
 import { galatForm, TANPA_GALAT, type FormGalat } from '../../formGalat'
 import { Page } from '../../shell/Page'
+import { usePasangAplikasi } from '../../../app/pwa'
 import { usePageTitle } from '../../usePageTitle'
 import { GoogleMark } from '../auth/AuthLayout'
 
@@ -355,6 +356,26 @@ function BannerGoogle() {
   )
 }
 
+/** Pemasangan PWA hanya ditawarkan bila browser mendukung dan aplikasi belum terpasang. */
+function KartuPasang() {
+  const { bisa, pasang } = usePasangAplikasi()
+  const judulId = useId()
+  if (!bisa) return null
+  return (
+    <Card aria-labelledby={judulId} className="flex flex-col gap-4">
+      <CardTitle icon="install_desktop" id={judulId}>
+        Pasang aplikasi
+      </CardTitle>
+      <p className="text-ink-muted">Buka Softblock dari layar utama atau menu aplikasi, termasuk saat offline dengan data terakhir.</p>
+      <div>
+        <Button variant="tactile" icon="install_desktop" onClick={() => void pasang()}>
+          Pasang Softblock
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
 export function AkunPage() {
   usePageTitle('Akun')
   const { akun } = useAuth()
@@ -370,6 +391,7 @@ export function AkunPage() {
         </div>
         <div className="flex flex-col gap-6">
           <FormPassword akun={akun} />
+          <KartuPasang />
           <KartuKeluar />
         </div>
       </div>

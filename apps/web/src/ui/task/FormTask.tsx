@@ -20,12 +20,16 @@ import { SegmentedControl } from '../kit/controls'
 import { Alert, Badge } from '../kit/display'
 import { SelectField, TextareaField, TextField } from '../kit/fields'
 import { formatRentang, formatTanggal } from '../format'
+import { useDaftarDraf } from '../drafFormulir'
 import { TANPA_GALAT } from '../formGalat'
 import { BannerKonflik, KakiForm, useKirimForm } from '../formUmum'
 import { SPRING_SOFT } from '../motion'
 import { Dialog } from '../overlay/Dialog'
 
-export type AwalFormTask = { mode: 'buat'; sesiId?: string; labelId?: string } | { mode: 'ubah'; task: Task }
+/** Isian yang disimpan sebelum login ulang lewat Google lalu dipulihkan (DA-10). */
+export type DrafFormTask = { isian: IsianTask; jenis: 'sesi' | 'mandiri'; sesiId: string; labelId: string | null; labelBaru: string }
+
+export type AwalFormTask = ({ mode: 'buat'; sesiId?: string; labelId?: string } | { mode: 'ubah'; task: Task }) & { draf?: DrafFormTask }
 
 export function menitKeJam(m: number | null): string {
   return m === null ? '' : `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`
@@ -107,8 +111,17 @@ export function FormTask({ awal, onClose }: { awal: AwalFormTask | null; onClose
       setLabelBaru('')
       setGalat(TANPA_GALAT)
       setKonflik(false)
+      if (awal.draf) {
+        setIsian(awal.draf.isian)
+        setJenis(awal.draf.jenis)
+        setSesiId(awal.draf.sesiId)
+        setLabelId(awal.draf.labelId)
+        setLabelBaru(awal.draf.labelBaru)
+      }
     }
   }
+
+  useDaftarDraf('form-task', !!awal, () => ({ awal: awal && { ...awal, draf: undefined }, draf: { isian, jenis, sesiId, labelId, labelBaru } satisfies DrafFormTask }))
 
   const sesiDipilih = pilihanSesi.find((x) => x.sesi.id === sesiId)?.sesi
   const ganti = <K extends keyof IsianTask>(k: K, v: IsianTask[K]) => setIsian((s) => ({ ...s, [k]: v }))

@@ -1,6 +1,9 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router'
+import { MODE_MOCK } from '../../api/mode'
 import { taskApi } from '../../api/task'
+import { useAuth } from '../../app/auth'
+import { ambilDraf } from '../../data/penyimpanan'
 import { useMutasi, useMutasiInstan } from '../../data/DataProvider'
 import { useDataProjek } from '../../data/pilih'
 import { useWaktu } from '../../data/useWaktu'
@@ -13,11 +16,12 @@ import { FormJadwal, type AwalFormJadwal } from '../kalender/FormJadwal'
 import { PanelHari } from '../kalender/PanelHari'
 import { PilihSlot } from '../kalender/PilihSlot'
 import { FormBlok, type AwalFormBlok } from '../todo/FormBlok'
+import { PanelSusun, type AwalSusun } from '../todo/PanelSusun'
 import { PilihHari } from '../todo/PilihHari'
 import { FormBukaKembali } from './FormBukaKembali'
 import { FormPindah } from './FormPindah'
 import { FormProgress } from './FormProgress'
-import { FormTask, type AwalFormTask } from './FormTask'
+import { FormTask, type AwalFormTask, type DrafFormTask } from './FormTask'
 import { PanelTask } from './PanelTask'
 
 /*
@@ -42,6 +46,8 @@ type LayananTaskValue = {
   /** Panel hari (P-02), dari Kalender dan kalender mini Dashboard. */
   bukaHari: (tanggal: string) => void
   bukaFormJadwal: (awal: AwalFormJadwal) => void
+  /** Panel penyusunan (P-03), dari To-do dan Daftar Task. */
+  bukaSusun: (awal: AwalSusun) => void
 }
 
 const LayananContext = createContext<LayananTaskValue | null>(null)
@@ -71,12 +77,29 @@ export function LayananTask({ children }: { children: ReactNode }) {
   const [hariAsal, setHariAsal] = useState<string | null>(null)
   const [slot, setSlot] = useState<{ tanggal: string; mulai: number } | null>(null)
   const [formJadwal, setFormJadwal] = useState<AwalFormJadwal | null>(null)
+  const [susun, setSusun] = useState<AwalSusun | null>(null)
   const [konfirmasiBatal, setKonfirmasiBatal] = useState<Task | null>(null)
   const [penutupan, setPenutupan] = useState<Penutupan | null>(null)
   const [proses, setProses] = useState(false)
   const [galat, setGalat] = useState<string>()
 
   const taskId = params.get('task')
+  const akunId = useAuth().akun?.id
+
+  // Kembali dari login ulang lewat Google: buka lagi formulir dengan isian yang disimpan (DA-10).
+  useEffect(() => {
+    if (MODE_MOCK || !akunId) return
+    let batal = false
+    ambilDraf(akunId)
+      .then((d) => {
+        const simpanan = d['form-task'] as { awal: AwalFormTask | null; draf: DrafFormTask } | undefined
+        if (!batal && simpanan?.awal) setFormTask({ ...simpanan.awal, draf: simpanan.draf })
+      })
+      .catch(() => undefined)
+    return () => {
+      batal = true
+    }
+  }, [akunId])
 
   const bukaDetail = useCallback(
     (id: string) => {
@@ -191,6 +214,7 @@ export function LayananTask({ children }: { children: ReactNode }) {
       bukaFormBlok: setFormBlok,
       bukaHari: setHari,
       bukaFormJadwal: setFormJadwal,
+      bukaSusun: setSusun,
     }),
     [bukaDetail, ubahProgress, mintaBatal, bukaKembali],
   )
@@ -244,6 +268,7 @@ export function LayananTask({ children }: { children: ReactNode }) {
           setFormBlok({ entri, mulai })
         }}
       />
+      <PanelSusun awal={susun} onClose={() => setSusun(null)} />
       <FormJadwal awal={formJadwal} onClose={() => setFormJadwal(null)} />
       <FormTask awal={formTask} onClose={() => setFormTask(null)} />
       <FormProgress task={formProgress} onClose={() => setFormProgress(null)} />

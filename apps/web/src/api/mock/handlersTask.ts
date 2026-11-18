@@ -17,7 +17,7 @@ import {
 import { waktuLokal } from '../../domain/tanggal'
 import type { Task } from '../../domain/tipe'
 import { galatMock, transaksi, type Transaksi } from './db'
-import { AKUN_BERDATA, penggunaAktif } from './handlers'
+import { AKUN_BERDATA, klienUsang, penggunaAktif } from './handlers'
 
 /* Handler modul Task untuk mode mock, memakai aturan domain TS yang sama (pengganti domain PHP). */
 
@@ -88,6 +88,7 @@ function ubah(kerja: (c: Ctx) => { id?: string } | void) {
     await delay(250)
     const akun = penggunaAktif()
     if (!akun) return HttpResponse.json({ kode: 'sesi_habis', pesan: 'Sesi habis. Masuk lagi.' }, { status: 401 })
+    if (klienUsang()) return HttpResponse.json({ kode: 'klien_usang', pesan: 'Ada versi baru aplikasi.' }, { status: 409 })
     const body = (await request.json().catch(() => ({}))) as Json
     const { tanggal, menit } = waktuLokal(new Date(), akun.zona_waktu)
     const p = Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)]))
