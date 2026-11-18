@@ -4,23 +4,14 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\PengirimEmail;
+use App\Support\PengirimEmailMail;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+final class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
-    }
+    /** @var array<class-string, class-string> */
+    public array $bindings = [
+        PengirimEmail::class => PengirimEmailMail::class,
+    ];
 }

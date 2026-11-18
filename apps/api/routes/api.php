@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Akun\AkunController;
+use App\Http\Controllers\Akun\AuthController;
 use App\Http\Controllers\SinkronController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,19 @@ Route::get('/kesehatan/siap', function () {
     return response()->json(['status' => 'siap', 'build' => config('app.build')]);
 });
 
+// N-24: endpoint publik hanya auth.
+Route::prefix('auth')->controller(AuthController::class)->group(function () {
+    Route::post('/daftar', 'daftar');
+    Route::post('/masuk', 'masuk');
+    Route::post('/keluar', 'keluar');
+    Route::post('/lupa-password', 'lupaPassword');
+    Route::post('/reset-password', 'resetPassword');
+});
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/akun', [AkunController::class, 'tampil']);
+    Route::patch('/akun', [AkunController::class, 'ubah']);
+    Route::put('/akun/password', [AkunController::class, 'gantiPassword']);
+
     Route::get('/sinkron', SinkronController::class);
 });
