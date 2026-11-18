@@ -17,8 +17,9 @@ export const NAMA_TAMPIL_MAX = 45
 export const akunApi = {
   saya: () => request<Akun>('GET', '/api/akun'),
   masuk: (email: string, password: string) => request<Akun>('POST', '/api/auth/masuk', { email, password }),
+  // U-14: zona waktu akun diambil dari browser saat mendaftar.
   daftar: (data: { email: string; password: string; nama_tampil: string }) =>
-    request<Akun>('POST', '/api/auth/daftar', data),
+    request<Akun>('POST', '/api/auth/daftar', { ...data, zona_waktu: Intl.DateTimeFormat().resolvedOptions().timeZone }),
   keluar: () => request<void>('POST', '/api/auth/keluar'),
   lupaPassword: (email: string) => request<void>('POST', '/api/auth/lupa-password', { email }),
   resetPassword: (token: string, password: string) =>

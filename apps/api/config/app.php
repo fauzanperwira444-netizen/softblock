@@ -18,6 +18,9 @@ return [
     // SHA git build ini, dibandingkan dengan header X-Build dari klien (N-76).
     'build' => env('APP_BUILD', 'dev'),
 
+    // DP-9: proxy tepercaya ("*" atau daftar IP dipisah koma) agar pembatas per IP memakai IP klien asli.
+    'proxy_tepercaya' => env('TRUSTED_PROXIES', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

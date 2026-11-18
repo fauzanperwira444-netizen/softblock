@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Contracts\PengirimEmail;
 use App\Support\PengirimEmailMail;
+use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
@@ -14,4 +15,12 @@ final class AppServiceProvider extends ServiceProvider
     public array $bindings = [
         PengirimEmail::class => PengirimEmailMail::class,
     ];
+
+    public function boot(): void
+    {
+        $proxy = (string) config('app.proxy_tepercaya');
+        if ($proxy !== '') {
+            TrustProxies::at($proxy === '*' ? '*' : explode(',', $proxy));
+        }
+    }
 }

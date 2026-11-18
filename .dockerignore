@@ -1,0 +1,14 @@
+.git
+.claude
+**/node_modules
+**/dist
+**/test-results
+**/.env
+apps/api/vendor
+apps/api/storage/logs/*
+apps/api/storage/framework/cache/*
+apps/api/storage/framework/sessions/*
+apps/api/storage/framework/views/*
+apps/api/bootstrap/cache/*.php
+Dokumen
+mockup

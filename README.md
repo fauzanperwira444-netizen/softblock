@@ -29,11 +29,13 @@ cd apps/api
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
+php artisan migrate --seed
 php artisan serve
 ```
 
-Pemeriksaan: `composer test` (Pest, memakai `softblock_test`) dan `composer analyse` (Larastan).
+Seeder membuat dua akun contoh, `dina@contoh.test` dan `raka@contoh.test`, dengan password `rahasia-123`.
+
+Pastikan `php` di PATH adalah PHP 8.4. XAMPP sering membawa versi lama yang mendahului di PATH.
 
 ## Menjalankan frontend
 
@@ -44,6 +46,8 @@ pnpm dev:web
 
 Vite berjalan di http://localhost:5173 dan meneruskan `/api`, `/auth`, dan `/sanctum` ke Laravel di port 8000.
 
+Saat dev, frontend memakai API tiruan (msw). Untuk memakai API Laravel, jalankan dengan `VITE_API_MOCK=off`. Build produksi selalu memakai API asli.
+
 ## Pemeriksaan
 
 ```bash
@@ -51,4 +55,16 @@ pnpm typecheck:web
 pnpm test:web
 pnpm lint:web
 pnpm build:web
+pnpm test:api
+pnpm analyse:api
 ```
+
+`test:api` memakai database `softblock_test`.
+
+## Image produksi
+
+```bash
+docker build --build-arg BUILD_SHA=$(git rev-parse --short HEAD) -t softblock .
+```
+
+Satu image berisi SPA, Laravel, php-fpm, dan nginx (DP-2), mendengarkan di `$PORT` (bawaan 8080). Variabel wajib saat jalan: `APP_KEY`, `APP_URL`, `DB_*`, `MAIL_*`. Migrasi tidak dijalankan saat start; jalankan `php artisan migrate --force` dari job Deploy (DP-4).
