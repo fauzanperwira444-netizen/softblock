@@ -38,6 +38,7 @@ ENV APP_ENV=production \
     APP_DEBUG=false \
     APP_BUILD=$BUILD_SHA \
     LOG_CHANNEL=stderr \
+    DB_CONNECTION=pgsql \
     SESSION_COOKIE=__Host-softblock \
     SESSION_SECURE_COOKIE=true \
     TRUSTED_PROXIES=*
