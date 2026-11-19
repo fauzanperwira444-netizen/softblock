@@ -1,0 +1,2760 @@
+{
+    "openapi": "3.1.2",
+    "info": {
+        "title": "Softblock",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api"
+        }
+    ],
+    "paths": {
+        "/kesehatan": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "const": "ok"
+                                        },
+                                        "build": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "build"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kesehatan/siap": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "const": "siap"
+                                        },
+                                        "build": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "build"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/akun": {
+            "get": {
+                "operationId": "akun.tampil",
+                "tags": [
+                    "Akun"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "nama_tampil": {
+                                            "type": "string"
+                                        },
+                                        "zona_waktu": {
+                                            "type": "string"
+                                        },
+                                        "punya_password": {
+                                            "type": "boolean"
+                                        },
+                                        "tertaut_google": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "email",
+                                        "nama_tampil",
+                                        "zona_waktu",
+                                        "punya_password",
+                                        "tertaut_google"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "akun.ubah",
+                "tags": [
+                    "Akun"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UbahAkunRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "nama_tampil": {
+                                            "type": "string"
+                                        },
+                                        "zona_waktu": {
+                                            "type": "string"
+                                        },
+                                        "punya_password": {
+                                            "type": "boolean"
+                                        },
+                                        "tertaut_google": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "email",
+                                        "nama_tampil",
+                                        "zona_waktu",
+                                        "punya_password",
+                                        "tertaut_google"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/akun/password": {
+            "put": {
+                "operationId": "akun.gantiPassword",
+                "tags": [
+                    "Akun"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password_baru": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "maxLength": 128
+                                    }
+                                },
+                                "required": [
+                                    "password_baru"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/auth/daftar": {
+            "post": {
+                "operationId": "auth.daftar",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DaftarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "nama_tampil": {
+                                            "type": "string"
+                                        },
+                                        "zona_waktu": {
+                                            "type": "string"
+                                        },
+                                        "punya_password": {
+                                            "type": "boolean"
+                                        },
+                                        "tertaut_google": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "email",
+                                        "nama_tampil",
+                                        "zona_waktu",
+                                        "punya_password",
+                                        "tertaut_google"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/auth/masuk": {
+            "post": {
+                "operationId": "auth.masuk",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "nama_tampil": {
+                                            "type": "string"
+                                        },
+                                        "zona_waktu": {
+                                            "type": "string"
+                                        },
+                                        "punya_password": {
+                                            "type": "boolean"
+                                        },
+                                        "tertaut_google": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "email",
+                                        "nama_tampil",
+                                        "zona_waktu",
+                                        "punya_password",
+                                        "tertaut_google"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/keluar": {
+            "post": {
+                "operationId": "auth.keluar",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            }
+        },
+        "/auth/lupa-password": {
+            "post": {
+                "operationId": "auth.lupaPassword",
+                "summary": "Selalu 204 agar tidak membocorkan email terdaftar; email dikirim setelah respons (N-73)",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "maxLength": 254
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/auth/reset-password": {
+            "post": {
+                "operationId": "auth.resetPassword",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "maxLength": 128
+                                    }
+                                },
+                                "required": [
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/jadwal": {
+            "post": {
+                "operationId": "jadwal.simpan",
+                "tags": [
+                    "Jadwal"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/jadwal/{id}": {
+            "patch": {
+                "operationId": "jadwal.ubah",
+                "tags": [
+                    "Jadwal"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "jadwal.hapus",
+                "tags": [
+                    "Jadwal"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/jadwal/{id}/akhiri": {
+            "post": {
+                "operationId": "jadwal.akhiri",
+                "tags": [
+                    "Jadwal"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/pengecualian": {
+            "post": {
+                "operationId": "jadwal.simpanPengecualian",
+                "tags": [
+                    "Jadwal"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/pengecualian/{id}": {
+            "delete": {
+                "operationId": "jadwal.hapusPengecualian",
+                "tags": [
+                    "Jadwal"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/pola-kerja": {
+            "get": {
+                "operationId": "polaKerja",
+                "tags": [
+                    "PolaKerja"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "dari": {},
+                                        "sampai": {},
+                                        "granularitas": {
+                                            "type": "string",
+                                            "enum": [
+                                                "hari",
+                                                "minggu",
+                                                "bulan"
+                                            ]
+                                        },
+                                        "seri": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "dibuat": {
+                                            "type": "integer"
+                                        },
+                                        "selesai": {
+                                            "type": "integer"
+                                        },
+                                        "batal": {
+                                            "type": "integer"
+                                        },
+                                        "dikerjakan": {
+                                            "type": "integer"
+                                        },
+                                        "tidak_dikerjakan": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "dari",
+                                        "sampai",
+                                        "granularitas",
+                                        "seri",
+                                        "dibuat",
+                                        "selesai",
+                                        "batal",
+                                        "dikerjakan",
+                                        "tidak_dikerjakan"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek": {
+            "post": {
+                "operationId": "projek.simpan",
+                "tags": [
+                    "Projek"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}": {
+            "patch": {
+                "operationId": "projek.ubah",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "projek.hapus",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}/selesai-dini": {
+            "post": {
+                "operationId": "projek.selesaiDini",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}/batal": {
+            "post": {
+                "operationId": "projek.batal",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}/buka-kembali": {
+            "post": {
+                "operationId": "projek.bukaKembali",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}/dokumen": {
+            "post": {
+                "operationId": "projek.simpanDokumen",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/dokumen/{id}": {
+            "patch": {
+                "operationId": "projek.ubahDokumen",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "projek.hapusDokumen",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/projek/{id}/sesi": {
+            "post": {
+                "operationId": "projek.simpanSesi",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/sesi/{id}": {
+            "patch": {
+                "operationId": "projek.ubahSesi",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "projek.hapusSesi",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/sesi/{id}/batal": {
+            "post": {
+                "operationId": "projek.batalSesi",
+                "tags": [
+                    "Projek"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/sinkron": {
+            "get": {
+                "operationId": "sinkron",
+                "tags": [
+                    "Sinkron"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task": {
+            "post": {
+                "operationId": "task.simpan",
+                "tags": [
+                    "Task"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task/{id}": {
+            "patch": {
+                "operationId": "task.ubah",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task/{id}/pindah": {
+            "post": {
+                "operationId": "task.pindah",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task/{id}/progress": {
+            "post": {
+                "operationId": "task.progress",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task/{id}/batal": {
+            "post": {
+                "operationId": "task.batal",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/task/{id}/buka-kembali": {
+            "post": {
+                "operationId": "task.bukaKembali",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/label/{id}": {
+            "patch": {
+                "operationId": "task.ubahLabel",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "task.hapusLabel",
+                "tags": [
+                    "Task"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/entri": {
+            "post": {
+                "operationId": "todo.simpanEntri",
+                "tags": [
+                    "Todo"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/entri/{id}": {
+            "delete": {
+                "operationId": "todo.hapusEntri",
+                "tags": [
+                    "Todo"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/entri/{id}/ceklis": {
+            "put": {
+                "operationId": "todo.ceklis",
+                "tags": [
+                    "Todo"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/entri/{id}/blok": {
+            "post": {
+                "operationId": "todo.simpanBlok",
+                "tags": [
+                    "Todo"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "/blok/{id}": {
+            "patch": {
+                "operationId": "todo.ubahBlok",
+                "tags": [
+                    "Todo"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "todo.hapusBlok",
+                "tags": [
+                    "Todo"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "revisi": {
+                                            "type": "integer"
+                                        },
+                                        "revisi_sebelum": {
+                                            "type": "integer"
+                                        },
+                                        "ubah": {
+                                            "type": "string"
+                                        },
+                                        "hapus": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "peringatan": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0
+                                        },
+                                        "id": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "revisi",
+                                        "revisi_sebelum",
+                                        "ubah",
+                                        "hapus",
+                                        "peringatan",
+                                        "id"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DaftarRequest": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 254
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 128
+                    },
+                    "nama_tampil": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "maxLength": 45
+                    },
+                    "zona_waktu": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "title": "DaftarRequest"
+            },
+            "UbahAkunRequest": {
+                "type": "object",
+                "properties": {
+                    "nama_tampil": {
+                        "type": "string",
+                        "maxLength": 45
+                    },
+                    "zona_waktu": {
+                        "type": "string"
+                    }
+                },
+                "title": "UbahAkunRequest"
+            }
+        },
+        "responses": {
+            "ValidationException": {
+                "description": "Validation error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Errors overview."
+                                },
+                                "errors": {
+                                    "type": "object",
+                                    "description": "A detailed description of each field that failed validation.",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "message",
+                                "errors"
+                            ]
+                        }
+                    }
+                }
+            },
+            "AuthenticationException": {
+                "description": "Unauthenticated",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error overview."
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

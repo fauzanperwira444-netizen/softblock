@@ -1,0 +1,173 @@
+# DP-5: pemeriksaan pada PR dan main. Image hanya didorong ke GHCR dari main.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    name: Web (tsc, oxlint, Vitest, build, Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck:web
+      - run: pnpm lint:web
+      - run: pnpm test:web
+      - run: pnpm build:web
+      - run: pnpm audit --prod
+      # Alur ujung ke ujung memakai API tiruan (msw), jadi tidak butuh backend.
+      - run: pnpm --filter web exec playwright install --with-deps chromium
+      - run: pnpm e2e:web
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-trace
+          path: apps/web/test-results
+          retention-days: 7
+
+  api:
+    name: API (PHPStan, Pest, audit, OpenAPI)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: softblock
+          POSTGRES_USER: softblock
+          POSTGRES_PASSWORD: softblock
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U softblock -d softblock"
+          --health-interval 5s
+          --health-retries 10
+    defaults:
+      run:
+        working-directory: apps/api
+    env:
+      APP_URL: http://localhost:8000
+      DB_HOST: 127.0.0.1
+      DB_PASSWORD: softblock
+      PGPASSWORD: softblock
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_pgsql, intl, sodium, mbstring, openssl
+          coverage: none
+      - name: Siapkan database uji
+        run: |
+          psql -h 127.0.0.1 -U softblock -d softblock -c 'CREATE EXTENSION IF NOT EXISTS btree_gist'
+          psql -h 127.0.0.1 -U softblock -d softblock -c 'CREATE DATABASE softblock_test'
+          psql -h 127.0.0.1 -U softblock -d softblock_test -c 'CREATE EXTENSION IF NOT EXISTS btree_gist'
+      - name: PASSWORD_ARGON2ID tersedia
+        run: php -r 'exit(defined("PASSWORD_ARGON2ID") ? 0 : 1);'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('apps/api/composer.lock') }}
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - run: cp .env.example .env && php artisan key:generate
+      - run: composer analyse
+      - run: composer test
+      - run: composer audit
+      - name: OpenAPI tidak drift
+        run: |
+          php artisan scramble:export --path=openapi.json
+          git diff --exit-code -- openapi.json || {
+            echo '::error::apps/api/openapi.json tidak sesuai kode. Jalankan `php artisan scramble:export --path=openapi.json` lalu commit.'
+            exit 1
+          }
+
+  gitleaks:
+    name: Gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  image:
+    name: Image (build, smoke test, push)
+    needs: [web, api, gitleaks]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: softblock
+          POSTGRES_USER: softblock
+          POSTGRES_PASSWORD: softblock
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U softblock -d softblock"
+          --health-interval 5s
+          --health-retries 10
+    env:
+      PGPASSWORD: softblock
+    steps:
+      - uses: actions/checkout@v5
+      - name: Nama image
+        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: softblock:uji
+          build-args: BUILD_SHA=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Smoke test image
+        run: |
+          psql -h 127.0.0.1 -U softblock -d softblock -c 'CREATE EXTENSION IF NOT EXISTS btree_gist'
+          ENV_ARGS="-e APP_KEY=base64:$(openssl rand -base64 32) -e APP_URL=http://localhost:8080 \
+            -e DB_HOST=127.0.0.1 -e DB_DATABASE=softblock -e DB_USERNAME=softblock -e DB_PASSWORD=softblock \
+            -e MAIL_MAILER=log"
+          docker run --rm --network host $ENV_ARGS softblock:uji php artisan migrate --force
+          docker run -d --name app --network host $ENV_ARGS softblock:uji
+          for i in $(seq 1 30); do
+            curl -fsS http://localhost:8080/api/kesehatan/siap -o siap.json && break
+            sleep 2
+          done
+          cat siap.json || { docker logs app; exit 1; }
+          test "$(jq -r .build siap.json)" = "${{ github.sha }}" || { echo '::error::build tidak sama dengan SHA'; exit 1; }
+          curl -fsS http://localhost:8080/ | grep -qi '<div id="root"' || { echo '::error::SPA tidak tersaji'; docker logs app; exit 1; }
+      - uses: docker/login-action@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Dorong ke GHCR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:main
+          build-args: BUILD_SHA=${{ github.sha }}
+          cache-from: type=gha
