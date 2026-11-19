@@ -76,7 +76,8 @@ jobs:
           psql -h 127.0.0.1 -U softblock -d softblock -c 'CREATE DATABASE softblock_test'
           psql -h 127.0.0.1 -U softblock -d softblock_test -c 'CREATE EXTENSION IF NOT EXISTS btree_gist'
       - name: PASSWORD_ARGON2ID tersedia
-        run: php -r 'exit(defined("PASSWORD_ARGON2ID") ? 0 : 1);'
+        run: |
+          php -r 'exit(defined("PASSWORD_ARGON2ID") ? 0 : 1);'
       - uses: actions/cache@v4
         with:
           path: ~/.composer/cache
