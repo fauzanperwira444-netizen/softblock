@@ -20,6 +20,12 @@
       "runtimeArgs": ["dev:web"],
       "env": { "VITE_API_MOCK": "off" },
       "port": 5173
+    },
+    {
+      "name": "web-demo",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "web", "preview", "--port", "4173", "--strictPort"],
+      "port": 4173
     }
   ]
 }

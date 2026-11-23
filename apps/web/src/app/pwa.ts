@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-/** Didaftarkan hanya di build produksi; saat dev, msw memakai service worker sendiri. */
+/** Didaftarkan hanya di build produksi; saat dev dan demo, msw memakai service worker sendiri. */
 export function daftarkanServiceWorker() {
-  if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return
+  if (!import.meta.env.PROD || import.meta.env.VITE_DEMO === 'on' || !('serviceWorker' in navigator)) return
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')

@@ -12,8 +12,8 @@ async function mulai() {
   const root = document.getElementById('root')
   if (!root) throw new Error('Elemen #root tidak ditemukan')
 
-  // import.meta.env.DEV ditulis langsung agar Vite membuang modul mock dari build produksi.
-  if (import.meta.env.DEV && MODE_MOCK) {
+  // Env ditulis langsung agar Vite membuang modul mock dari build produksi non-demo.
+  if ((import.meta.env.DEV || import.meta.env.VITE_DEMO === 'on') && MODE_MOCK) {
     const { mulaiMock } = await import('./api/mock/browser')
     await mulaiMock()
   }
