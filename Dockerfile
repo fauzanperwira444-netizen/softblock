@@ -14,13 +14,7 @@ COPY fixtures fixtures
 # X-Build klien harus sama dengan APP_BUILD server (N-76).
 RUN VITE_BUILD=$BUILD_SHA pnpm --filter web build
 
-FROM composer:2 AS vendor
-WORKDIR /app
-COPY apps/api/composer.json apps/api/composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
-COPY apps/api ./
-RUN composer dump-autoload --no-dev --optimize --classmap-authoritative
-
+# Paket gratis SnapDeploy membatasi Dockerfile pada 2 stage, jadi Composer berjalan di stage akhir.
 FROM php:8.4-fpm-alpine
 ARG BUILD_SHA
 RUN apk add --no-cache nginx icu-libs libpq \
@@ -29,7 +23,14 @@ RUN apk add --no-cache nginx icu-libs libpq \
     && apk del .bangun
 
 WORKDIR /var/www
-COPY --from=vendor /app ./
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY apps/api/composer.json apps/api/composer.lock ./
+RUN apk add --no-cache --virtual .composer git unzip \
+    && COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction --no-cache \
+    && apk del .composer
+COPY apps/api ./
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-dev --optimize --classmap-authoritative \
+    && rm /usr/local/bin/composer
 COPY --from=web /src/apps/web/dist ./public/
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 COPY docker/mulai.sh /usr/local/bin/mulai
