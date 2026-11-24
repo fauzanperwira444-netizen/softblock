@@ -33,6 +33,7 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --no-dev --optimize --clas
     && rm /usr/local/bin/composer
 COPY --from=web /src/apps/web/dist ./public/
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/nginx-keamanan.conf /etc/nginx/keamanan.conf
 COPY docker/mulai.sh /usr/local/bin/mulai
 
 ENV APP_ENV=production \
