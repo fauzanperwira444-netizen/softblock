@@ -95,7 +95,11 @@ return [
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
+            // Koneksi persisten dipakai ulang antar-request php-fpm, jadi request tidak membayar jabat tangan TCP, TLS,
+            // dan auth ke Neon setiap kali. search_path dibiarkan bawaan server karena perintah SET-nya menambah satu
+            // perjalanan pulang-pergi per request, dan bawaan "$user", public sudah jatuh ke public.
+            'search_path' => env('DB_PERSISTENT', false) ? null : 'public',
+            'options' => env('DB_PERSISTENT', false) ? [PDO::ATTR_PERSISTENT => true] : [],
             'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
