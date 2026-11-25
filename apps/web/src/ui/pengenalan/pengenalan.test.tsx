@@ -86,6 +86,21 @@ describe('Pengenalan fitur', () => {
     expect(JSON.parse(tersimpan ?? '{}')).toMatchObject({ awal: true, halaman: ['dashboard'], aktif: true, mati: false })
   })
 
+  test('di HP sorotan Dashboard mengikuti urutan N-54', async () => {
+    const { user, router } = await masuk()
+    await router.navigate('/akun')
+    await user.click(await screen.findByRole('button', { name: 'Tampilkan pengenalan lagi' }))
+    await user.click(await screen.findByRole('button', { name: 'Lewati' }))
+    await vi.waitFor(() => expect(screen.queryByRole('heading', { name: 'Mulai hari dari sini' })).not.toBeInTheDocument())
+
+    await router.navigate('/')
+    expect(await screen.findByRole('heading', { name: 'Task telat' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Lanjut' }))
+    expect(await screen.findByRole('heading', { name: 'To-do dan jam kosong' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Lanjut' }))
+    expect(await screen.findByRole('heading', { name: 'Hari ini + 7 hari' })).toBeInTheDocument()
+  })
+
   test('Matikan semua menutup pengenalan dan tidak memunculkan sorotan', async () => {
     layarLaptop()
     const { user, router } = await masuk()

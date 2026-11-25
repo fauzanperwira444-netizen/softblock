@@ -56,7 +56,7 @@ export function TodoPage() {
   const seksiHari = (t: string) => {
     const { n, m } = ringkasanHari(data, t)
     return (
-      <section key={t} aria-labelledby={`hari-${t}`} className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex">
+      <section key={t} aria-labelledby={`hari-${t}`} className="flex flex-col gap-4 rounded-card bg-card p-4 tactile-convex sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/7 pb-4">
           <h2 id={`hari-${t}`} className="flex items-center gap-2.5 text-headline-md">
             <span aria-hidden="true" className={cx('size-2.5 rounded-full', t === hariIni ? 'bg-primary' : 'bg-line-strong')} />
@@ -89,7 +89,7 @@ export function TodoPage() {
         </div>
       }
     >
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         <motion.div variants={staggerParent} initial="hidden" animate="show" className="flex flex-col gap-6">
           <motion.div variants={riseChild} data-pengenalan="todo-hari-ini">
             {seksiHari(hariIni)}

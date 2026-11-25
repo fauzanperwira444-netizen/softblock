@@ -204,7 +204,7 @@ function IsiDetail({
         </Link>
       </motion.div>
 
-      <motion.section variants={riseChild} className="relative flex flex-wrap gap-8 overflow-hidden rounded-card bg-card p-6 tactile-convex md:p-8">
+      <motion.section variants={riseChild} className="relative flex flex-wrap gap-8 overflow-hidden rounded-card bg-card p-5 tactile-convex sm:p-6 md:p-8">
         <div aria-hidden="true" className="pointer-events-none absolute -top-44 -right-28 size-90 rounded-full bg-[radial-gradient(circle,var(--sb-glow)_0%,transparent_70%)]" />
         <div className="relative flex min-w-0 flex-[1_1_420px] flex-col gap-2.5">
           <div className="flex flex-wrap items-center gap-2">
@@ -341,7 +341,7 @@ function IsiDetail({
         const r = nDariM(isi)
         const sst = statusSesi(s, hariIni)
         return (
-          <motion.section key={s.id} variants={riseChild} data-pengenalan="detail-sesi" aria-labelledby={`sesi-${s.id}`} className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex">
+          <motion.section key={s.id} variants={riseChild} data-pengenalan="detail-sesi" aria-labelledby={`sesi-${s.id}`} className="flex flex-col gap-4 rounded-card bg-card p-4 tactile-convex sm:p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex flex-wrap items-center gap-2">

@@ -415,7 +415,7 @@ export function AkunPage() {
   return (
     <Page title="Akun pengguna" subtitle="Kelola identitas, password, dan zona waktu kerja kamu.">
       {akun.tertaut_google && !akun.punya_password && <BannerGoogle />}
-      <div className="grid items-start gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
         <div className="flex flex-col gap-6">
           <FormNama akun={akun} />
           <FormZona akun={akun} />

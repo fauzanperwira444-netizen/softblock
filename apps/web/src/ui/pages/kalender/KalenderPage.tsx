@@ -86,7 +86,7 @@ export function KalenderPage() {
               <IconButton icon="chevron_right" label={tab === 'bulan' ? 'Bulan berikutnya' : 'Minggu berikutnya'} size="sm" onClick={() => geser(1)} />
             </>
           )}
-          <h1 className="text-auth" aria-live="polite">
+          <h1 className="order-first w-full text-auth sm:order-none sm:w-auto" aria-live="polite">
             {judul}
           </h1>
           {tab !== 'jadwal' && (
@@ -102,12 +102,12 @@ export function KalenderPage() {
             </Button>
           )}
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <span data-pengenalan="kalender-jam-kosong" className="inline-flex items-center gap-1.5 rounded-full bg-well px-3 py-1.5 text-body-sm tactile-inset">
+        <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
+          <span data-pengenalan="kalender-jam-kosong" className="inline-flex items-center gap-1.5 rounded-full bg-well px-3 py-1.5 text-body-sm whitespace-nowrap tactile-inset">
             <Icon name="schedule" size={16} className="text-primary" />
             Sisa pekan ini: <b className="font-mono">{formatDurasi(kosongPekan)} kosong</b>
           </span>
-          <div data-pengenalan="kalender-tampilan" className="min-w-[280px]">
+          <div data-pengenalan="kalender-tampilan" className="w-full sm:w-auto sm:min-w-[280px]">
             <SegmentedControl
               label="Tampilan"
               value={tab}

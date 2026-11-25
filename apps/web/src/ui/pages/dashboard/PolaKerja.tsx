@@ -60,7 +60,7 @@ export function PolaKerja({ hariIni, awalData }: { hariIni: Tanggal; awalData: T
         Pola kerja
       </CardTitle>
 
-      <div className="grid gap-4 sm:grid-cols-[minmax(0,240px)_1fr] sm:items-end">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,240px)_1fr] sm:items-end">
         <SelectField label="Rentang" value={pilihan} onChange={(e) => setPilihan(e.target.value as PilihanRentang)}>
           {PILIHAN.map((p) => (
             <option key={p.value} value={p.value}>

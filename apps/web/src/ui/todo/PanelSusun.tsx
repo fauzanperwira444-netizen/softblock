@@ -228,7 +228,7 @@ export function PanelSusun({ awal, onClose }: { awal: AwalSusun | null; onClose:
       </AnimatePresence>
       {alasan && <Alert tone="info">{alasan}</Alert>}
 
-      <div className="grid min-h-0 flex-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,420px)]">
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,420px)]">
         <div className="flex min-w-0 flex-col gap-6">
           <section aria-labelledby="susun-belum" className="flex flex-col gap-3">
             <h3 id="susun-belum" className="text-headline-md">

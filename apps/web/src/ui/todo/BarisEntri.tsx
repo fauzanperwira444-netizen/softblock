@@ -57,7 +57,7 @@ export function BarisEntri({ entri }: { entri: EntriTodo }) {
     <motion.div
       layout="position"
       className={cx(
-        'flex flex-col gap-3 rounded-tile px-5 py-4',
+        'flex flex-col gap-3 rounded-tile px-4 py-4 sm:px-5',
         entri.ceklis || !aktif ? 'bg-well' : 'bg-card tactile-convex',
         blok.length === 0 && aktif && 'bg-transparent shadow-[inset_0_0_0_1.5px_var(--sb-line)]',
       )}
@@ -72,7 +72,7 @@ export function BarisEntri({ entri }: { entri: EntriTodo }) {
           title={alasanCeklis ?? undefined}
           onClick={() => void jalankan(() => aksi.ceklis(entri, !entri.ceklis))}
           className={cx(
-            'mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full transition-colors',
+            "relative mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full transition-colors after:absolute after:-inset-2.5 after:content-['']",
             entri.ceklis ? 'bg-primary text-on-primary' : 'bg-well tactile-inset hover:bg-mist',
             'disabled:opacity-60',
           )}
@@ -151,7 +151,7 @@ export function BarisEntri({ entri }: { entri: EntriTodo }) {
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex w-full min-w-0 flex-wrap items-center gap-2">
           {aktif && !lewat && (
             <ProgressStepper
               value={task.progress}

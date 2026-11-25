@@ -60,7 +60,7 @@ export function PengenalanProvider({ children }: { children: ReactNode }) {
   const lebar = useLayarLebar()
   const [halaman, setHalamanState] = useState<KunciHalaman | null>(null)
   const [status, setStatus] = useState<{ akunId: string; isi: StatusPengenalan } | null>(null)
-  const [tampilState, setTampil] = useState<Tampil | null>(null)
+  const [tampil, setTampil] = useState<Tampil | null>(null)
 
   const akunId = akun?.id ?? null
   const tersimpan = useMemo(() => (akunId ? bacaStatus(akunId) : null), [akunId])
@@ -84,15 +84,13 @@ export function PengenalanProvider({ children }: { children: ReactNode }) {
     setTampil((t) => (t?.jenis === 'halaman' ? null : t))
   }, [])
 
-  // Layar menyempit ke ukuran HP: sorotan laptop tidak dipakai.
-  const tampil = tampilState?.jenis === 'halaman' && !lebar ? null : tampilState
+  const tata = lebar ? 'laptop' : 'hp'
   const berlaku = st !== null && pengenalanBerlaku(st, snapshot?.akun_dibuat)
-  // Sorotan halaman baru tersedia untuk laptop; HP menyusul dengan kartu di bawah layar.
   const kunciMau: 'awal' | KunciHalaman | null = !berlaku
     ? null
     : !st.awal
       ? 'awal'
-      : halaman && lebar && !st.halaman.includes(halaman)
+      : halaman && !st.halaman.includes(halaman)
         ? halaman
         : null
 
@@ -146,8 +144,10 @@ export function PengenalanProvider({ children }: { children: ReactNode }) {
       )}
       {tampil?.jenis === 'halaman' && (
         <Sorotan
-          key={tampil.kunci}
+          // Berpindah laptop ↔ HP memulai ulang sorotan dengan urutan tata letak yang baru.
+          key={`${tampil.kunci}-${tata}`}
           isi={PENGENALAN_HALAMAN[tampil.kunci]}
+          tata={tata}
           onSelesai={() => {
             ubahStatus((s) => tandaiHalaman(s, tampil.kunci))
             tutup()

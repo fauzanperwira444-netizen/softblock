@@ -51,12 +51,19 @@ export type KunciHalaman = 'dashboard' | 'projek' | 'detail-projek' | 'task' | '
  */
 export type LangkahSorotan = { sasaran: string[]; judul: string; teks: string }
 
-export type PengenalanHalaman = { nama: string; langkah: LangkahSorotan[] }
+export type PengenalanHalaman = {
+  nama: string
+  langkah: LangkahSorotan[]
+  /** Urutan indeks langkah di HP bila tata letaknya berbeda dari laptop (N-54). */
+  urutanHp?: number[]
+}
 
 /** O-03: urutan mengikuti tata letak laptop (D-01). */
 export const PENGENALAN_HALAMAN: Record<KunciHalaman, PengenalanHalaman> = {
   dashboard: {
     nama: 'Dashboard',
+    // HP: telat, jam kosong dan to-do, 7 hari, kalender mini, projek dan pola kerja.
+    urutanHp: [0, 2, 1, 3, 4, 5],
     langkah: [
       { sasaran: ['dashboard-telat'], judul: 'Task telat', teks: 'Task yang lewat tenggat selalu di paling atas, supaya tidak tertimbun task baru.' },
       {

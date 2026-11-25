@@ -89,7 +89,7 @@ export function ProgressStepper({ value, onChange, taskName, disabled = false, d
   const tombol =
     'inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-card text-ink tactile-button transition-[color,box-shadow] hover:text-primary active:tactile-pressed disabled:opacity-40 disabled:shadow-none'
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex max-w-full min-w-0 items-center gap-1.5 sm:gap-2">
       <motion.button
         type="button"
         whileTap={readOnly || value <= 0 ? {} : { scale: 0.97 }}
@@ -101,7 +101,7 @@ export function ProgressStepper({ value, onChange, taskName, disabled = false, d
       >
         <Icon name="remove" />
       </motion.button>
-      <div className="inline-flex items-center gap-2 rounded-full bg-well px-4 py-1.5 tactile-inset">
+      <div className="flex min-w-0 items-center gap-2 rounded-full bg-well px-3 py-1.5 tactile-inset sm:px-4">
         <div
           role="meter"
           aria-label={`Progress ${taskName}`}
@@ -109,7 +109,7 @@ export function ProgressStepper({ value, onChange, taskName, disabled = false, d
           aria-valuemax={10}
           aria-valuenow={value}
           aria-valuetext={`${value} dari 10`}
-          className="flex gap-1"
+          className="flex min-w-0 gap-0.5 sm:gap-1"
         >
           {SEGMENTS.map((n) => {
             const on = n <= value
@@ -121,7 +121,7 @@ export function ProgressStepper({ value, onChange, taskName, disabled = false, d
                 animate={{ scaleY: on ? 1 : 0.82 }}
                 transition={SPRING_SNAPPY}
                 className={cx(
-                  'h-4 w-2 rounded-full transition-colors duration-200',
+                  'h-4 w-2 min-w-0.5 rounded-full transition-colors duration-200',
                   on ? (value === 10 ? 'bg-primary' : 'bg-sage') : 'bg-high',
                 )}
               />
@@ -133,7 +133,7 @@ export function ProgressStepper({ value, onChange, taskName, disabled = false, d
           initial={{ scale: 1.3 }}
           animate={{ scale: 1 }}
           transition={{ duration: DUR.slow, ease: EASE_OUT }}
-          className={cx('inline-block min-w-14 text-right font-mono text-numeric-md font-bold tabular-nums', readOnly ? 'text-ink-muted' : 'text-primary')}
+          className={cx('inline-block shrink-0 min-w-12 text-right font-mono sm:min-w-14 text-numeric-md font-bold tabular-nums', readOnly ? 'text-ink-muted' : 'text-primary')}
           aria-hidden="true"
         >
           {value}/10

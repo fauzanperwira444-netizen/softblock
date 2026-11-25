@@ -18,7 +18,7 @@ function Kerangka() {
       className="flex flex-col gap-6"
     >
       <motion.div variants={riseChild} className="h-11 w-56 rounded-full bg-well tactile-inset" />
-      <div className="grid gap-6 lg:grid-cols-[7fr_5fr]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[7fr_5fr]">
         <motion.div variants={riseChild} className={`${blok} h-72`} />
         <motion.div variants={riseChild} className={`${blok} h-72`} />
       </div>

@@ -62,7 +62,7 @@ export function BarisTask({ task, onPilihLabel }: Props) {
     <motion.div
       layout="position"
       className={cx(
-        'flex flex-col gap-3 rounded-tile px-5 py-4',
+        'flex flex-col gap-3 rounded-tile px-4 py-4 sm:px-5',
         aktif ? 'bg-card tactile-convex' : 'bg-well',
         telat && 'shadow-[inset_0_0_0_1.5px_color-mix(in_srgb,var(--sb-danger)_28%,transparent),var(--sb-shadow-convex)]',
       )}
@@ -74,7 +74,7 @@ export function BarisTask({ task, onPilihLabel }: Props) {
             aria-label={`Selesaikan ${task.nama}`}
             disabled={!boleh || !!kunci}
             onClick={() => void jalankan(() => layanan.ubahProgress(task, PROGRESS_SELESAI))}
-            className="group relative inline-flex size-6 items-center justify-center self-start rounded-full bg-well tactile-inset hover:bg-mist disabled:opacity-50 md:mt-1"
+            className="group relative inline-flex size-6 items-center justify-center self-start rounded-full bg-well tactile-inset after:absolute after:-inset-2.5 after:content-[''] hover:bg-mist disabled:opacity-50 md:mt-1"
           >
             <Icon name="check" size={14} className="text-primary opacity-0 transition-opacity group-hover:opacity-100" />
           </button>
@@ -164,7 +164,7 @@ export function BarisTask({ task, onPilihLabel }: Props) {
             {...(aktif && !alasanUbah ? { onChange: (n: number) => void jalankan(() => layanan.ubahProgress(task, n)) } : {})}
             {...(alasanUbah && aktif ? { disabled: true, disabledReason: alasanUbah } : {})}
           />
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {aktif && (
               <Button variant="tactile" size="sm" icon="checklist" disabled={!!alasanUbah} title={alasanUbah ?? undefined} onClick={() => layanan.tambahKeTodo(task)}>
                 To-do
