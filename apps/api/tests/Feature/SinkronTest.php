@@ -24,6 +24,7 @@ function aksi(Akun $akun, callable $isi): array
 
 it('akun baru: sinkron penuh yang kosong', function () {
     $this->travelTo(new DateTimeImmutable('2026-11-18T18:00:00Z'));
+    $this->akun->forceFill(['created_at' => '2026-11-18T17:30:00Z'])->save();
 
     $this->getJson('/api/sinkron?sejak=0')
         ->assertOk()
@@ -32,7 +33,7 @@ it('akun baru: sinkron penuh yang kosong', function () {
             'penuh' => true,
             'ubah' => [],
             'hapus' => [],
-            'meta' => ['hari_ini' => '2026-11-19', 'zona_waktu' => 'Asia/Jakarta'],
+            'meta' => ['hari_ini' => '2026-11-19', 'zona_waktu' => 'Asia/Jakarta', 'akun_dibuat' => '2026-11-19'],
         ]);
 });
 

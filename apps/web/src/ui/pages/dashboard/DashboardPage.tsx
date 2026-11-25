@@ -23,6 +23,7 @@ import { usePageTitle } from '../../usePageTitle'
 import { BADGE_STATUS, bandingkanProjek, ringkas } from '../projek/tampilan'
 import { KalenderMini } from './KalenderMini'
 import { PolaKerja } from './PolaKerja'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 
 const MAKS_TELAT = 5
 const MAKS_PROJEK = 5
@@ -33,6 +34,7 @@ const MAKS_PROJEK = 5
  */
 export function DashboardPage() {
   usePageTitle('Dashboard')
+  usePengenalanHalaman('dashboard')
   const data = useDataProjek()
   const waktu = useWaktu()
   const layanan = useLayananTask()
@@ -47,35 +49,35 @@ export function DashboardPage() {
           <h1 className="text-headline-xl-mobile md:text-headline-xl">Dashboard</h1>
           <p className="mt-1 text-[0.9375rem] leading-[1.375rem] text-ink-muted">Hari ini {formatTanggal(hariIni)}.</p>
         </div>
-        <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
+        <Button data-pengenalan="dashboard-tambah-task" icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
           Tambah task
         </Button>
       </motion.div>
 
       <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] lg:items-start">
         <div className="contents lg:flex lg:flex-col lg:gap-6">
-          <Bagian className="order-1 lg:order-none">
+          <Bagian penanda="dashboard-telat" className="order-1 lg:order-none">
             <Telat data={data} hariIni={hariIni} menit={menit} />
           </Bagian>
-          <Bagian className="order-4 lg:order-none">
+          <Bagian penanda="dashboard-tujuh-hari" className="order-4 lg:order-none">
             <TujuhHari data={data} hariIni={hariIni} menit={menit} />
           </Bagian>
         </div>
         <div className="contents lg:flex lg:flex-col lg:gap-6">
-          <Bagian className="order-3 lg:order-none">
+          <Bagian penanda="dashboard-todo" className="order-3 lg:order-none">
             <RingkasanTodo data={data} hariIni={hariIni} />
           </Bagian>
-          <Bagian className="order-2 lg:order-none">
+          <Bagian penanda="dashboard-jam-kosong" className="order-2 lg:order-none">
             <JamKosongHariIni data={data} hariIni={hariIni} menit={menit} />
           </Bagian>
-          <Bagian className="order-5 lg:order-none">
+          <Bagian penanda="dashboard-kalender-mini" className="order-5 lg:order-none">
             <KalenderMini data={data} hariIni={hariIni} />
           </Bagian>
         </div>
-        <Bagian className="order-6 lg:order-none lg:col-span-2">
+        <Bagian penanda="dashboard-projek" className="order-6 lg:order-none lg:col-span-2">
           <DaftarProjek data={data} hariIni={hariIni} menit={menit} />
         </Bagian>
-        <Bagian className="order-7 lg:order-none lg:col-span-2">
+        <Bagian penanda="dashboard-pola-kerja" className="order-7 lg:order-none lg:col-span-2">
           <PolaKerja hariIni={hariIni} awalData={data.task.reduce((min, t) => (t.dibuat_tanggal_lokal < min ? t.dibuat_tanggal_lokal : min), hariIni)} />
         </Bagian>
       </div>
@@ -83,9 +85,9 @@ export function DashboardPage() {
   )
 }
 
-function Bagian({ className, children }: { className: string; children: ReactNode }) {
+function Bagian({ penanda, className, children }: { penanda: string; className: string; children: ReactNode }) {
   return (
-    <motion.div variants={riseChild} className={className}>
+    <motion.div variants={riseChild} data-pengenalan={penanda} className={className}>
       {children}
     </motion.div>
   )

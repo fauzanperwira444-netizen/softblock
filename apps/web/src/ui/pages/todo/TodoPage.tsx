@@ -20,10 +20,12 @@ import { DaftarEntriHari, ringkasanHari } from '../../todo/DaftarEntriHari'
 import { useAksiTodo } from '../../todo/useAksiTodo'
 import { useLayananTask } from '../../task/LayananTask'
 import { usePageTitle } from '../../usePageTitle'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 
 /** S-14: hari ini dan hari mendatang yang punya entri, plus "Belum selesai" (E-09, E-11). */
 export function TodoPage() {
   usePageTitle('To-do')
+  usePengenalanHalaman('todo')
   const data = useDataProjek()
   const waktu = useWaktu()
   const layanan = useLayananTask()
@@ -78,7 +80,7 @@ export function TodoPage() {
       subtitle="Pilih task untuk tiap hari, lalu beri blok jam di antara Jadwal tetapmu."
       actions={
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="tactile" icon="playlist_add" onClick={() => layanan.bukaSusun({ tanggal: waktu.hariIni })}>
+          <Button data-pengenalan="todo-susun" variant="tactile" icon="playlist_add" onClick={() => layanan.bukaSusun({ tanggal: waktu.hariIni })}>
             Susun to-do
           </Button>
           <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
@@ -89,7 +91,9 @@ export function TodoPage() {
     >
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
         <motion.div variants={staggerParent} initial="hidden" animate="show" className="flex flex-col gap-6">
-          <motion.div variants={riseChild}>{seksiHari(hariIni)}</motion.div>
+          <motion.div variants={riseChild} data-pengenalan="todo-hari-ini">
+            {seksiHari(hariIni)}
+          </motion.div>
           {mendatang.map((t) => (
             <motion.div key={t} variants={riseChild}>
               {seksiHari(t)}
@@ -102,7 +106,7 @@ export function TodoPage() {
           )}
         </motion.div>
 
-        <aside aria-labelledby="judul-tertunda" className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex lg:sticky lg:top-6">
+        <aside data-pengenalan="todo-belum-selesai" aria-labelledby="judul-tertunda" className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex lg:sticky lg:top-6">
           <div className="flex items-center justify-between gap-2">
             <h2 id="judul-tertunda" className="flex items-center gap-2 text-headline-md">
               <Icon name="history" className="text-danger" />

@@ -58,7 +58,12 @@ final class SinkronController extends Controller
         });
 
         return response()->json($hasil + [
-            'meta' => ['hari_ini' => $hariIni['tanggal'], 'zona_waktu' => $akun->zona_waktu],
+            'meta' => [
+                'hari_ini' => $hariIni['tanggal'],
+                'zona_waktu' => $akun->zona_waktu,
+                // Penentu sasaran pengenalan fitur (O-01), dalam zona akun.
+                'akun_dibuat' => $akun->created_at?->setTimezone($akun->zona_waktu)->toDateString(),
+            ],
         ]);
     }
 }

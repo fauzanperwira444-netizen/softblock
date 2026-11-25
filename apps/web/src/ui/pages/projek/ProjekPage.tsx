@@ -15,6 +15,7 @@ import { Page } from '../../shell/Page'
 import { usePageTitle } from '../../usePageTitle'
 import { FormProjek } from './FormProjek'
 import { BADGE_STATUS, bandingkanProjek, ringkas, type RingkasanProjek } from './tampilan'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 
 type Filter = 'semua' | StatusProjek
 
@@ -94,6 +95,7 @@ function KartuProjek({ r, tertutup }: { r: RingkasanProjek; tertutup: boolean })
 
 export function ProjekPage() {
   usePageTitle('Projek')
+  usePengenalanHalaman('projek')
   const data = useDataProjek()
   const waktu = useWaktu()
   const { boleh, alasan } = useBolehUbah()
@@ -139,7 +141,7 @@ export function ProjekPage() {
               )}
             </p>
           )}
-          <Button icon="add" onClick={() => setFormBuka(true)} disabled={!boleh} title={alasan ?? undefined}>
+          <Button data-pengenalan="projek-buat" icon="add" onClick={() => setFormBuka(true)} disabled={!boleh} title={alasan ?? undefined}>
             Buat projek
           </Button>
         </div>
@@ -159,7 +161,7 @@ export function ProjekPage() {
         </EmptyState>
       ) : (
         <div className="flex flex-col gap-6">
-          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter status">
+          <div data-pengenalan="projek-filter" className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter status">
             <span className="lbl mr-1">Status</span>
             {FILTER.map((f) => {
               const aktif = filter === f.value

@@ -68,7 +68,7 @@ export function TabJadwal({ data, hariIni }: { data: DataLengkap; hariIni: Tangg
   return (
     <section aria-label="Jadwal" className="flex flex-col gap-4 rounded-card bg-card p-5 tactile-convex sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Sub-tab Jadwal">
+        <div data-pengenalan="jadwal-sub" className="flex flex-wrap gap-2" role="group" aria-label="Sub-tab Jadwal">
           {SUB.map((s) => (
             <button
               key={s.value}
@@ -88,7 +88,7 @@ export function TabJadwal({ data, hariIni }: { data: DataLengkap; hariIni: Tangg
             Tambah pengecualian
           </Button>
         ) : (
-          <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormJadwal({ mode: 'buat' })}>
+          <Button data-pengenalan="jadwal-tambah" icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormJadwal({ mode: 'buat' })}>
             Tambah Jadwal
           </Button>
         )}

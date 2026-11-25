@@ -45,6 +45,7 @@ import { galatForm } from '../../formGalat'
 import { DUR, riseChild, SPRING_SOFT, staggerParent } from '../../motion'
 import { HeavyConfirmDialog, LightConfirmDialog } from '../../overlay/ConfirmDialog'
 import { usePageTitle } from '../../usePageTitle'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 import { BarisTask } from '../../task/BarisTask'
 import { useLayananTask } from '../../task/LayananTask'
 import { FormDokumen } from './FormDokumen'
@@ -91,6 +92,7 @@ export function DetailProjekPage() {
   const waktu = useWaktu()
   const projek = data?.projek.find((p) => p.id === id)
   usePageTitle(projek?.nama ?? 'Detail projek')
+  usePengenalanHalaman('detail-projek')
 
   if (!data || !waktu) return null
   if (!projek) {
@@ -226,14 +228,14 @@ function IsiDetail({
             <motion.div className="h-2.5 origin-left rounded-full bg-primary" initial={{ scaleX: 0 }} animate={{ scaleX: persen / 100 }} transition={SPRING_SOFT} />
           </div>
         </div>
-        <div className="relative flex flex-[0_1_300px] flex-col gap-2.5">
+        <div data-pengenalan="detail-aksi" className="relative flex flex-[0_1_300px] flex-col gap-2.5">
           <span className="lbl">Aksi kelola projek</span>
           {tertutup ? (
             <Button icon="restart_alt" onClick={() => setFormSesi({ mode: 'buka' })} disabled={!!kunci(syaratBukaKembali(data, projek, hariIni))}>
               Buka kembali
             </Button>
           ) : (
-            <Button icon="add_circle" onClick={() => setFormSesi({ mode: 'tambah' })} disabled={!boleh}>
+            <Button data-pengenalan="detail-tambah-sesi" icon="add_circle" onClick={() => setFormSesi({ mode: 'tambah' })} disabled={!boleh}>
               Tambah sesi
             </Button>
           )}
@@ -266,7 +268,7 @@ function IsiDetail({
         </motion.div>
       )}
 
-      <motion.section variants={riseChild} aria-labelledby="judul-dokumen" className="flex flex-col gap-4">
+      <motion.section variants={riseChild} data-pengenalan="detail-dokumen" aria-labelledby="judul-dokumen" className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 id="judul-dokumen" className="flex items-center gap-2 text-headline-md">
             <Icon name="description" className="text-primary" />
@@ -339,7 +341,7 @@ function IsiDetail({
         const r = nDariM(isi)
         const sst = statusSesi(s, hariIni)
         return (
-          <motion.section key={s.id} variants={riseChild} aria-labelledby={`sesi-${s.id}`} className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex">
+          <motion.section key={s.id} variants={riseChild} data-pengenalan="detail-sesi" aria-labelledby={`sesi-${s.id}`} className="flex flex-col gap-4 rounded-card bg-card p-6 tactile-convex">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex flex-wrap items-center gap-2">

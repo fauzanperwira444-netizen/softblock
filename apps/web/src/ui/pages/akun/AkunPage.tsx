@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useId, useState, type FormEvent } from 'react'
 import { akunApi, NAMA_TAMPIL_MAX, PASSWORD_MAX, PASSWORD_MIN, type Akun } from '../../../api/akun'
 import { useAuth } from '../../../app/auth'
-import { useBolehUbah } from '../../../data/DataProvider'
+import { useBolehUbah, useData } from '../../../data/DataProvider'
 import { Button } from '../../kit/Button'
 import { Alert, Badge, Card, CardTitle } from '../../kit/display'
 import { Icon } from '../../kit/Icon'
@@ -13,6 +13,7 @@ import { galatForm, TANPA_GALAT, type FormGalat } from '../../formGalat'
 import { Page } from '../../shell/Page'
 import { usePasangAplikasi } from '../../../app/pwa'
 import { usePageTitle } from '../../usePageTitle'
+import { useTampilkanPengenalanLagi } from '../../pengenalan/Pengenalan'
 import { GoogleMark } from '../auth/AuthLayout'
 
 const ZONA_INDONESIA = [
@@ -376,6 +377,36 @@ function KartuPasang() {
   )
 }
 
+/** O-06: menghapus status pengenalan di perangkat ini lalu membuka pengenalan awal. */
+function KartuPengenalan() {
+  const tampilkanLagi = useTampilkanPengenalanLagi()
+  const { koneksi } = useData()
+  const judulId = useId()
+  if (!tampilkanLagi) return null
+  const offline = koneksi === 'offline'
+  return (
+    <Card aria-labelledby={judulId} className="flex flex-col gap-4">
+      <CardTitle icon="tour" id={judulId}>
+        Pengenalan fitur
+      </CardTitle>
+      <p className="text-ink-muted">
+        Lihat lagi ringkasan tiap menu dan penjelasan tiap halaman. Statusnya hanya disimpan di perangkat ini.
+      </p>
+      <div className="flex flex-wrap items-center justify-end gap-3">
+        {offline && (
+          <p className="mr-auto flex items-center gap-1.5 text-body-sm text-ink-muted">
+            <Icon name="lock" size={16} />
+            Tidak tersedia saat offline. Sambungkan internet dulu.
+          </p>
+        )}
+        <Button variant="tactile" icon="replay" disabled={offline} onClick={tampilkanLagi}>
+          Tampilkan pengenalan lagi
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
 export function AkunPage() {
   usePageTitle('Akun')
   const { akun } = useAuth()
@@ -392,6 +423,7 @@ export function AkunPage() {
         <div className="flex flex-col gap-6">
           <FormPassword akun={akun} />
           <KartuPasang />
+          <KartuPengenalan />
           <KartuKeluar />
         </div>
       </div>

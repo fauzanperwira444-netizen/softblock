@@ -7,6 +7,7 @@ configure({ asyncUtilTimeout: 4000 })
 if (typeof window !== 'undefined') {
   // jsdom tidak mengimplementasikan scrollTo; ScrollRestoration memanggilnya saat berpindah rute.
   window.scrollTo = () => {}
+  Element.prototype.scrollIntoView ??= () => {}
 
   window.matchMedia ??= (query: string) =>
     ({

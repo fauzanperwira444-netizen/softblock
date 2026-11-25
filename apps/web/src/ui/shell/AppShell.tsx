@@ -7,6 +7,7 @@ import { Icon } from '../kit/Icon'
 import { SPRING_SOFT } from '../motion'
 import { BrandMark } from './Brand'
 import { NAV_UTAMA } from './nav'
+import { PengenalanProvider } from '../pengenalan/Pengenalan'
 import { LayananTask } from '../task/LayananTask'
 import { DialogLoginUlang } from './DialogLoginUlang'
 import { GerbangData } from './GerbangData'
@@ -182,41 +183,43 @@ export function AppShell() {
   }, [pathname])
 
   return (
-    <div className="flex min-h-dvh">
-      <a
-        href="#konten"
-        className="sr-only z-50 rounded-full bg-cta px-4 py-2 text-on-cta focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
-      >
-        Lewati ke konten
-      </a>
-      <NavRail />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <TopBarHp />
-        <StatusBar />
-        <main
-          id="konten"
-          ref={mainRef}
-          tabIndex={-1}
-          className="mx-auto w-full max-w-[1280px] flex-1 px-4 pt-6 pb-28 outline-none md:px-8 md:pt-8 md:pb-12"
+    <PengenalanProvider>
+      <div className="flex min-h-dvh">
+        <a
+          href="#konten"
+          className="sr-only z-50 rounded-full bg-cta px-4 py-2 text-on-cta focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
         >
-          <div className="mb-2 hidden justify-end md:flex">
-            <SyncPill />
-          </div>
-          {/* Akun dibaca dari API, bukan snapshot, jadi tetap tersedia tanpa data lokal. */}
-          {pathname.startsWith('/akun') ? (
-            <Outlet />
-          ) : (
-            <GerbangData>
-              <LayananTask>
-                <Outlet />
-              </LayananTask>
-            </GerbangData>
-          )}
-        </main>
+          Lewati ke konten
+        </a>
+        <NavRail />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <TopBarHp />
+          <StatusBar />
+          <main
+            id="konten"
+            ref={mainRef}
+            tabIndex={-1}
+            className="mx-auto w-full max-w-[1280px] flex-1 px-4 pt-6 pb-28 outline-none md:px-8 md:pt-8 md:pb-12"
+          >
+            <div className="mb-2 hidden justify-end md:flex">
+              <SyncPill />
+            </div>
+            {/* Akun dibaca dari API, bukan snapshot, jadi tetap tersedia tanpa data lokal. */}
+            {pathname.startsWith('/akun') ? (
+              <Outlet />
+            ) : (
+              <GerbangData>
+                <LayananTask>
+                  <Outlet />
+                </LayananTask>
+              </GerbangData>
+            )}
+          </main>
+        </div>
+        <BottomNav />
+        <DialogLoginUlang />
+        <ScrollRestoration />
       </div>
-      <BottomNav />
-      <DialogLoginUlang />
-      <ScrollRestoration />
-    </div>
+    </PengenalanProvider>
   )
 }

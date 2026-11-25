@@ -119,5 +119,6 @@ export type ResponsSinkron = {
   penuh: boolean
   ubah: { [K in NamaTabel]?: Tabel[K][] }
   hapus: Array<{ tabel: NamaTabel; id: string }>
-  meta: { hari_ini: Tanggal; zona_waktu: string }
+  /** `akun_dibuat` di zona akun; null untuk akun tanpa tanggal dibuat. */
+  meta: { hari_ini: Tanggal; zona_waktu: string; akun_dibuat: Tanggal | null }
 }

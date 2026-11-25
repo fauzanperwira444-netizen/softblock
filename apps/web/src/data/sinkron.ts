@@ -147,7 +147,7 @@ export class MesinSinkron {
     const lama = this.state.snapshot
     if (!lama) return
     const terlewat = respons.revisi_sebelum !== lama.revisi
-    const baru = terapkan(lama, { ...respons, penuh: false, meta: { hari_ini: lama.hari_ini, zona_waktu: lama.zona_waktu } }, this.sekarang())
+    const baru = terapkan(lama, { ...respons, penuh: false, meta: { hari_ini: lama.hari_ini, zona_waktu: lama.zona_waktu, akun_dibuat: lama.akun_dibuat ?? null } }, this.sekarang())
     // Waktu sinkron tetap dari sinkron penuh terakhir; mutasi bukan pengganti sinkron.
     this.set({ snapshot: { ...baru, disinkron_pada: terlewat ? lama.disinkron_pada : baru.disinkron_pada } })
     await this.opsi.penyimpanan.simpan(this.opsi.akunId, this.state.snapshot as Snapshot).catch(() => undefined)

@@ -16,6 +16,7 @@ import { TampilanBulan } from '../../kalender/TampilanBulan'
 import { TampilanMinggu } from '../../kalender/TampilanMinggu'
 import { useLayananTask } from '../../task/LayananTask'
 import { usePageTitle } from '../../usePageTitle'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 
 type Tab = 'bulan' | 'minggu' | 'jadwal'
 const KUNCI_TAB = 'softblock:tab-kalender'
@@ -44,6 +45,7 @@ export function KalenderPage() {
   const waktu = useWaktu()
   const layanan = useLayananTask()
   const [tab, setTabState] = useState<Tab>(bacaTab)
+  usePengenalanHalaman(tab === 'jadwal' ? 'jadwal' : 'kalender')
   const [kursor, setKursor] = useState<Tanggal | null>(null)
   const [arah, setArah] = useState(0)
 
@@ -101,11 +103,11 @@ export function KalenderPage() {
           )}
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-well px-3 py-1.5 text-body-sm tactile-inset">
+          <span data-pengenalan="kalender-jam-kosong" className="inline-flex items-center gap-1.5 rounded-full bg-well px-3 py-1.5 text-body-sm tactile-inset">
             <Icon name="schedule" size={16} className="text-primary" />
             Sisa pekan ini: <b className="font-mono">{formatDurasi(kosongPekan)} kosong</b>
           </span>
-          <div className="min-w-[280px]">
+          <div data-pengenalan="kalender-tampilan" className="min-w-[280px]">
             <SegmentedControl
               label="Tampilan"
               value={tab}
@@ -123,6 +125,7 @@ export function KalenderPage() {
       <AnimatePresence mode="wait" initial={false} custom={arah}>
         <motion.div
           key={`${tab}-${tab === 'jadwal' ? '' : kunciGeser}`}
+          data-pengenalan={tab === 'jadwal' ? undefined : 'kalender-isi'}
           custom={arah}
           initial={{ opacity: 0, x: arah * 24 }}
           animate={{ opacity: 1, x: 0, transition: { duration: 0.28, ease: EASE_OUT } }}

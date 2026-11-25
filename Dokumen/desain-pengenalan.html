@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desain: Pengenalan fitur (LS-09) · Softblock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=block" rel="stylesheet">
+<style>
+/* Token disalin dari apps/web/src/index.css (design system Softblock, Tactile Barista Modern). */
+:root{
+  color-scheme:light;
+  --sb-canvas:#f8fafa;--sb-card:#fff;--sb-well:#f2f4f4;--sb-raised:#eceeee;--sb-high:#e6e8e8;
+  --sb-ink:#191c1d;--sb-ink-muted:#414844;--sb-line:#c1c8c2;--sb-line-strong:#717973;
+  --sb-primary:#406653;--sb-on-primary:#fff;--sb-sage:#769e88;--sb-sage-light:#8fbca3;
+  --sb-mist:#e3efe9;--sb-on-mist:#406653;--sb-mint:#beedd2;--sb-on-mint:#073523;
+  --sb-avatar:#c2ecd3;--sb-on-avatar:#284e3c;--sb-cta:#191c1d;--sb-cta-hover:#1e2322;--sb-on-cta:#fff;
+  --sb-danger:#ba1a1a;--sb-danger-soft:#ffdad6;--sb-on-danger-soft:#93000a;
+  --sb-inverse:#2e3131;--sb-on-inverse:#eff1f1;
+  --sb-warn-soft:#fdf6e6;--sb-warn-line:#ecd29a;--sb-warn:#8a5300;--sb-on-warn-soft:#5c3d00;
+  --sb-glow:rgb(143 188 163 / .3);--sb-scrim:rgb(25 28 29 / .42);
+  --sb-shadow-convex:-4px -4px 10px rgb(255 255 255/.95),6px 6px 16px rgb(30 35 34/.05),2px 2px 6px rgb(30 35 34/.03);
+  --sb-shadow-convex-sm:-2px -2px 6px rgb(255 255 255/.9),3px 3px 8px rgb(30 35 34/.05);
+  --sb-shadow-button:-3px -3px 8px rgb(255 255 255/.9),4px 4px 10px rgb(30 35 34/.06);
+  --sb-shadow-pressed:inset 2px 2px 5px rgb(30 35 34/.12),inset -2px -2px 5px rgb(255 255 255/.7);
+  --sb-shadow-inset:inset 2px 2px 5px rgb(30 35 34/.07),inset -2px -2px 5px rgb(255 255 255/.85);
+  --sb-shadow-pill:inset 1.5px 1.5px 4px rgb(30 35 34/.08),inset -1.5px -1.5px 4px rgb(255 255 255/.7);
+  --sb-shadow-cta:0 4px 12px rgb(25 28 29/.16),0 1px 3px rgb(25 28 29/.2);
+  --sb-shadow-header:0 2px 12px rgb(30 35 34/.04);
+  --sb-shadow-overlay:0 24px 64px rgb(25 28 29/.22);
+  --ease-out:cubic-bezier(.22,1,.36,1);--ease-in:cubic-bezier(.55,0,1,.45);--ease-press:cubic-bezier(.4,0,.2,1);
+  --dur-instant:90ms;--dur-fast:140ms;--dur-base:220ms;--dur-slow:320ms;
+}
+:root.dark{
+  color-scheme:dark;
+  --sb-canvas:#111413;--sb-card:#1b1f1e;--sb-well:#161a19;--sb-raised:#242928;--sb-high:#2c3230;
+  --sb-ink:#e1e3e3;--sb-ink-muted:#c1c8c2;--sb-line:#414844;--sb-line-strong:#8b938d;
+  --sb-primary:#a6d0b8;--sb-on-primary:#0c3424;--sb-sage:#5f8a73;--sb-sage-light:#769e88;
+  --sb-mist:#20342a;--sb-on-mist:#a6d0b8;--sb-mint:#284e3c;--sb-on-mint:#c2ecd3;
+  --sb-avatar:#284e3c;--sb-on-avatar:#c2ecd3;--sb-cta:#e1e3e3;--sb-cta-hover:#f2f4f4;--sb-on-cta:#191c1d;
+  --sb-danger:#ffb4ab;--sb-danger-soft:#5c1a16;--sb-on-danger-soft:#ffdad6;
+  --sb-inverse:#e1e3e3;--sb-on-inverse:#191c1d;
+  --sb-warn-soft:#2e2410;--sb-warn-line:#5c4415;--sb-warn:#e0a33c;--sb-on-warn-soft:#f3dfb1;
+  --sb-glow:rgb(118 158 136/.16);--sb-scrim:rgb(0 0 0/.6);
+  --sb-shadow-convex:inset 0 1px 0 rgb(255 255 255/.04),0 6px 16px rgb(0 0 0/.35);
+  --sb-shadow-convex-sm:inset 0 1px 0 rgb(255 255 255/.04),0 3px 8px rgb(0 0 0/.3);
+  --sb-shadow-button:inset 0 1px 0 rgb(255 255 255/.05),0 3px 8px rgb(0 0 0/.35);
+  --sb-shadow-pressed:inset 2px 2px 5px rgb(0 0 0/.5);
+  --sb-shadow-inset:inset 2px 2px 6px rgb(0 0 0/.45),inset -1px -1px 2px rgb(255 255 255/.03);
+  --sb-shadow-pill:inset 1.5px 1.5px 4px rgb(0 0 0/.4);
+  --sb-shadow-cta:0 4px 12px rgb(0 0 0/.45);
+  --sb-shadow-header:0 2px 12px rgb(0 0 0/.3);
+  --sb-shadow-overlay:0 24px 64px rgb(0 0 0/.55);
+}
+:root.calm{--dur-instant:0ms;--dur-fast:0ms;--dur-base:0ms;--dur-slow:0ms}
+*{box-sizing:border-box;margin:0}
+body{background:var(--sb-canvas);color:var(--sb-ink);font:400 14px/20px "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:2px solid var(--sb-primary);outline-offset:2px}
+.ms{font-family:"Material Symbols Outlined";font-weight:400;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;-webkit-font-feature-settings:"liga";font-feature-settings:"liga";user-select:none;flex-shrink:0}
+.ms.fill{font-variation-settings:"FILL" 1}
+.mono{font-family:"Space Mono",ui-monospace,monospace}
+.lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sb-ink-muted)}
+.muted{color:var(--sb-ink-muted)}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Kit (dari ui/kit/Button.tsx) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 24px;border-radius:999px;font-weight:600;font-size:14px;
+  transition:background-color var(--dur-fast) var(--ease-press),box-shadow var(--dur-fast) var(--ease-press),transform var(--dur-instant) var(--ease-press)}
+.btn:not(:disabled):hover{transform:translateY(-1px)}
+.btn:not(:disabled):active{transform:scale(.97)}
+.btn:disabled{opacity:.45;box-shadow:none}
+.btn.sm{padding:0 16px;font-size:12px;gap:4px}
+.btn .ms{font-size:18px}
+.btn-primary{background:var(--sb-cta);color:var(--sb-on-cta);box-shadow:var(--sb-shadow-cta)}
+.btn-primary:not(:disabled):hover{background:var(--sb-cta-hover)}
+.btn-tactile{background:var(--sb-card);box-shadow:var(--sb-shadow-button)}
+.btn-tactile:not(:disabled):hover{background:var(--sb-raised)}
+.btn-tactile:not(:disabled):active{box-shadow:var(--sb-shadow-pressed)}
+.btn-ghost{color:var(--sb-ink-muted)}
+.btn-ghost:not(:disabled):hover{background:var(--sb-raised);color:var(--sb-ink)}
+.btn-sage{background:var(--sb-mist);color:var(--sb-on-mist)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:var(--sb-card);box-shadow:var(--sb-shadow-button)}
+.glyph{display:inline-flex;width:52px;height:52px;border-radius:999px;align-items:center;justify-content:center;background:var(--sb-mist);color:var(--sb-on-mist);flex-shrink:0}
+.glyph .ms{font-size:24px}
+.card{background:var(--sb-card);border-radius:32px;box-shadow:var(--sb-shadow-convex);padding:24px}
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:24px;padding:0 12px;border-radius:999px;background:var(--sb-well);box-shadow:var(--sb-shadow-pill);font-size:12px;font-weight:600;color:var(--sb-ink-muted)}
+.chip .ms{font-size:14px}
+.badge-telat{background:var(--sb-danger);color:#fff;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700}
+:root.dark .badge-telat{color:#690005}
+/* ProgressStepper design system: segmen + angka selalu tampil */
+.stepper{display:flex;align-items:center;gap:8px}
+.stepper .seg{display:flex;gap:3px}
+.stepper .seg i{display:block;width:14px;height:6px;border-radius:999px;background:var(--sb-high);box-shadow:var(--sb-shadow-pill);transition:background-color var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out)}
+.stepper .seg i.on{background:var(--sb-sage);box-shadow:none}
+.stepper .seg i.now{background:var(--sb-primary);transform:scaleX(1.5);transform-origin:left;margin-right:7px}
+.stepper .n{font-family:"Space Mono",monospace;font-size:12px;color:var(--sb-ink-muted)}
+
+/* ---------- Halaman dokumen ---------- */
+.doc{max-width:1280px;margin:0 auto;padding:40px 32px 80px}
+.doc h1{font-size:30px;line-height:38px;font-weight:600;letter-spacing:-.02em}
+.doc h2{font-size:20px;line-height:28px;font-weight:600;margin:56px 0 12px}
+.doc h3{font-size:16px;line-height:24px;font-weight:600;margin:24px 0 8px}
+.doc p,.doc li{font-size:14px;line-height:22px;max-width:72ch}
+.doc ul{padding-left:20px;display:grid;gap:6px}
+.frame h1,.frame h2,.frame h3{margin:0}
+.frame .dash h2{margin-bottom:12px}
+.frame p{max-width:none}
+.stepper .n{white-space:nowrap}
+.lede{color:var(--sb-ink-muted);margin-top:8px;font-size:16px!important;line-height:24px!important}
+.ctrl{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding:12px 16px;margin:24px -16px 16px;background:color-mix(in srgb,var(--sb-canvas) 90%,transparent);backdrop-filter:blur(8px);border-radius:24px}
+.seg-ctl{display:inline-flex;padding:4px;border-radius:999px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset)}
+.seg-ctl button{min-height:36px;padding:0 14px;border-radius:999px;font-weight:600;font-size:12px;color:var(--sb-ink-muted)}
+.seg-ctl button[aria-pressed=true]{background:var(--sb-card);color:var(--sb-ink);box-shadow:var(--sb-shadow-button)}
+.ctrl label{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:12px;min-height:44px;cursor:pointer}
+.ctrl input{accent-color:var(--sb-primary);width:18px;height:18px}
+.status-dev{font-family:"Space Mono",monospace;font-size:12px;color:var(--sb-ink-muted)}
+.stage{display:flex;justify-content:center;padding:24px;border-radius:32px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset)}
+.stage-note{font-size:12px;color:var(--sb-ink-muted);text-align:center;margin-top:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;line-height:20px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--sb-line)}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--sb-ink-muted);font-weight:600}
+td:first-child{white-space:nowrap;font-weight:600}
+.tbl{overflow-x:auto;background:var(--sb-card);border-radius:24px;box-shadow:var(--sb-shadow-convex-sm);padding:8px 12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.anat{display:grid;gap:8px;font-size:13px}
+.anat b{font-weight:600}
+.k{display:inline-flex;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--sb-cta);color:var(--sb-on-cta);font:700 11px/22px "Space Mono",monospace;justify-content:center;margin-right:6px}
+
+/* ---------- Bingkai perangkat ---------- */
+.frame{position:relative;overflow:hidden;background:var(--sb-canvas);transition:width var(--dur-slow) var(--ease-out)}
+.frame[data-device=laptop]{width:min(1180px,100%);height:760px;border-radius:24px;box-shadow:0 0 0 1px var(--sb-line),var(--sb-shadow-overlay)}
+.frame[data-device=phone]{width:390px;height:780px;border-radius:44px;box-shadow:0 0 0 10px var(--sb-inverse),var(--sb-shadow-overlay)}
+.app{position:absolute;inset:0;display:flex}
+.rail{width:72px;margin:16px 0 16px 16px;border-radius:999px;background:var(--sb-well);box-shadow:var(--sb-shadow-convex);display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 0;flex-shrink:0}
+.brand{width:44px;height:44px;border-radius:999px;background:var(--sb-card);box-shadow:var(--sb-shadow-convex-sm);display:grid;place-items:center;color:var(--sb-primary)}
+.brand i{width:16px;height:16px;border-radius:5px;background:var(--sb-primary);box-shadow:5px 5px 0 -1px var(--sb-sage-light)}
+.rail nav{flex:1;display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.rail .nv{width:48px;height:48px;border-radius:999px;display:grid;place-items:center;color:var(--sb-ink-muted)}
+.rail .nv[aria-current=page]{background:var(--sb-cta);color:var(--sb-on-cta);box-shadow:var(--sb-shadow-cta)}
+.avatar{width:44px;height:44px;border-radius:999px;background:var(--sb-avatar);color:var(--sb-on-avatar);display:grid;place-items:center;font-weight:600;box-shadow:0 0 0 2px var(--sb-card),var(--sb-shadow-convex-sm)}
+.avatar[aria-current=page]{box-shadow:0 0 0 2px var(--sb-primary)}
+.col{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{display:none;align-items:center;justify-content:space-between;padding:8px 16px;padding-top:44px;box-shadow:var(--sb-shadow-header);background:var(--sb-canvas)}
+.topbar .nm{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.main{flex:1;overflow:auto;padding:28px 32px 40px;scrollbar-width:thin}
+.bottomnav{display:none;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px 8px 22px;background:var(--sb-card);box-shadow:0 -4px 16px rgb(30 35 34/.05)}
+.bottomnav button{min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:600;color:var(--sb-ink-muted)}
+.bottomnav .pill{width:56px;height:28px;border-radius:999px;display:grid;place-items:center}
+.bottomnav [aria-current=page]{color:var(--sb-ink)}
+.bottomnav [aria-current=page] .pill{background:var(--sb-mint);color:var(--sb-on-mint);box-shadow:var(--sb-shadow-pill)}
+.frame[data-device=phone] .rail{display:none}
+.frame[data-device=phone] .topbar{display:flex}
+.frame[data-device=phone] .bottomnav{display:grid}
+.frame[data-device=phone] .main{padding:20px 16px 32px}
+
+/* Bilah status (N-11) */
+.sbar{display:none;margin:16px 32px 0;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:var(--sb-well);box-shadow:inset 0 0 0 1.5px var(--sb-line)}
+.sbar .ic{width:40px;height:40px;border-radius:999px;background:var(--sb-card);display:grid;place-items:center}
+.offline .sbar{display:flex}
+.frame[data-device=phone] .sbar{margin:12px 16px 0}
+
+/* Dashboard */
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.ph h1{font-size:36px;line-height:44px;font-weight:600;letter-spacing:-.02em}
+.frame[data-device=phone] .ph h1{font-size:28px;line-height:36px}
+.dash{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;grid-template-areas:"telat ring" "minggu kal" "projek projek" "pola pola"}
+.frame[data-device=phone] .dash{grid-template-columns:1fr;grid-template-areas:"telat" "ring" "minggu" "kal" "projek" "pola";gap:16px}
+.dash>section{background:var(--sb-card);border-radius:32px;box-shadow:var(--sb-shadow-convex);padding:20px 24px}
+.frame[data-device=phone] .dash>section{padding:18px;border-radius:24px}
+.dash h2{font-size:16px;line-height:24px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset);margin-top:8px}
+.row .t{flex:1;min-width:0;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chk{width:22px;height:22px;border-radius:999px;box-shadow:inset 0 0 0 2px var(--sb-line-strong);flex-shrink:0}
+.day{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--sb-line) 50%,transparent)}
+.day:first-of-type{border-top:0}
+.day .d{font-family:"Space Mono",monospace;font-size:12px;color:var(--sb-ink-muted);padding-top:2px}
+.day .it{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:4px}
+.dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{border-radius:24px;padding:14px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset)}
+.tile .v{font-family:"Space Mono",monospace;font-weight:700;font-size:28px;line-height:32px;margin-top:6px}
+.mini{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-family:"Space Mono",monospace;font-size:11px}
+.mini span{height:30px;display:grid;place-items:center;border-radius:999px;position:relative}
+.mini .h{color:var(--sb-ink-muted);font-family:"Plus Jakarta Sans";font-weight:600}
+.mini .today{background:var(--sb-cta);color:var(--sb-on-cta);font-weight:700}
+.mini .mk::after{content:"";position:absolute;bottom:3px;width:4px;height:4px;border-radius:999px;background:var(--sb-primary)}
+.projs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.frame[data-device=phone] .projs{grid-template-columns:1fr}
+.proj{border-radius:24px;padding:16px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset)}
+.proj .nm{display:flex;align-items:center;gap:8px;font-weight:600;margin-bottom:10px}
+.bars{display:flex;align-items:flex-end;gap:12px;height:96px;padding-top:8px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;font-size:11px;color:var(--sb-ink-muted)}
+.bars b{display:block;width:100%;max-width:36px;border-radius:8px 8px 4px 4px;background:var(--sb-sage)}
+.placeholder{display:grid;place-items:center;text-align:center;min-height:60%;gap:12px;color:var(--sb-ink-muted)}
+
+/* Akun */
+.akun{display:grid;gap:24px;max-width:720px}
+.akun .card h2{font-size:20px;line-height:28px;font-weight:600}
+.akun .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-end;margin-top:16px}
+.reason{margin-right:auto;display:none;align-items:center;gap:6px;font-size:12px;color:var(--sb-ink-muted)}
+.offline .reason{display:inline-flex}
+.fld{display:grid;gap:6px;margin-top:16px}
+.fld .in{min-height:48px;border-radius:999px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset);padding:0 20px;display:flex;align-items:center}
+
+/* ---------- LS-09: pengenalan awal (dialog tengah) ---------- */
+.veil{position:absolute;inset:0;z-index:30;background:var(--sb-scrim);backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px;
+  opacity:0;transition:opacity var(--dur-base) var(--ease-out)}
+.veil.show{opacity:1}
+.intro{width:min(560px,100%);max-height:calc(100% - 16px);display:flex;flex-direction:column;background:var(--sb-card);border-radius:32px;box-shadow:var(--sb-shadow-overlay);overflow:hidden;
+  transform:translateY(16px) scale(.97);opacity:0;transition:transform var(--dur-slow) var(--ease-out),opacity var(--dur-slow) var(--ease-out)}
+.veil.show .intro{transform:none;opacity:1}
+.intro header{display:flex;align-items:center;gap:12px;padding:20px 20px 0 24px}
+.intro header .lbl{flex:1}
+.intro .body{padding:16px 24px 24px;overflow:auto;position:relative}
+.intro .pane{display:grid;gap:12px;align-content:start}
+.intro .pane .preview{margin-bottom:8px}
+.intro .pane.enter{animation:slideIn var(--dur-base) var(--ease-out) both}
+.intro .pane.enter.back{animation-name:slideInBack}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}}
+@keyframes slideInBack{from{opacity:0;transform:translateX(-24px)}}
+.preview{height:176px;border-radius:24px;background:var(--sb-well);box-shadow:var(--sb-shadow-inset);padding:18px;position:relative;overflow:hidden}
+.preview::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:999px;background:radial-gradient(circle,rgba(143,188,163,.35) 0%,rgba(227,239,233,.1) 70%,transparent 100%);pointer-events:none}
+:root.dark .preview::before{opacity:.35}
+.intro h2{font-size:22px;line-height:30px;font-weight:600;letter-spacing:-.01em}
+.intro .menu{display:flex;align-items:center;gap:8px;color:var(--sb-on-mist);font-weight:600;font-size:13px}
+.intro .menu .ms{width:32px;height:32px;border-radius:999px;background:var(--sb-mist);display:grid;place-items:center;font-size:18px}
+.intro p.desc{color:var(--sb-ink-muted);font-size:14px;line-height:22px}
+.intro footer{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 20px 14px 24px;background:var(--sb-well)}
+.intro footer .stepper{margin-right:auto}
+.offswitch{display:flex;justify-content:center;padding:4px 16px 12px;background:var(--sb-well)}
+.linkbtn{min-height:44px;padding:0 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--sb-ink-muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--sb-line-strong)}
+.linkbtn:hover{color:var(--sb-ink);background:var(--sb-raised)}
+/* Miniatur di kartu ringkasan: potongan UI asli, bukan ilustrasi */
+.pv-row{display:flex;align-items:center;gap:10px;height:36px;padding:0 12px;border-radius:12px;background:var(--sb-card);box-shadow:var(--sb-shadow-convex-sm);margin-bottom:8px;font-size:12px;font-weight:500;position:relative}
+.pv-row .chk{width:16px;height:16px}
+.pv-row .sp{flex:1}
+.pv-tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;position:relative}
+.pv-tile{background:var(--sb-card);border-radius:16px;padding:10px 12px;box-shadow:var(--sb-shadow-convex-sm)}
+.pv-tile .v{font-family:"Space Mono",monospace;font-weight:700;font-size:22px;line-height:28px}
+.pv-time{display:grid;grid-template-columns:44px 1fr;gap:6px 10px;font-family:"Space Mono",monospace;font-size:11px;color:var(--sb-ink-muted);position:relative}
+.pv-time .blk{height:30px;border-radius:10px;display:flex;align-items:center;gap:8px;padding:0 10px;font-family:"Plus Jakarta Sans";font-weight:600;font-size:12px;color:var(--sb-ink);background:var(--sb-card);box-shadow:var(--sb-shadow-convex-sm)}
+.pv-time .blk.sage{background:var(--sb-mist);color:var(--sb-on-mist);box-shadow:none}
+.pv-time .blk.free{background:transparent;box-shadow:inset 0 0 0 1.5px var(--sb-line);color:var(--sb-ink-muted);font-weight:500}
+
+/* ---------- LS-09: sorotan halaman ---------- */
+.tour{position:absolute;inset:0;z-index:30}
+.tour .catch{position:absolute;inset:0}
+.hole{position:absolute;border-radius:24px;pointer-events:none;
+  box-shadow:0 0 0 2px var(--sb-primary),0 0 0 8px var(--sb-glow),0 0 0 3000px var(--sb-scrim);
+  transition:top var(--dur-slow) var(--ease-out),left var(--dur-slow) var(--ease-out),width var(--dur-slow) var(--ease-out),height var(--dur-slow) var(--ease-out),border-radius var(--dur-slow) var(--ease-out),opacity var(--dur-base) var(--ease-out)}
+.pop{position:absolute;width:352px;background:var(--sb-card);border-radius:24px;box-shadow:var(--sb-shadow-overlay);overflow:hidden;
+  transition:top var(--dur-slow) var(--ease-out),left var(--dur-slow) var(--ease-out),opacity var(--dur-base) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.pop.hidden{opacity:0;transform:translateY(8px)}
+.pop .hd{display:flex;align-items:center;gap:8px;padding:14px 8px 0 20px}
+.pop .hd .lbl{flex:1}
+.pop .bd{padding:6px 20px 16px}
+.pop h3{font-size:16px;line-height:24px;font-weight:600;margin-bottom:4px}
+.pop p{color:var(--sb-ink-muted);font-size:14px;line-height:21px}
+.pop .ft{display:flex;align-items:center;gap:8px;padding:12px 16px 12px 20px;background:var(--sb-well)}
+.pop .ft .stepper{margin-right:auto}
+.pop .off{display:flex;justify-content:flex-start;padding:0 8px 8px;background:var(--sb-well)}
+.pop .txt.enter{animation:fadeUp var(--dur-base) var(--ease-out) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}}
+/* HP: kartu di bawah layar, bisa digesek ke bawah */
+.pop.sheet{left:8px!important;right:8px;top:auto!important;bottom:8px;width:auto;border-radius:32px;touch-action:none}
+.pop.sheet .grab{display:block;width:40px;height:6px;border-radius:999px;background:var(--sb-high);margin:10px auto 0}
+.pop .grab{display:none}
+.pop.sheet .hd{padding-top:6px}
+.pop.sheet .ft .btn{min-height:48px}
+.pop.dragging{transition:none}
+</style>
+</head>
+<body>
+<div class="doc">
+  <p class="lbl">Softblock · LS-09 Pengenalan fitur · desain, belum diimplementasi</p>
+  <h1>Pengenalan fitur (onboarding)</h1>
+  <p class="lede">Prototipe interaktif untuk O-01 sampai O-06 dan UC-40. Semua warna, radius, bayangan, dan durasi gerak diambil dari token Softblock di <span class="mono">apps/web/src/index.css</span> dan <span class="mono">ui/motion.ts</span>; tidak ada token baru.</p>
+
+  <div class="ctrl" role="toolbar" aria-label="Kontrol prototipe">
+    <div class="seg-ctl" aria-label="Perangkat">
+      <button aria-pressed="true" data-device="laptop">Laptop</button>
+      <button aria-pressed="false" data-device="phone">HP</button>
+    </div>
+    <div class="seg-ctl" aria-label="Tema">
+      <button aria-pressed="true" data-theme="light">Terang</button>
+      <button aria-pressed="false" data-theme="dark">Gelap</button>
+    </div>
+    <label><input type="checkbox" id="cbOffline"> Offline</label>
+    <label><input type="checkbox" id="cbCalm"> Kurangi gerakan</label>
+    <button class="btn btn-tactile sm" id="btnReset"><span class="ms">restart_alt</span>Ulang sebagai akun baru</button>
+    <span class="status-dev" id="devStatus" aria-live="polite"></span>
+  </div>
+
+  <div class="stage">
+    <div class="frame" id="frame" data-device="laptop">
+      <div class="app" id="app">
+        <aside class="rail">
+          <span class="brand" aria-hidden="true"><i></i></span>
+          <nav aria-label="Navigasi utama" id="railNav"></nav>
+          <button class="avatar" data-go="akun" aria-label="Akun Raka">R</button>
+        </aside>
+        <div class="col">
+          <header class="topbar">
+            <span class="nm"><span class="brand" style="width:36px;height:36px" aria-hidden="true"><i></i></span>Softblock</span>
+            <button class="avatar" data-go="akun" aria-label="Akun Raka">R</button>
+          </header>
+          <div class="sbar" role="status">
+            <span class="ic"><span class="ms">cloud_off</span></span>
+            <div><b>Offline</b><div style="font-size:12px;opacity:.85">Data terakhir per hari ini 08.12. Perubahan dinonaktifkan sampai tersambung.</div></div>
+          </div>
+          <main class="main" id="main" tabindex="-1"></main>
+          <nav class="bottomnav" aria-label="Navigasi utama" id="bottomNav"></nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="stage-note">Isi Dashboard adalah data contoh untuk prototipe. Tekan Esc untuk Lewati; di HP, gesek kartu ke bawah.</p>
+
+  <h2>Anatomi</h2>
+  <div class="grid2">
+    <div class="card anat">
+      <h3 style="margin-top:0">Pengenalan awal (O-02)</h3>
+      <div><span class="k">1</span><b>Sapaan</b> label kecil "Selamat datang, Raka" tetap di atas; isi kartu yang berganti.</div>
+      <div><span class="k">2</span><b>Lewati</b> tombol teks di kanan atas, sekaligus tombol tutup yang diwajibkan J-06. Menandai pengenalan awal sudah dilihat, lalu pengenalan halaman tetap jalan.</div>
+      <div><span class="k">3</span><b>Miniatur menu</b> di sumur <span class="mono">tactile-inset</span>, disusun dari potongan komponen asli (baris task, tile metrik, blok jam), bukan ilustrasi. Satu glow sage per layar, sesuai aturan desain system.</div>
+      <div><span class="k">4</span><b>Nama menu + ikon nav</b> memakai ikon yang sama dengan rail dan bottom nav, supaya pengguna mengenali menu yang dimaksud.</div>
+      <div><span class="k">5</span><b>Penanda langkah</b> ProgressStepper dengan angka "2 dari 5" yang selalu tampil (warna bukan satu-satunya pembawa makna, N-16).</div>
+      <div><span class="k">6</span><b>Kembali / Lanjut / Selesai</b> Lanjut adalah satu-satunya tombol gelap di layar. Kembali disembunyikan di langkah pertama.</div>
+      <div><span class="k">7</span><b>Matikan semua pengenalan</b> tautan sekunder di bawah, terpisah dari tombol navigasi agar tidak tertekan tidak sengaja.</div>
+    </div>
+    <div class="card anat">
+      <h3 style="margin-top:0">Sorotan halaman (O-03)</h3>
+      <div><span class="k">1</span><b>Lubang sorotan</b> scrim <span class="mono">--sb-scrim</span> dengan lubang seukuran elemen + 8px, cincin 2px <span class="mono">--sb-primary</span> dan halo <span class="mono">--sb-glow</span>. Radius lubang mengikuti radius elemen.</div>
+      <div><span class="k">2</span><b>Kartu penjelasan</b> 352px, radius tile 24px, di sisi elemen yang paling lega (kanan, kiri, bawah, atas). Kartu tidak pernah menutupi elemen yang disorot.</div>
+      <div><span class="k">3</span><b>Kepala</b> nama halaman sebagai label + tombol Lewati.</div>
+      <div><span class="k">4</span><b>Kaki</b> stepper + "3 dari 6", Kembali, Lanjut. Di langkah terakhir Lanjut menjadi Selesai.</div>
+      <div><span class="k">5</span><b>HP</b> kartu menempel di bawah layar (radius 32px, pegangan geser). Elemen disorot digulir ke sepertiga atas agar tidak tertutup kartu.</div>
+      <div><span class="k">6</span><b>Klik di luar</b> tidak menutup pengenalan, supaya ketukan tak sengaja tidak menghilangkan penjelasan. Penutupnya eksplisit: Lewati, Esc, atau gesek ke bawah.</div>
+    </div>
+  </div>
+
+  <h2>Naskah pengenalan halaman</h2>
+  <p class="muted">Urutan mengikuti tata letak laptop (D-01). Bila urutan di HP berbeda (N-54), nomornya ditulis dalam kurung. Langkah yang elemennya tidak ada dilewati otomatis, dan penghitung langkah menyesuaikan.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Halaman</th><th>Elemen yang disorot</th><th>Judul</th><th>Teks</th></tr></thead>
+    <tbody id="naskah"></tbody>
+  </table></div>
+
+  <h2>Perilaku</h2>
+  <div class="grid2">
+    <div>
+      <h3>Kapan tampil</h3>
+      <ul>
+        <li>Hanya untuk akun dengan <span class="mono">meta.akun_dibuat</span> pada atau setelah konstanta tanggal rilis, kecuali pengguna menekan "Tampilkan pengenalan lagi" (O-01, O-06).</li>
+        <li>Pengenalan awal dulu, lalu pengenalan halaman yang sedang terbuka. Keduanya tidak pernah tampil bersamaan.</li>
+        <li>Ditunda selama ada panel, formulir, dialog, bilah Offline/Menyambungkan, atau data masih dimuat. Muncul 400ms setelah keadaan itu selesai, supaya tidak menyambar layar yang baru stabil (O-05).</li>
+        <li>Akun tidak punya pengenalan halaman.</li>
+      </ul>
+      <h3>Status</h3>
+      <ul>
+        <li>Kunci <span class="mono">softblock:pengenalan:{akun_id}</span> berisi <span class="mono">{ awal, halaman: [...], mati }</span> (DA-11). Tidak dihapus saat Keluar.</li>
+        <li>Selesai dan Lewati menandai bagian itu. Bila halaman ditinggalkan sebelum itu, bagian tersebut tampil lagi di kunjungan berikutnya (O-04).</li>
+        <li>"Matikan semua" tanpa dialog konfirmasi: bisa dibatalkan dari Akun, dan konfirmasi akan menumpuk overlay di atas pengenalan (J-06).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Keyboard dan pembaca layar</h3>
+      <ul>
+        <li>Dialog awal dan kartu sorotan memakai <span class="mono">role="dialog"</span> + <span class="mono">aria-modal</span>, judul sebagai <span class="mono">aria-labelledby</span>. Sisa aplikasi <span class="mono">inert</span>.</li>
+        <li>Fokus awal ke Lanjut. Tab berputar di dalam kartu. Esc = Lewati. Panah kiri/kanan = Kembali/Lanjut.</li>
+        <li>Pergantian langkah diumumkan lewat <span class="mono">aria-live="polite"</span>: "Langkah 3 dari 6, To-do dan jam kosong".</li>
+        <li>Setelah ditutup, fokus ke <span class="mono">#konten</span> (J-07).</li>
+        <li>Pada teks 200%, kartu sorotan di laptop beralih ke kartu bawah seperti HP bila tidak muat di sisi elemen (N-18).</li>
+      </ul>
+      <h3>Gerak (token "Tactile calm")</h3>
+      <ul>
+        <li>Dialog awal masuk seperti <span class="mono">modalCard</span>: naik 16px + scale .97 → 1, <span class="mono">DUR.slow</span> 320ms <span class="mono">EASE_OUT</span>; keluar 180ms <span class="mono">EASE_IN</span>.</li>
+        <li>Ganti kartu: geser 24px searah tombol yang ditekan + pudar, <span class="mono">DUR.base</span> 220ms.</li>
+        <li>Lubang sorotan berpindah ke elemen berikutnya 320ms <span class="mono">EASE_OUT</span>; kartu ikut berpindah, teksnya pudar naik 6px. Lubang memberi tahu ke mana mata harus pindah, itu alasan geraknya.</li>
+        <li>Kartu bawah HP masuk dengan <span class="mono">SPRING_SOFT</span>, mengikuti jari saat digesek; lepas di atas 80px = Lewati.</li>
+        <li>Kurangi gerakan: semua perpindahan langsung, isi tetap sama (N-19).</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s)
+const NAV = [
+  ['dashboard', 'Dashboard', 'dashboard'],
+  ['projek', 'Projek', 'folder'],
+  ['task', 'Task', 'task_alt'],
+  ['todo', 'To-do', 'checklist'],
+  ['kalender', 'Kalender', 'calendar_today'],
+]
+
+/* ---------- Isi pengenalan ---------- */
+const AWAL = [
+  { menu: 'Dashboard', icon: 'dashboard', judul: 'Mulai hari dari sini', teks: 'Task yang telat, rencana hari ini sampai 7 hari ke depan, sisa jam kosong, dan kemajuan projek ada di satu layar.', pv: 'dash' },
+  { menu: 'Projek', icon: 'folder', judul: 'Pecah kerja besar menjadi sesi', teks: 'Buat projek dengan warnanya sendiri, bagi ke dalam sesi bertanggal, lalu isi tiap sesi dengan task dan dokumen.', pv: 'projek' },
+  { menu: 'Task', icon: 'task_alt', judul: 'Semua task di satu daftar', teks: 'Cari dan saring per status atau label, lalu catat progress langsung dari baris task tanpa membuka detailnya.', pv: 'task' },
+  { menu: 'To-do', icon: 'checklist', judul: 'Susun hari per jam', teks: 'Ambil task ke to-do hari ini, taruh di blok jam, lalu centang. Yang tertinggal pindah ke daftar "Belum selesai".', pv: 'todo' },
+  { menu: 'Kalender', icon: 'calendar_today', judul: 'Lihat waktu yang tersisa', teks: 'Lihat sesi dan to-do per bulan atau minggu, catat jadwal tetap seperti kuliah, dan temukan jam yang masih kosong.', pv: 'kal' },
+]
+
+const TUR = {
+  dashboard: {
+    nama: 'Dashboard',
+    laptop: ['telat', 'minggu', 'ring', 'kal', 'projek', 'tambah'],
+    phone: ['telat', 'ring', 'minggu', 'kal', 'projek', 'tambah'],
+    langkah: {
+      telat: ['Task telat', 'Task yang lewat tenggat selalu di paling atas, supaya tidak tertimbun task baru.'],
+      minggu: ['Hari ini + 7 hari', 'Task dan sesi seminggu ke depan, dikelompokkan per hari. Ketuk satu task untuk melihat detailnya.'],
+      ring: ['To-do dan jam kosong', 'Berapa to-do hari ini yang sudah dicentang, dan berapa jam yang masih kosong di luar jadwal tetap.'],
+      kal: ['Kalender mini', 'Tanggal bertitik punya task atau sesi. Pilih tanggal untuk membukanya di Kalender.'],
+      projek: ['Projek dan Pola kerja', 'Kemajuan tiap projek yang berjalan, lalu jam kerjamu per hari. Pola kerja dimuat paling akhir.'],
+      tambah: ['Tambah task', 'Catat task baru dari sini kapan saja. Task bisa masuk ke sesi projek atau berdiri sendiri.'],
+    },
+  },
+}
+
+const NASKAH = [
+  ['Dashboard', '1 Telat', 'Task telat', TUR.dashboard.langkah.telat[1]],
+  ['', '2 Hari ini + 7 hari (HP: 3)', 'Hari ini + 7 hari', TUR.dashboard.langkah.minggu[1]],
+  ['', '3 Ringkasan to-do dan jam kosong (HP: 2)', 'To-do dan jam kosong', TUR.dashboard.langkah.ring[1]],
+  ['', '4 Kalender mini', 'Kalender mini', TUR.dashboard.langkah.kal[1]],
+  ['', '5 Projek + Pola kerja', 'Projek dan Pola kerja', TUR.dashboard.langkah.projek[1]],
+  ['', '6 Tombol Tambah task', 'Tambah task', TUR.dashboard.langkah.tambah[1]],
+  ['Daftar Projek', '1 Tombol Buat projek', 'Buat projek', 'Beri nama, rentang tanggal, dan warna. Warna dan pola garis membedakan projek di Kalender.'],
+  ['', '2 Filter status', 'Saring per status', 'Tampilkan projek yang berjalan, selesai, atau diarsipkan.'],
+  ['', '3 Area daftar (teks, bukan kartu)', 'Buka detail projek', 'Ketuk kartu projek untuk melihat sesi, task, dan dokumennya.'],
+  ['Detail Projek', '1 Tombol Tambah sesi', 'Bagi ke dalam sesi', 'Sesi adalah tahap bertanggal, misalnya "Riset" atau "Revisi". Garisnya tampil di Kalender.'],
+  ['', '2 Daftar sesi', 'Task per sesi', 'Task dikelompokkan per sesi. Progress sesi dihitung dari task di dalamnya.'],
+  ['', '3 Seksi Dokumen', 'Dokumen', 'Simpan tautan dan catatan yang dipakai di projek ini.'],
+  ['', '4 Tombol aksi projek', 'Aksi projek', 'Ubah, selesaikan, atau arsipkan projek dari menu ini.'],
+  ['Daftar Task', '1 Tombol Tambah task', 'Tambah task', 'Task bisa masuk ke sesi projek atau berdiri sendiri.'],
+  ['', '2 Filter + kolom cari', 'Saring dan cari', 'Gabungkan status, label, dan projek. Pencarian membaca judul task.'],
+  ['', '3 Area daftar (teks)', 'Aksi cepat di baris', 'Catat progress, tambah ke to-do, atau selesaikan task langsung dari barisnya.'],
+  ['', '4 Tombol Kelola label', 'Kelola label', 'Buat, ganti nama, atau hapus label. Menghapus label tidak menghapus task.'],
+  ['To-do', '1 Tab Hari ini / Mendatang', 'Hari ini dan mendatang', 'Rencana hari ini di depan, rencana hari berikutnya di tab sebelah.'],
+  ['', '2 Tombol Susun', 'Panel penyusunan', 'Pilih task untuk dikerjakan hari ini, lalu atur urutannya.'],
+  ['', '3 Garis waktu blok jam', 'Blok jam dan ceklis', 'Taruh to-do di jam tertentu, centang saat selesai.'],
+  ['', '4 Daftar Belum selesai', '"Belum selesai"', 'To-do dari hari lalu yang belum dicentang berkumpul di sini, siap dipindah ke hari lain.'],
+  ['Kalender', '1 Tab Bulan / Minggu', 'Bulan dan Minggu', 'Bulan untuk gambaran besar, Minggu untuk melihat jam.'],
+  ['', '2 Satu sel hari (teks)', 'Panel hari', 'Ketuk tanggal untuk membuka panel hari berisi daftar kronologis.'],
+  ['', '3 Legenda jam kosong', 'Jam kosong', 'Area terang adalah jam yang belum terisi jadwal, sesi, atau to-do.'],
+  ['Tab Jadwal', '1 Tombol Buat jadwal', 'Jadwal berulang', 'Catat kegiatan tetap seperti kuliah atau kerja paruh waktu sekali, lalu biarkan berulang.'],
+  ['', '2 Sub-tab Aktif / Berakhir / Pengecualian', 'Aktif, Berakhir, Pengecualian', 'Pengecualian dipakai untuk hari libur atau jadwal yang batal sekali saja.'],
+]
+
+/* ---------- Status perangkat (simulasi localStorage per akun) ---------- */
+let st = { awal: false, halaman: [], mati: false }
+let halaman = 'dashboard'
+let offline = false
+let antre = null // pengenalan yang ditunda (O-05)
+
+function tulisStatus() {
+  const h = st.mati ? 'dimatikan' : `awal ${st.awal ? 'sudah' : 'belum'} · dashboard ${st.halaman.includes('dashboard') ? 'sudah' : 'belum'}`
+  $('#devStatus').textContent = `status perangkat: ${h}${antre ? ' · ditunda: offline' : ''}`
+}
+
+/* ---------- Render aplikasi ---------- */
+function renderNav() {
+  $('#railNav').innerHTML = NAV.map(([k, l, i]) =>
+    `<button class="nv" data-go="${k}" aria-label="${l}" ${k === halaman ? 'aria-current="page"' : ''}><span class="ms ${k === halaman ? 'fill' : ''}">${i}</span></button>`).join('')
+  $('#bottomNav').innerHTML = NAV.map(([k, l, i]) =>
+    `<button data-go="${k}" ${k === halaman ? 'aria-current="page"' : ''}><span class="pill"><span class="ms ${k === halaman ? 'fill' : ''}">${i}</span></span>${l}</button>`).join('')
+  document.querySelectorAll('.avatar').forEach((a) => a.toggleAttribute('aria-current', halaman === 'akun'))
+  document.querySelectorAll('.avatar').forEach((a) => halaman === 'akun' ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'))
+}
+
+const P = { skripsi: '#406653', lomba: '#8a5a2b', kerja: '#4a5f8a' }
+
+function renderDashboard() {
+  return `
+  <div class="ph"><div><p class="lbl">Rabu, 25 Nov 2026</p><h1>Dashboard</h1></div>
+    <button class="btn btn-primary" data-tour="tambah"><span class="ms">add</span>Tambah task</button></div>
+  <div class="dash">
+    <section data-tour="telat" style="grid-area:telat"><h2><span class="ms" style="color:var(--sb-danger)">event_busy</span>Telat <span class="badge-telat mono">2</span></h2>
+      <div class="row"><span class="chk"></span><span class="t">Kirim draf bab 2 ke pembimbing</span><span class="chip mono">23 Nov</span></div>
+      <div class="row"><span class="chk"></span><span class="t">Unggah aset desain lomba</span><span class="chip mono">24 Nov</span></div>
+    </section>
+    <section data-tour="ring" style="grid-area:ring"><h2>Hari ini</h2>
+      <div class="tiles"><div class="tile"><p class="lbl">To-do</p><p class="v">2/5</p></div><div class="tile"><p class="lbl">Jam kosong</p><p class="v">3.5</p></div></div>
+    </section>
+    <section data-tour="minggu" style="grid-area:minggu"><h2>Hari ini + 7 hari</h2>
+      <div class="day"><span class="d">Rab 25</span><div><div class="it"><i class="dot" style="background:${P.skripsi}"></i>Revisi metodologi</div><div class="it"><i class="dot" style="background:${P.lomba}"></i>Wireframe halaman profil</div></div></div>
+      <div class="day"><span class="d">Kam 26</span><div><div class="it"><i class="dot" style="background:${P.kerja}"></i>Rapat mingguan tim</div></div></div>
+      <div class="day"><span class="d">Jum 27</span><div><div class="it"><i class="dot" style="background:${P.skripsi}"></i>Sesi: Pengumpulan data dimulai</div></div></div>
+      <div class="day"><span class="d">Sen 30</span><div><div class="it"><i class="dot" style="background:var(--sb-line-strong)"></i>Bayar UKT</div></div></div>
+    </section>
+    <section data-tour="kal" style="grid-area:kal"><h2>November 2026</h2>
+      <div class="mini">${['S','S','R','K','J','S','M'].map((h) => `<span class="h">${h}</span>`).join('')}
+      ${Array.from({ length: 21 }, (_, i) => { const d = i + 16; const c = d === 25 ? 'today' : [23, 24, 26, 27, 30].includes(d) ? 'mk' : ''; return `<span class="${c}">${d > 30 ? d - 30 : d}</span>` }).join('')}</div>
+    </section>
+    <section data-tour="projek" style="grid-area:projek"><h2>Projek</h2>
+      <div class="projs">
+        ${[['Skripsi', P.skripsi, 4, 10], ['Lomba UI/UX', P.lomba, 7, 9], ['Kerja paruh waktu', P.kerja, 2, 6]].map(([n, c, a, b]) => `
+        <div class="proj"><div class="nm"><i class="dot" style="background:${c};width:10px;height:10px"></i>${n}</div>
+          <div class="stepper"><span class="seg">${Array.from({ length: b }, (_, i) => `<i class="${i < a ? 'on' : ''}" style="width:10px"></i>`).join('')}</span><span class="n">${a}/${b}</span></div></div>`).join('')}
+      </div>
+      <h2 style="margin-top:20px">Pola kerja</h2>
+      <div class="bars">${[['S', 3], ['S', 5], ['R', 4], ['K', 6], ['J', 2], ['S', 1], ['M', 0.5]].map(([d, v]) => `<div><b style="height:${v * 12}px"></b>${d}</div>`).join('')}</div>
+    </section>
+  </div>`
+}
+
+function renderAkun() {
+  return `
+  <div class="ph"><div><h1>Akun</h1></div></div>
+  <div class="akun">
+    <div class="card"><h2>Profil</h2>
+      <div class="fld"><span class="lbl">Nama tampil</span><span class="in">Raka</span></div></div>
+    <div class="card" id="kartuPengenalan">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <span class="glyph"><span class="ms">tour</span></span>
+        <div><h2>Pengenalan fitur</h2>
+        <p class="muted" style="margin-top:4px">Lihat lagi ringkasan tiap menu dan penjelasan tiap halaman. Pengenalan tampil sekali per halaman, dan statusnya hanya disimpan di perangkat ini.</p></div>
+      </div>
+      <div class="actions">
+        <p class="reason"><span class="ms" style="font-size:16px">lock</span>Tidak tersedia saat offline. Sambungkan internet dulu.</p>
+        <button class="btn btn-tactile" id="btnLagi" ${offline ? 'disabled' : ''}><span class="ms">replay</span>Tampilkan pengenalan lagi</button>
+      </div>
+    </div>
+  </div>`
+}
+
+function renderLain() {
+  const n = NAV.find(([k]) => k === halaman)[1]
+  return `<div class="placeholder"><span class="glyph"><span class="ms">description</span></span>
+    <p style="max-width:36ch">Halaman ${n} tidak digambar di prototipe ini. Naskah sorotannya ada di tabel "Naskah pengenalan halaman" di bawah.</p></div>`
+}
+
+function render() {
+  renderNav()
+  $('#main').innerHTML = halaman === 'dashboard' ? renderDashboard() : halaman === 'akun' ? renderAkun() : renderLain()
+  $('#main').scrollTop = 0
+  const b = $('#btnLagi')
+  if (b) b.onclick = tampilkanLagi
+}
+
+function pergi(k) {
+  if (k === halaman) return
+  halaman = k
+  render()
+  $('#main').focus({ preventScroll: true })
+  mungkinMulai()
+}
+
+document.addEventListener('click', (e) => {
+  const g = e.target.closest('[data-go]')
+  if (g && $('#app').contains(g)) pergi(g.dataset.go)
+})
+
+/* ---------- Pengendali LS-09 ---------- */
+const frame = $('#frame')
+let aktif = null // 'awal' | 'halaman'
+
+function bolehTampil() { return !offline && !st.mati && !aktif }
+
+function mungkinMulai() {
+  if (st.mati || aktif) return
+  let mau = null
+  if (!st.awal) mau = 'awal'
+  else if (TUR[halaman] && !st.halaman.includes(halaman)) mau = 'halaman'
+  if (!mau) return
+  if (offline) { antre = mau; tulisStatus(); return } // O-05
+  antre = null
+  setTimeout(() => (mau === 'awal' ? bukaAwal() : bukaTur(halaman)), 400)
+  tulisStatus()
+}
+
+function kunci(on) { $('#app').inert = on }
+
+function selesaikan(bagian) {
+  if (bagian === 'awal') st.awal = true
+  else if (!st.halaman.includes(bagian)) st.halaman.push(bagian)
+  tulisStatus()
+}
+
+function matikanSemua() {
+  st.mati = true
+  tutup()
+}
+
+let tutupFn = null
+function tutup() { tutupFn && tutupFn() }
+
+document.addEventListener('keydown', (e) => {
+  if (!aktif) return
+  if (e.key === 'Escape') { e.preventDefault(); $('[data-act=lewati]', frame)?.click() }
+  if (e.key === 'ArrowRight' && !e.target.closest('input')) $('[data-act=lanjut]', frame)?.click()
+  if (e.key === 'ArrowLeft' && !e.target.closest('input')) $('[data-act=kembali]', frame)?.click()
+  if (e.key === 'Tab') { // fokus berputar di dalam pengenalan
+    const box = $('.intro, .pop', frame); if (!box) return
+    const f = [...box.querySelectorAll('button:not(:disabled):not([hidden])')]
+    const i = f.indexOf(document.activeElement)
+    if (e.shiftKey && i <= 0) { e.preventDefault(); f.at(-1).focus() }
+    else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus() }
+  }
+})
+
+function stepperHTML(i, n) {
+  return `<span class="stepper" aria-hidden="true"><span class="seg">${Array.from({ length: n }, (_, k) => `<i class="${k < i ? 'on' : k === i ? 'now' : ''}"></i>`).join('')}</span><span class="n">${i + 1} dari ${n}</span></span>`
+}
+
+/* Miniatur menu: potongan komponen asli */
+function preview(pv) {
+  if (pv === 'dash') return `<div class="pv-tiles"><div class="pv-tile"><p class="lbl">Telat</p><p class="v" style="color:var(--sb-danger)">2</p></div><div class="pv-tile"><p class="lbl">To-do</p><p class="v">2/5</p></div><div class="pv-tile"><p class="lbl">Jam kosong</p><p class="v">3.5</p></div></div>
+    <div class="pv-row" style="margin-top:12px"><span class="chk"></span>Revisi metodologi<span class="sp"></span><span class="chip mono">Hari ini</span></div>`
+  if (pv === 'projek') return `<div class="pv-row"><i class="dot" style="background:${P.skripsi};width:10px;height:10px"></i><b style="font-weight:600">Skripsi</b><span class="sp"></span><span class="stepper"><span class="seg">${'<i class="on" style="width:8px"></i>'.repeat(4)}${'<i style="width:8px"></i>'.repeat(6)}</span><span class="n">4/10</span></span></div>
+    <div class="pv-row" style="margin-left:20px"><span class="ms" style="font-size:16px;color:var(--sb-ink-muted)">flag</span>Sesi 1 · Riset<span class="sp"></span><span class="chip mono">2–14 Nov</span></div>
+    <div class="pv-row" style="margin-left:20px"><span class="ms" style="font-size:16px;color:var(--sb-ink-muted)">flag</span>Sesi 2 · Pengumpulan data<span class="sp"></span><span class="chip mono">27 Nov</span></div>`
+  if (pv === 'task') return `<div class="pv-row" style="background:var(--sb-card)"><span class="ms" style="font-size:16px;color:var(--sb-ink-muted)">search</span><span class="muted">Cari task</span><span class="sp"></span><span class="chip"><span class="ms">filter_alt</span>Aktif</span></div>
+    <div class="pv-row"><span class="chk"></span>Wireframe halaman profil<span class="sp"></span><span class="chip"><span class="ms">tag</span>Desain</span><span class="chip mono">3/5</span></div>
+    <div class="pv-row"><span class="chk"></span>Rapat mingguan tim<span class="sp"></span><span class="chip mono">26 Nov</span></div>`
+  if (pv === 'todo') return `<div class="pv-time"><span>08.00</span><span class="blk sage"><span class="ms" style="font-size:16px">check_circle</span>Revisi metodologi</span>
+    <span>10.00</span><span class="blk"><span class="chk" style="width:14px;height:14px"></span>Wireframe halaman profil</span>
+    <span>13.00</span><span class="blk free">Jam kosong · 2 jam</span></div>`
+  return `<div class="mini" style="position:relative">${['S','S','R','K','J','S','M'].map((h) => `<span class="h" style="height:22px">${h}</span>`).join('')}
+    ${Array.from({ length: 14 }, (_, i) => { const d = i + 23; const c = d === 25 ? 'today' : [23, 24, 26, 27, 30].includes(d) ? 'mk' : ''; return `<span class="${c}" style="background:${c === 'today' ? '' : 'var(--sb-card)'};box-shadow:${c === 'today' ? '' : 'var(--sb-shadow-convex-sm)'};height:34px">${d > 30 ? d - 30 : d}</span>` }).join('')}</div>`
+}
+
+/* O-02: pengenalan awal */
+function bukaAwal() {
+  if (!bolehTampil()) return
+  aktif = 'awal'; kunci(true)
+  let i = 0
+  const veil = document.createElement('div')
+  veil.className = 'veil'
+  veil.innerHTML = `<div class="intro" role="dialog" aria-modal="true" aria-labelledby="awalJudul">
+    <header><span class="lbl">Selamat datang, Raka</span><button class="btn btn-ghost sm" data-act="lewati">Lewati</button></header>
+    <div class="body"><div class="pane"></div></div>
+    <footer><span data-slot="step"></span>
+      <button class="btn btn-tactile" data-act="kembali">Kembali</button>
+      <button class="btn btn-primary" data-act="lanjut">Lanjut</button></footer>
+    <div class="offswitch"><button class="linkbtn" data-act="mati">Matikan semua pengenalan</button></div>
+    <p class="sr" aria-live="polite" data-slot="live"></p></div>`
+  frame.appendChild(veil)
+  const pane = $('.pane', veil)
+  function isi(arah) {
+    const s = AWAL[i]
+    pane.className = 'pane'
+    void pane.offsetWidth
+    if (arah) pane.className = `pane enter ${arah < 0 ? 'back' : ''}`
+    pane.innerHTML = `<div class="preview" aria-hidden="true">${preview(s.pv)}</div>
+      <span class="menu"><span class="ms">${s.icon}</span>Menu ${s.menu}</span>
+      <h2 id="awalJudul">${s.judul}</h2><p class="desc">${s.teks}</p>`
+    $('[data-slot=step]', veil).outerHTML = `<span data-slot="step" style="margin-right:auto">${stepperHTML(i, AWAL.length)}</span>`
+    const kb = $('[data-act=kembali]', veil); kb.hidden = i === 0
+    const lb = $('[data-act=lanjut]', veil); lb.textContent = i === AWAL.length - 1 ? 'Selesai' : 'Lanjut'
+    $('[data-slot=live]', veil).textContent = `Langkah ${i + 1} dari ${AWAL.length}, ${s.menu}`
+  }
+  isi(0)
+  requestAnimationFrame(() => { veil.classList.add('show'); $('[data-act=lanjut]', veil).focus() })
+  function selesai(tandai) {
+    if (tandai) selesaikan('awal')
+    veil.classList.remove('show')
+    setTimeout(() => { veil.remove(); aktif = null; kunci(false); $('#main').focus({ preventScroll: true }); mungkinMulai() }, document.documentElement.classList.contains('calm') ? 0 : 200)
+  }
+  tutupFn = () => selesai(false)
+  veil.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-act]')?.dataset.act
+    if (a === 'lanjut') { if (i === AWAL.length - 1) selesai(true); else { i++; isi(1); $('[data-act=lanjut]', veil).focus() } }
+    if (a === 'kembali' && i > 0) { i--; isi(-1); if (i === 0) $('[data-act=lanjut]', veil).focus() }
+    if (a === 'lewati') selesai(true)
+    if (a === 'mati') { st.mati = true; tulisStatus(); selesai(false) }
+  })
+}
+
+/* O-03: sorotan halaman */
+function bukaTur(hal) {
+  if (!bolehTampil()) return
+  const def = TUR[hal]
+  const dev = frame.dataset.device
+  const ids = def[dev].filter((id) => $(`[data-tour=${id}]`, frame)) // langkah tanpa elemen dilewati
+  if (!ids.length) return
+  aktif = 'halaman'; kunci(true)
+  let i = 0
+  const tour = document.createElement('div')
+  tour.className = 'tour'
+  tour.innerHTML = `<div class="catch"></div><div class="hole"></div>
+    <div class="pop hidden ${dev === 'phone' ? 'sheet' : ''}" role="dialog" aria-modal="true" aria-labelledby="turJudul">
+      <span class="grab" aria-hidden="true"></span>
+      <div class="hd"><span class="lbl">Pengenalan ${def.nama}</span><button class="btn btn-ghost sm" data-act="lewati">Lewati</button></div>
+      <div class="bd txt"></div>
+      <div class="ft"><span data-slot="step"></span><button class="btn btn-tactile sm" data-act="kembali">Kembali</button><button class="btn btn-primary sm" data-act="lanjut">Lanjut</button></div>
+      <div class="off"><button class="linkbtn" data-act="mati">Matikan semua pengenalan</button></div>
+      <p class="sr" aria-live="polite" data-slot="live"></p>
+    </div>`
+  frame.appendChild(tour)
+  const hole = $('.hole', tour), pop = $('.pop', tour), main = $('#main')
+  const calm = () => document.documentElement.classList.contains('calm')
+
+  async function tempatkan(first) {
+    const el = $(`[data-tour=${ids[i]}]`, frame)
+    const fr = frame.getBoundingClientRect(), mr = main.getBoundingClientRect()
+    let r = el.getBoundingClientRect()
+    // Gulir supaya elemen terlihat; di HP ke sepertiga atas, di atas kartu bawah.
+    const ruangBawah = dev === 'phone' ? pop.offsetHeight + 24 : 24
+    const target = dev === 'phone' ? mr.top + 16 : mr.top + Math.max(16, (mr.height - r.height) / 2 - 40)
+    const perlu = r.top < mr.top + 8 || r.bottom > fr.bottom - ruangBawah
+    if (perlu) {
+      const tujuan = Math.max(0, Math.min(main.scrollHeight - main.clientHeight, main.scrollTop + (r.top - target)))
+      main.scrollTo({ top: tujuan, behavior: calm() ? 'auto' : 'smooth' })
+      // Tunggu guliran benar-benar selesai sebelum mengukur ulang.
+      await new Promise((ok) => {
+        const t0 = performance.now()
+        const cek = () => (Math.abs(main.scrollTop - tujuan) < 1 || performance.now() - t0 > 900 ? ok() : requestAnimationFrame(cek))
+        cek()
+      })
+      r = el.getBoundingClientRect()
+    }
+    const pad = 8, rad = parseFloat(getComputedStyle(el).borderRadius) || 12
+    const box = { x: r.left - fr.left - pad, y: r.top - fr.top - pad, w: r.width + pad * 2, h: r.height + pad * 2 }
+    Object.assign(hole.style, { left: box.x + 'px', top: box.y + 'px', width: box.w + 'px', height: box.h + 'px', borderRadius: Math.min(rad + pad, box.h / 2) + 'px' })
+    if (dev !== 'phone') {
+      const W = pop.offsetWidth, H = pop.offsetHeight, g = 16, FW = fr.width, FH = fr.height
+      const opsi = [
+        { x: box.x + box.w + g, y: box.y, ok: box.x + box.w + g + W < FW - g },
+        { x: box.x - g - W, y: box.y, ok: box.x - g - W > g },
+        { x: box.x + box.w - W, y: box.y + box.h + g, ok: box.y + box.h + g + H < FH - g },
+        { x: box.x + box.w - W, y: box.y - g - H, ok: box.y - g - H > g },
+      ]
+      const o = opsi.find((p) => p.ok) || opsi[2]
+      pop.style.left = Math.min(Math.max(g, o.x), FW - W - g) + 'px'
+      pop.style.top = Math.min(Math.max(g, o.y), FH - H - g) + 'px'
+    }
+    if (first) requestAnimationFrame(() => pop.classList.remove('hidden'))
+  }
+
+  function isi(first) {
+    const [j, t] = def.langkah[ids[i]]
+    const bd = $('.bd', pop)
+    bd.classList.remove('enter'); void bd.offsetWidth; if (!first) bd.classList.add('enter')
+    bd.innerHTML = `<h3 id="turJudul">${j}</h3><p>${t}</p>`
+    $('[data-slot=step]', pop).outerHTML = `<span data-slot="step" style="margin-right:auto">${stepperHTML(i, ids.length)}</span>`
+    $('[data-act=kembali]', pop).hidden = i === 0
+    $('[data-act=lanjut]', pop).textContent = i === ids.length - 1 ? 'Selesai' : 'Lanjut'
+    $('[data-slot=live]', pop).textContent = `Langkah ${i + 1} dari ${ids.length}, ${j}`
+    tempatkan(first)
+  }
+  isi(true)
+  $('[data-act=lanjut]', pop).focus({ preventScroll: true })
+
+  function selesai(tandai) {
+    if (tandai) selesaikan(hal)
+    pop.classList.add('hidden'); hole.style.opacity = 0
+    setTimeout(() => { tour.remove(); aktif = null; kunci(false); main.focus({ preventScroll: true }) }, calm() ? 0 : 200)
+  }
+  tutupFn = () => selesai(false)
+  pop.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-act]')?.dataset.act
+    if (a === 'lanjut') { if (i === ids.length - 1) selesai(true); else { i++; isi(); $('[data-act=lanjut]', pop).focus({ preventScroll: true }) } }
+    if (a === 'kembali' && i > 0) { i--; isi(); if (i === 0) $('[data-act=lanjut]', pop).focus({ preventScroll: true }) }
+    if (a === 'lewati') selesai(true)
+    if (a === 'mati') { st.mati = true; tulisStatus(); selesai(false) }
+  })
+  // HP: gesek ke bawah = Lewati
+  if (dev === 'phone') {
+    let y0 = null, dy = 0
+    pop.addEventListener('pointerdown', (e) => { if (e.target.closest('button')) return; y0 = e.clientY; pop.classList.add('dragging'); pop.setPointerCapture(e.pointerId) })
+    pop.addEventListener('pointermove', (e) => { if (y0 === null) return; dy = Math.max(0, e.clientY - y0); pop.style.transform = `translateY(${dy}px)` })
+    pop.addEventListener('pointerup', () => { if (y0 === null) return; pop.classList.remove('dragging'); pop.style.transform = ''; if (dy > 80) selesai(true); y0 = null; dy = 0 })
+  }
+}
+
+/* O-06: tampilkan lagi */
+function tampilkanLagi() {
+  if (offline) return
+  st = { awal: false, halaman: [], mati: false }
+  tulisStatus()
+  mungkinMulai()
+}
+
+/* ---------- Kontrol prototipe ---------- */
+document.querySelectorAll('[data-device]').forEach((b) => b.addEventListener('click', () => {
+  if (b.dataset.device === frame.dataset.device) return
+  tutup()
+  document.querySelectorAll('button[data-device]').forEach((x) => x.setAttribute('aria-pressed', x === b))
+  frame.dataset.device = b.dataset.device
+  setTimeout(mungkinMulai, 350)
+}))
+document.querySelectorAll('[data-theme]').forEach((b) => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-theme]').forEach((x) => x.setAttribute('aria-pressed', x === b))
+  document.documentElement.classList.toggle('dark', b.dataset.theme === 'dark')
+}))
+$('#cbCalm').checked = matchMedia('(prefers-reduced-motion: reduce)').matches
+document.documentElement.classList.toggle('calm', $('#cbCalm').checked)
+$('#cbCalm').addEventListener('change', (e) => document.documentElement.classList.toggle('calm', e.target.checked))
+$('#cbOffline').addEventListener('change', (e) => {
+  offline = e.target.checked
+  frame.classList.toggle('offline', offline)
+  if (offline && aktif) { tutup(); antre = true } // pengenalan yang sedang tampil ditunda, belum ditandai
+  if (halaman === 'akun') render()
+  if (!offline) mungkinMulai()
+  tulisStatus()
+})
+$('#btnReset').addEventListener('click', () => { tutup(); st = { awal: false, halaman: [], mati: false }; halaman = 'dashboard'; render(); setTimeout(mungkinMulai, 250); tulisStatus() })
+
+$('#naskah').innerHTML = NASKAH.map(([h, e, j, t]) => `<tr><td>${h}</td><td>${e}</td><td>${j}</td><td>${t}</td></tr>`).join('')
+
+render()
+tulisStatus()
+mungkinMulai()
+</script>
+</body>
+</html>

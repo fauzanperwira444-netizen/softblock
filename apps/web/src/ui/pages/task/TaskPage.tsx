@@ -18,6 +18,7 @@ import { BarisTask } from '../../task/BarisTask'
 import { DialogLabel } from '../../task/DialogLabel'
 import { useLayananTask } from '../../task/LayananTask'
 import { usePageTitle } from '../../usePageTitle'
+import { usePengenalanHalaman } from '../../pengenalan/Pengenalan'
 
 const STATUS: Array<{ value: StatusFilter; label: string }> = [
   { value: 'aktif', label: 'Aktif' },
@@ -47,6 +48,7 @@ function bacaFilter(p: URLSearchParams): FilterTask {
 
 export function TaskPage() {
   usePageTitle('Task')
+  usePengenalanHalaman('task')
   const data = useDataProjek()
   const waktu = useWaktu()
   const layanan = useLayananTask()
@@ -98,19 +100,19 @@ export function TaskPage() {
             <Icon name="checklist" size={16} />
             <span className="font-mono font-bold">{jumlahAktif}</span> task aktif
           </span>
-          <Button variant="tactile" icon="sell" onClick={() => setLabelBuka(true)}>
+          <Button data-pengenalan="task-label" variant="tactile" icon="sell" onClick={() => setLabelBuka(true)}>
             Kelola label
           </Button>
           <Button variant="tactile" icon="playlist_add" onClick={() => waktu && layanan.bukaSusun({ tanggal: waktu.hariIni })}>
             Susun to-do
           </Button>
-          <Button icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
+          <Button data-pengenalan="task-tambah" icon="add" disabled={!boleh} title={alasan ?? undefined} onClick={() => layanan.bukaFormTask({ mode: 'buat' })}>
             Tambah task
           </Button>
         </div>
       }
     >
-      <div className="flex flex-col gap-4 rounded-card bg-well p-4 tactile-inset">
+      <div data-pengenalan="task-filter" className="flex flex-col gap-4 rounded-card bg-well p-4 tactile-inset">
         <div className="relative">
           <label htmlFor="cari-task" className="sr-only">
             Cari task, projek, atau label
@@ -193,7 +195,7 @@ export function TaskPage() {
           {data.task.length === 0 ? 'Task yang kamu buat akan muncul di sini.' : 'Ganti filter atau kata kunci, atau buat task baru.'}
         </EmptyState>
       ) : (
-        <div className="flex flex-col gap-6">
+        <div data-pengenalan="task-daftar" className="flex flex-col gap-6">
           {utama.length > 0 && daftar(utama)}
           {tanpaDeadline.length > 0 && (
             <section aria-labelledby="judul-tanpa-deadline" className="flex flex-col gap-3">

@@ -1,5 +1,6 @@
 import { http, HttpResponse, delay } from 'msw'
 import type { Akun } from '../akun'
+import type { Tanggal } from '../../domain/tipe'
 import { PASSWORD_MAX, PASSWORD_MIN } from '../akun'
 import { hitungPolaKerja } from '../../domain/polaKerja'
 import { waktuLokal } from '../../domain/tanggal'
@@ -33,7 +34,8 @@ export function klienUsang(): boolean {
   Server tiruan untuk dev sampai endpoint Laravel tersedia. Bentuk galat mengikuti
   Arsitektur Sistem 7.5; sesi disimpan di localStorage karena mock tidak bisa memakai cookie httpOnly.
 */
-type AkunMock = Akun & { password: string | null }
+/** `dibuat` kosong = akun lama, tidak mendapat pengenalan otomatis (O-01). */
+type AkunMock = Akun & { password: string | null; dibuat?: Tanggal }
 
 type Status = {
   akun: AkunMock[]
@@ -93,7 +95,7 @@ export function penggunaAktif(): AkunMock | undefined {
   return aktif(baca())
 }
 
-function publik({ password, ...akun }: AkunMock): Akun {
+function publik({ password, dibuat: _dibuat, ...akun }: AkunMock): Akun {
   return { ...akun, punya_password: password !== null }
 }
 
@@ -144,7 +146,7 @@ export const handlers = [
     const hariIni = waktuLokal(new Date(), akun.zona_waktu).tanggal
     const sejak = Number(new URL(request.url).searchParams.get('sejak') ?? '0')
     const db = dbAkun(akun.id, akun.zona_waktu, AKUN_BERDATA.has(akun.email))
-    return HttpResponse.json(responsSinkron(db, sejak, { hari_ini: hariIni, zona_waktu: akun.zona_waktu }))
+    return HttpResponse.json(responsSinkron(db, sejak, { hari_ini: hariIni, zona_waktu: akun.zona_waktu, akun_dibuat: akun.dibuat ?? null }))
   }),
 
   http.get('/api/pola-kerja', async ({ request }) => {
@@ -215,6 +217,7 @@ export const handlers = [
       punya_password: true,
       tertaut_google: false,
       password,
+      dibuat: waktuLokal(new Date(), 'Asia/Jakarta').tanggal,
     }
     s.akun.push(akun)
     s.sesi = akun.id
@@ -237,6 +240,7 @@ export const handlers = [
         punya_password: false,
         tertaut_google: true,
         password: null,
+        dibuat: waktuLokal(new Date(), 'Asia/Jakarta').tanggal,
       }
       s.akun.push(akun)
     }

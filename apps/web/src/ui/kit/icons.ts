@@ -15,6 +15,8 @@ import chevronRight from '@material-symbols/svg-400/outlined/chevron_right.svg?r
 import close from '@material-symbols/svg-400/outlined/close.svg?raw'
 import cloudDone from '@material-symbols/svg-400/outlined/cloud_done.svg?raw'
 import cloudOff from '@material-symbols/svg-400/outlined/cloud_off.svg?raw'
+import tour from '@material-symbols/svg-400/outlined/tour.svg?raw'
+import replay from '@material-symbols/svg-400/outlined/replay.svg?raw'
 import syncProblem from '@material-symbols/svg-400/outlined/sync_problem.svg?raw'
 import dashboard from '@material-symbols/svg-400/outlined/dashboard.svg?raw'
 import dashboardFill from '@material-symbols/svg-400/outlined/dashboard-fill.svg?raw'
@@ -153,6 +155,8 @@ const raw = {
   hourglass_empty: hourglassEmpty,
   playlist_add: playlistAdd,
   install_desktop: installDesktop,
+  tour,
+  replay,
 } as const
 
 export type IconName = keyof typeof raw

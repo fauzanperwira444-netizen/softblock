@@ -4,7 +4,7 @@ import { penyimpananMemori } from './penyimpanan'
 import { BATAS_LAMBAT_MS, BATAS_MENYERAH_MS, MesinSinkron } from './sinkron'
 import { isiKosong, terapkan, type Snapshot } from './snapshot'
 
-const META = { hari_ini: '2026-11-18', zona_waktu: 'Asia/Jakarta' }
+const META = { hari_ini: '2026-11-18', zona_waktu: 'Asia/Jakarta', akun_dibuat: '2026-11-01' }
 const projek = (id: string, nama: string) => ({ id, versi: 1, nama, deskripsi: '', warna: '#406653', batal: false })
 
 function respons(sebagian: Partial<ResponsSinkron>): ResponsSinkron {

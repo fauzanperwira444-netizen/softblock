@@ -7,6 +7,8 @@ export type Snapshot = {
   disinkron_pada: string
   hari_ini: Tanggal
   zona_waktu: string
+  /** Tidak ada di snapshot yang disimpan sebelum fitur pengenalan. */
+  akun_dibuat?: Tanggal | null
   isi: IsiTabel
 }
 
@@ -38,6 +40,7 @@ export function terapkan(lama: Snapshot | null, respons: ResponsSinkron, sekaran
     disinkron_pada: sekarang.toISOString(),
     hari_ini: respons.meta.hari_ini,
     zona_waktu: respons.meta.zona_waktu,
+    akun_dibuat: respons.meta.akun_dibuat,
     isi: isi as unknown as IsiTabel,
   }
 }

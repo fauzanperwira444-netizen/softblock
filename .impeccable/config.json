@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "Dokumen/desain-pengenalan.html"
+        ],
+        "createdAt": "2026-11-25T12:46:44.456Z",
+        "reason": "Claude: Softblock design system (Tactile Barista Modern README) puts debossed wells (tactile-inset rows, tiles, chips) inside extruded cards by design"
+      }
+    ]
+  }
+}
