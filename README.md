@@ -67,6 +67,8 @@ Setelah mengubah rute atau respons API, perbarui kontraknya: `cd apps/api && php
 
 `.github/workflows/ci.yml` berjalan di setiap PR dan push ke `main`: pemeriksaan web (tsc, oxlint, Vitest, build, audit, Playwright dengan msw), pemeriksaan API (PHPStan, Pest dengan PostgreSQL 18, `composer audit`, drift OpenAPI), dan gitleaks. Setelah semuanya lolos, image dibangun dan diuji (migrasi, `/api/kesehatan/siap`, build sama dengan SHA, SPA tersaji). Dari `main`, image didorong ke `ghcr.io/<owner>/softblock` dengan tag SHA dan `main`.
 
+Penyiapan akun produksi (Neon, Resend, SnapDeploy, secret GitHub) ada di [`Dokumen/panduan-penyiapan-produksi.md`](Dokumen/panduan-penyiapan-produksi.md).
+
 ## Image produksi
 
 ```bash
