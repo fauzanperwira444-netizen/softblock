@@ -9,6 +9,7 @@ use Database\Factories\AkunFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
 
 /**
  * Akun pengguna. Bukan tabel data (tidak memakai MilikAkun): baris ini sendiri
@@ -23,6 +24,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $revisi
  * @property int $penghapusan_dipangkas_hingga
  * @property CarbonImmutable|null $hari_ini_terakhir
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 final class Akun extends Authenticatable
 {
